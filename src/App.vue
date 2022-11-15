@@ -6,7 +6,7 @@
       class="container mx-auto max-w-screen-xl flex items-center py-3 relative"
     >
       <div
-        class="bg-[#85bc33] h-[90px] p-5 absolute mr-auto text-white font-bold text-center shadow-xl"
+        class="bg-[#85bc33] h-[90px] border-in p-5 absolute mr-auto text-white font-bold text-center shadow-xl"
       >
         <div class="mt-2">
           <p>Giras</p>
@@ -14,7 +14,7 @@
         </div>
       </div>
       <nav class="mx-auto absolute -translate-x-1/2 left-1/2">
-        <ul class="flex items-center [&>:not(li)]:mx-3">
+        <ul class="flex items-center [&>:not(li)]:mx-3 font-bold">
           <li><router-link to="#home">Home</router-link></li>
           <span>/</span>
           <li><router-link to="#history">History</router-link></li>
@@ -25,16 +25,29 @@
         </ul>
       </nav>
       <button
-        class="flex items-center bg-[#85bc33] text-white rounded-full px-[16px] py-[5px] ml-auto shadow-md"
+        class="flex items-center border-2 border-[#85bc33] text-white rounded-full px-[16px] py-[5px] ml-auto shadow-md group"
       >
-        <Icon icon="mdi:email" width="25" height="25" />
-        <p class="ml-2 text-sm">Email me</p>
+        <Icon icon="mdi:email" class="text-[#85bc33]" width="25" height="25" />
+        <p
+          class="text-sm text-slate-800 w-0 overflow-hidden gorup-hover:ml-2 group-hover:w-14 transition-all"
+        >
+          Contact
+        </p>
       </button>
       <button
-        class="flex items-center bg-[#85bc33] text-white rounded-full px-[16px] py-[5px] ml-2 shadow-md"
+        class="flex items-center border-2 border-[#85bc33] text-white rounded-full px-[16px] py-[5px] ml-2 shadow-md group"
       >
-        <Icon icon="clarity:sign-in-line" width="25" height="25" />
-        <p class="ml-2 text-sm">Login</p>
+        <Icon
+          icon="clarity:sign-in-line"
+          class="text-[#85bc33]"
+          width="25"
+          height="25"
+        />
+        <p
+          class="text-sm text-slate-800 w-0 overflow-hidden gorup-hover:ml-2 group-hover:w-14 transition-all"
+        >
+          Login
+        </p>
       </button>
     </div>
   </header>
@@ -75,9 +88,37 @@
     </div> -->
   </div>
 
-  <div id="history" class="mt-24">
-    <div class="container mx-auto max-w-screen-xl">
-      <h1 class="text-2xl font-semibold mb-10">- My Amazing History</h1>
+  <div id="history" class="mt-16">
+    <div
+      class="container mx-auto max-w-screen-xl mb-20 flex justify-center flex-col"
+    >
+      <div class="flex gap-4 items-center justify-center text-center">
+        <div
+          id="bullet1"
+          class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
+        ></div>
+        <h1 class="text-4xl font-semibold text-slate-600">
+          My Amazing History
+        </h1>
+        <div
+          id="bullet1"
+          class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
+        ></div>
+      </div>
+      <p class="mt-10 mx-auto font-semibold text-center max-w-screen-lg">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
+        maiores, harum corporis minus nihil iusto eligendi distinctio. Obcaecati
+        accusamus deleniti, quisquam in dolorum recusandae delectus iusto fugiat
+        illo id saepe voluptatem ut consectetur sequi facere! Reiciendis
+        assumenda consequatur cum nulla.
+      </p>
+
+      <div
+        id="downarrow"
+        class="mx-auto mt-[2rem] text-[#85bc33] p-2 bg-white rounded-full hover:shadow-md cursor-pointer transition-all"
+      >
+        <Icon icon="material-symbols:arrow-downward" width="60" height="60" />
+      </div>
     </div>
 
     <div class="container mx-auto max-w-screen-xl">
@@ -99,10 +140,13 @@
           <div>
             <p class="mb-6">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-              repellat, modi facilis dolor ex animi voluptatem autem doloremque
-              adipisci odio saepe maiores. Debitis minima, doloribus modi dicta
-              quis cumque repellendus recusandae, molestiae voluptatibus velit
-              nihil. Iste, at. Cumque, atque quae.
+              repellat, modi facilis
+              <span class="font-bold"
+                >dolor ex animi voluptatem autem doloremque adipisci odio saepe
+                maiores. Debitis minima,
+              </span>
+              doloribus modi dicta quis cumque repellendus recusandae, molestiae
+              voluptatibus velit nihil. Iste, at. Cumque, atque quae.
             </p>
 
             <p class="mb-6">
@@ -149,12 +193,14 @@
             <p class="mb-6">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis ex
               perspiciatis, repudiandae obcaecati autem eaque sit ipsam cumque,
-              consectetur temporibus eveniet,
+              consectetur
               <span class="font-bold">
-                fugit maxime totam dolor tenetur. Labore ipsam ex quaerat
-                corporis officia, consequuntur optio dolores voluptatibus ad
-                laborum veritatis assumenda minus, qui ipsum aut ipsa.
+                temporibus eveniet, fugit maxime totam dolor tenetur. Labore
+                ipsam ex quaerat corporis officia, consequuntur
               </span>
+
+              optio dolores voluptatibus ad laborum veritatis assumenda minus,
+              qui ipsum aut ipsa.
             </p>
           </div>
 
