@@ -9,8 +9,8 @@
         class="bg-[#85bc33] h-[90px] border-in p-5 absolute mr-auto text-white font-bold text-center shadow-xl"
       >
         <div class="mt-2">
-          <p>Giras</p>
-          <p>Gendrasena</p>
+          <p class="invisible">Giras</p>
+          <p class="invisible">Gendrasena</p>
         </div>
       </div>
       <nav class="mx-auto absolute -translate-x-1/2 left-1/2">
@@ -121,7 +121,7 @@
       </div>
     </div>
 
-    <div class="container mx-auto max-w-screen-xl">
+    <div class="container mx-auto max-w-screen-xl mb-64">
       <div class="grid grid-cols-3 place-items-center">
         <img
           src="./assets/img/project-list/thumb1.jpg"
@@ -215,6 +215,31 @@
         </div>
       </div>
     </div>
+
+    <div
+      id="aboutme"
+      class="w-full min-h-[600px] bg-[#f6f8fa] flex justify-center"
+    >
+      <div class="container mx-auto max-w-screen-xl flex flex-col">
+        <div class="flex gap-4 justify-center items-center text-center mt-10">
+          <!-- <div
+            id="bullet1"
+            class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
+          ></div> -->
+          <h1 class="text-4xl font-semibold text-slate-700 px-5 py-2">
+            About Me
+          </h1>
+          <!-- <div
+            id="bullet1"
+            class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
+          ></div> -->
+        </div>
+
+        <div>
+          <img :src="userOptions.heroImage" class="h-[300px] w-[300px]" />
+        </div>
+      </div>
+    </div>
   </div>
   <!-- <RouterView /> -->
 
@@ -238,4 +263,23 @@ const userOptions = reactive({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.our-gradient {
+  /* background-image: linear-gradient(to bottom, #2b2b2b 0%, black 100%); */
+
+  /* background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  background-blend-mode: multiply, multiply; */
+
+  /* background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%); */
+}
+</style>
