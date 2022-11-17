@@ -123,11 +123,18 @@
 
     <div class="container mx-auto max-w-screen-xl mb-64">
       <div class="grid grid-cols-3 place-items-center">
-        <img
-          src="./assets/img/project-list/thumb1.jpg"
-          alt="forest"
-          class="w-[430px] h-full"
-        />
+        <div class="relative">
+          <img
+            src="./assets/img/polkadot.png"
+            alt="polkadot pattern"
+            class="w-[200px] h-[200px] absolute -hue-rotate-60 -top-16 -left-16"
+          />
+          <img
+            src="./assets/img/project-list/thumb1.jpg"
+            alt="forest"
+            class="w-[430px] h-full relative z-10"
+          />
+        </div>
         <div class="px-10 col-span-2 prose prose-lg self-start">
           <h1
             class="font-bold text-2xl bg-[#85bc33] text-white inline-block px-2 py-2 shadow-lg"
@@ -167,12 +174,19 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-3 place-items-center mt-32">
-        <img
-          src="./assets/img/project-list/thumb2.jpg"
-          alt="forest"
-          class="w-[430px] h-full"
-        />
+      <div class="grid grid-cols-3 place-items-center mt-40">
+        <div class="relative">
+          <img
+            src="./assets/img/polkadot.png"
+            alt="polkadot pattern"
+            class="w-[200px] h-[200px] absolute -hue-rotate-60 -top-16 -left-16"
+          />
+          <img
+            src="./assets/img/project-list/thumb2.jpg"
+            alt="forest"
+            class="w-[430px] h-full relative z-10"
+          />
+        </div>
         <div class="px-10 col-span-2 prose prose-lg self-start">
           <h1
             class="font-bold text-2xl bg-[#85bc33] text-white inline-block px-2 py-2 shadow-lg"
@@ -216,27 +230,133 @@
       </div>
     </div>
 
+    <!-- Aboutme -->
     <div
       id="aboutme"
-      class="w-full min-h-[600px] bg-[#f6f8fa] flex justify-center"
+      class="w-full min-h-[600px] bg-[#f4f7fb] flex justify-center p-10 mb-16"
     >
-      <div class="container mx-auto max-w-screen-xl flex flex-col">
-        <div class="flex gap-4 justify-center items-center text-center mt-10">
+      <div class="container mx-auto max-w-screen-xl flex flex-col items-center">
+        <div class="flex flex-col gap-4 items-center text-center">
           <!-- <div
             id="bullet1"
             class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
           ></div> -->
-          <h1 class="text-4xl font-semibold text-slate-700 px-5 py-2">
+          <h1
+            class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
+          >
             About Me
           </h1>
+          <div class="w-7 bg-[#85bc33] h-1"></div>
           <!-- <div
             id="bullet1"
             class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
           ></div> -->
         </div>
 
-        <div>
-          <img :src="userOptions.heroImage" class="h-[300px] w-[300px]" />
+        <div
+          class="grid grid-cols-3 gap-4 place-items-center mt-20 max-w-[1120px]"
+        >
+          <div class="self-start text-xl col-span-2">
+            <p class="mb-7">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
+              perspiciatis totam nobis sequi nihild architecto consectetur
+              itaque atque numquam perferendis, quasi velit magnam, iure harum
+              aperiam vitae.
+            </p>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
+              perspiciatis totam nobis
+              <span class="font-semibold">sequi nihil aliquid</span> cum fuga
+              architecto consectetur itaque atque numquam perferendis, quasi
+              velit magnam, iure harum aperiam vitae.
+            </p>
+          </div>
+          <div class="">
+            <img
+              :src="userOptions.heroImage"
+              class="h-[300px] w-[300px] rounded"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Works -->
+    <div
+      class="container mx-auto max-w-screen-xl flex flex-col items-center justify-center"
+    >
+      <div class="flex flex-col gap-4 items-center justify-center mb-10">
+        <h1 class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start">
+          My Works
+        </h1>
+        <div class="w-7 bg-[#85bc33] h-1"></div>
+      </div>
+      <div id="worksbox" class="grid grid-cols-3 gap-7">
+        <div class="flex flex-col gap-4 border border-gray-100 shadow p-4">
+          <div data-details="workbox-meta" class="flex items-center gap-4">
+            <div>
+              <img
+                src="./assets/img/hero.jpg"
+                alt="works-picture"
+                class="w-[55px] h-[55px] block rounded-lg"
+              />
+            </div>
+            <div class="self-start">
+              <p class="font-semibold">Lorem ipsum dolor sit amet.</p>
+              <span class="">10 March 2020</span>
+            </div>
+          </div>
+          <div data-details="workbox-description" class="flex items-center">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+              nostrum labore accusantium repellendus fugit velit reiciendis cum
+              est doloribus nisi!
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 border border-gray-100 shadow p-4">
+          <div data-details="workbox-meta" class="flex items-center gap-4">
+            <div>
+              <img
+                src="./assets/img/hero.jpg"
+                alt="works-picture"
+                class="w-[55px] h-[55px] block rounded-lg"
+              />
+            </div>
+            <div class="self-start">
+              <p class="font-semibold">Lorem ipsum dolor sit amet.</p>
+              <span class="">10 March 2020</span>
+            </div>
+          </div>
+          <div data-details="workbox-description" class="flex items-center">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+              nostrum labore accusantium repellendus fugit velit reiciendis cum
+              est doloribus nisi!
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4 border border-gray-100 shadow p-4">
+          <div data-details="workbox-meta" class="flex items-center gap-4">
+            <div>
+              <img
+                src="./assets/img/hero.jpg"
+                alt="works-picture"
+                class="w-[55px] h-[55px] block rounded-lg"
+              />
+            </div>
+            <div class="self-start">
+              <p class="font-semibold">Lorem ipsum dolor sit amet.</p>
+              <span class="">10 March 2020</span>
+            </div>
+          </div>
+          <div data-details="workbox-description" class="flex items-center">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
+              nostrum labore accusantium repellendus fugit velit reiciendis cum
+              est doloribus nisi!
+            </p>
+          </div>
         </div>
       </div>
     </div>
