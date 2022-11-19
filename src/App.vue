@@ -6,7 +6,7 @@
       class="container mx-auto max-w-screen-xl flex items-center py-3 relative"
     >
       <div
-        class="bg-[#85bc33] h-[90px] border-in p-5 absolute mr-auto text-white font-bold text-center shadow-xl"
+        class="h-[90px] border-in p-5 absolute mr-auto text-white font-bold text-center shadow-xl"
       >
         <div class="mt-2">
           <p class="invisible">Giras</p>
@@ -105,7 +105,7 @@
           class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
         ></div>
       </div>
-      <p class="mt-10 mx-auto font-semibold text-center max-w-screen-lg">
+      <p class="mt-10 mx-auto text-center max-w-screen-lg">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
         maiores, harum corporis minus nihil iusto eligendi distinctio. Obcaecati
         accusamus deleniti, quisquam in dolorum recusandae delectus iusto fugiat
@@ -237,20 +237,12 @@
     >
       <div class="container mx-auto max-w-screen-xl flex flex-col items-center">
         <div class="flex flex-col gap-4 items-center text-center">
-          <!-- <div
-            id="bullet1"
-            class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
-          ></div> -->
           <h1
             class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
           >
             About Me
           </h1>
           <div class="w-7 bg-[#85bc33] h-1"></div>
-          <!-- <div
-            id="bullet1"
-            class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
-          ></div> -->
         </div>
 
         <div
@@ -283,7 +275,7 @@
 
     <!-- My Works -->
     <div
-      class="container mx-auto max-w-screen-xl flex flex-col items-center justify-center"
+      class="container mx-auto max-w-screen-xl flex flex-col items-center justify-center mb-20"
     >
       <div class="flex flex-col gap-4 items-center justify-center mb-10">
         <h1 class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start">
@@ -292,70 +284,125 @@
         <div class="w-7 bg-[#85bc33] h-1"></div>
       </div>
       <div id="worksbox" class="grid grid-cols-3 gap-7">
-        <div class="flex flex-col gap-4 border border-gray-100 shadow p-4">
-          <div data-details="workbox-meta" class="flex items-center gap-4">
-            <div>
-              <img
-                src="./assets/img/hero.jpg"
-                alt="works-picture"
-                class="w-[55px] h-[55px] block rounded-lg"
-              />
-            </div>
-            <div class="self-start">
-              <p class="font-semibold">Lorem ipsum dolor sit amet.</p>
-              <span class="">10 March 2020</span>
-            </div>
-          </div>
-          <div data-details="workbox-description" class="flex items-center">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-              nostrum labore accusantium repellendus fugit velit reiciendis cum
-              est doloribus nisi!
-            </p>
-          </div>
+        <MiniCard
+          title="Lorem ipsum dolor sit amet."
+          date="10 March 2020"
+          img="../assets/img/hero.jpg"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
+          laborum maiores? Eligendi quia id ad?
+        </MiniCard>
+
+        <MiniCard
+          title="Lorem ipsum dolor sit amet."
+          date="10 March 2020"
+          img="../assets/img/hero.jpg"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione!
+        </MiniCard>
+
+        <MiniCard
+          title="Lorem ipsum dolor sit amet."
+          date="10 March 2020"
+          img="../assets/img/hero.jpg"
+        >
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati
+          exercitationem quaerat velit est dolorem!
+        </MiniCard>
+
+        <MiniCard
+          title="Lorem ipsum dolor sit amet."
+          date="10 March 2020"
+          img="../assets/img/hero.jpg"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore
+          explicabo libero hic in impedit eius magnam distinctio?
+        </MiniCard>
+
+        <MiniCard
+          title="Lorem ipsum dolor sit amet."
+          date="10 March 2020"
+          img="../assets/img/hero.jpg"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore,
+          laborum.
+        </MiniCard>
+
+        <MiniCard
+          title="Lorem ipsum dolor sit amet."
+          date="10 March 2020"
+          img="../assets/img/hero.jpg"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+          assumenda voluptatibus ad quae eligendi!
+        </MiniCard>
+      </div>
+    </div>
+
+    <!-- Socials -->
+    <div class="flex flex-col items-center justify-center bg-[#f4f7fb] p-10">
+      <div
+        class="flex container mx-auto max-w-screen-xl flex-col gap-4 items-center justify-center mb-10 text-center"
+      >
+        <div class="flex flex-col items-center gap-3">
+          <h1
+            class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
+          >
+            Socials
+          </h1>
+          <div class="w-7 bg-[#85bc33] h-1"></div>
         </div>
-        <div class="flex flex-col gap-4 border border-gray-100 shadow p-4">
-          <div data-details="workbox-meta" class="flex items-center gap-4">
-            <div>
-              <img
-                src="./assets/img/hero.jpg"
-                alt="works-picture"
-                class="w-[55px] h-[55px] block rounded-lg"
-              />
-            </div>
-            <div class="self-start">
-              <p class="font-semibold">Lorem ipsum dolor sit amet.</p>
-              <span class="">10 March 2020</span>
-            </div>
+        <p class="text-slate-700 max-w-screen-lg">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus,
+          similique animi et distinctio asperiores corrupti. Vitae deserunt
+          eveniet asperiores magnam.
+        </p>
+      </div>
+      <div class="container mx-auto max-w-screen-lg">
+        <div id="socialsbox" class="gap-5 grid grid-cols-4">
+          <div
+            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden min-h-[155px]"
+          >
+            <p class="text-4xl raleway">Facebook</p>
+            <Icon
+              icon="iconoir:facebook"
+              width="100"
+              height="100"
+              class="absolute -bottom-7"
+            />
           </div>
-          <div data-details="workbox-description" class="flex items-center">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-              nostrum labore accusantium repellendus fugit velit reiciendis cum
-              est doloribus nisi!
-            </p>
+          <div
+            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden"
+          >
+            <p class="text-4xl raleway">Instagram</p>
+            <Icon
+              icon="ph:instagram-logo-light"
+              width="100"
+              height="100"
+              class="absolute -bottom-7"
+            />
           </div>
-        </div>
-        <div class="flex flex-col gap-4 border border-gray-100 shadow p-4">
-          <div data-details="workbox-meta" class="flex items-center gap-4">
-            <div>
-              <img
-                src="./assets/img/hero.jpg"
-                alt="works-picture"
-                class="w-[55px] h-[55px] block rounded-lg"
-              />
-            </div>
-            <div class="self-start">
-              <p class="font-semibold">Lorem ipsum dolor sit amet.</p>
-              <span class="">10 March 2020</span>
-            </div>
+          <div
+            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden"
+          >
+            <p class="text-4xl raleway">Linkedin</p>
+            <Icon
+              icon="uil:linkedin-alt"
+              width="100"
+              height="100"
+              class="absolute -bottom-7"
+            />
           </div>
-          <div data-details="workbox-description" class="flex items-center">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-              nostrum labore accusantium repellendus fugit velit reiciendis cum
-              est doloribus nisi!
-            </p>
+          <div
+            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden"
+          >
+            <p class="text-4xl raleway">Twitter</p>
+            <Icon
+              icon="uit:twitter-alt"
+              width="100"
+              height="100"
+              class="absolute -bottom-9"
+            />
           </div>
         </div>
       </div>
@@ -367,6 +414,8 @@
 </template>
 
 <script setup>
+import MiniCard from "./components/MiniCard.vue";
+
 import { reactive } from "vue";
 import { Icon } from "@iconify/vue";
 
@@ -384,6 +433,10 @@ const userOptions = reactive({
 </script>
 
 <style scoped>
+.raleway {
+  font-family: "Raleway", sans-serif;
+}
+
 .our-gradient {
   /* background-image: linear-gradient(to bottom, #2b2b2b 0%, black 100%); */
 
