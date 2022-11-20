@@ -340,7 +340,9 @@
     </div>
 
     <!-- Socials -->
-    <div class="flex flex-col items-center justify-center bg-[#f4f7fb] p-10">
+    <div
+      class="flex flex-col items-center justify-center bg-[#f4f7fb] p-10 pb-16"
+    >
       <div
         class="flex container mx-auto max-w-screen-xl flex-col gap-4 items-center justify-center mb-10 text-center"
       >
@@ -361,56 +363,67 @@
       <div class="container mx-auto max-w-screen-lg">
         <div id="socialsbox" class="gap-5 grid grid-cols-4">
           <div
-            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden min-h-[155px]"
+            class="border border-gray-100 shadow p-5 bg-[#4267B2] relative overflow-hidden min-h-[155px] brightness-[.60]"
           >
-            <p class="text-4xl raleway">Facebook</p>
+            <p class="text-4xl raleway text-white font-bold">Facebook</p>
             <Icon
               icon="iconoir:facebook"
               width="100"
               height="100"
-              class="absolute -bottom-7"
+              class="absolute -bottom-7 text-white"
             />
           </div>
           <div
-            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden"
+            class="border border-gray-100 shadow p-5 bg-instagram relative overflow-hidden brightness-[.60]"
           >
-            <p class="text-4xl raleway">Instagram</p>
+            <p class="text-4xl raleway font-bold text-white">Instagram</p>
             <Icon
               icon="ph:instagram-logo-light"
               width="100"
               height="100"
-              class="absolute -bottom-7"
+              class="absolute -bottom-7 text-white"
             />
           </div>
           <div
-            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden"
+            class="border border-gray-100 shadow p-5 bg-[#0077b5] relative overflow-hidden brightness-[.60]"
           >
-            <p class="text-4xl raleway">Linkedin</p>
+            <p class="text-4xl raleway font-bold text-white">Linkedin</p>
             <Icon
-              icon="uil:linkedin-alt"
+              icon="uit:linkedin-alt"
               width="100"
               height="100"
-              class="absolute -bottom-7"
+              class="absolute -bottom-7 text-white"
             />
           </div>
           <div
-            class="border border-gray-100 shadow p-5 bg-white relative overflow-hidden"
+            class="border border-gray-100 shadow p-5 bg-[#1DA1F2] relative overflow-hidden brightness-[.60]"
           >
-            <p class="text-4xl raleway">Twitter</p>
+            <p class="text-4xl raleway text-white">Twitter</p>
             <Icon
               icon="uit:twitter-alt"
               width="100"
               height="100"
-              class="absolute -bottom-9"
+              class="absolute -bottom-9 text-white"
             />
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="w-full bg-[#393E46]">
+      <div class="container mx-auto max-w-screen-lg">
+        <!-- Footer -->
+        <div class="flex justify-between p-4 text-slate-100">
+          <p class="text-sm">Copyright - Giras Gendrasena &copy; 2022</p>
+          <p class="text-sm">Back to top</p>
         </div>
       </div>
     </div>
   </div>
   <!-- <RouterView /> -->
 
-  <div class="mt-60"></div>
+  <!-- <div class="mt-60"></div> -->
 </template>
 
 <script setup>
@@ -435,6 +448,18 @@ const userOptions = reactive({
 <style scoped>
 .raleway {
   font-family: "Raleway", sans-serif;
+}
+
+.bg-instagram {
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d
+  );
 }
 
 .our-gradient {
