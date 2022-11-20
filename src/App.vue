@@ -363,47 +363,56 @@
       <div class="container mx-auto max-w-screen-lg">
         <div id="socialsbox" class="gap-5 grid grid-cols-4">
           <div
-            class="border border-gray-100 shadow p-5 bg-[#4267B2] relative overflow-hidden min-h-[155px] brightness-[.60]"
+            class="group border border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
           >
-            <p class="text-4xl raleway text-white font-bold">Facebook</p>
+            <p class="text-4xl raleway group-hover:text-white font-bold">
+              Facebook
+            </p>
             <Icon
               icon="iconoir:facebook"
               width="100"
               height="100"
-              class="absolute -bottom-7 text-white"
+              class="absolute -bottom-7 group-hover:text-white"
             />
           </div>
+          <!-- TODO: bg-instagram ngga kena effect transition -->
           <div
-            class="border border-gray-100 shadow p-5 bg-instagram relative overflow-hidden brightness-[.60]"
+            class="group border border-gray-100 shadow p-5 hover:bg-instagram relative overflow-hidden transition-all"
           >
-            <p class="text-4xl raleway font-bold text-white">Instagram</p>
+            <p class="text-4xl raleway font-bold group-hover:text-white">
+              Instagram
+            </p>
             <Icon
               icon="ph:instagram-logo-light"
               width="100"
               height="100"
-              class="absolute -bottom-7 text-white"
+              class="absolute -bottom-7 group-hover:text-white"
             />
           </div>
           <div
-            class="border border-gray-100 shadow p-5 bg-[#0077b5] relative overflow-hidden brightness-[.60]"
+            class="group border border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all"
           >
-            <p class="text-4xl raleway font-bold text-white">Linkedin</p>
+            <p class="text-4xl raleway font-bold group-hover:text-white">
+              Linkedin
+            </p>
             <Icon
               icon="uit:linkedin-alt"
               width="100"
               height="100"
-              class="absolute -bottom-7 text-white"
+              class="absolute -bottom-7 group-hover:text-white"
             />
           </div>
           <div
-            class="border border-gray-100 shadow p-5 bg-[#1DA1F2] relative overflow-hidden brightness-[.60]"
+            class="group border border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all"
           >
-            <p class="text-4xl raleway text-white">Twitter</p>
+            <p class="text-4xl raleway font-bold group-hover:text-white">
+              Twitter
+            </p>
             <Icon
               icon="uit:twitter-alt"
               width="100"
               height="100"
-              class="absolute -bottom-9 text-white"
+              class="absolute -bottom-9 group-hover:text-white"
             />
           </div>
         </div>
@@ -450,7 +459,7 @@ const userOptions = reactive({
   font-family: "Raleway", sans-serif;
 }
 
-.bg-instagram {
+/* .bg-instagram {
   background: linear-gradient(
     45deg,
     #405de6,
@@ -460,7 +469,7 @@ const userOptions = reactive({
     #e1306c,
     #fd1d1d
   );
-}
+} */
 
 .our-gradient {
   /* background-image: linear-gradient(to bottom, #2b2b2b 0%, black 100%); */
