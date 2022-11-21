@@ -1,5 +1,7 @@
 <template>
   <!-- TODO: Find how to scroll behavior on vue (its different i think ?) -->
+  <!-- TODO: Responsive design -->
+  <!-- TODO: add particle.js -->
 
   <header class="bg-white shadow-2xl fixed top-0 left-0 right-0 z-50">
     <div
@@ -242,7 +244,7 @@
           >
             About Me
           </h1>
-          <div class="w-7 bg-[#85bc33] h-1"></div>
+          <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
         </div>
 
         <div
@@ -281,7 +283,7 @@
         <h1 class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start">
           My Works
         </h1>
-        <div class="w-7 bg-[#85bc33] h-1"></div>
+        <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
       </div>
       <div id="worksbox" class="grid grid-cols-3 gap-7">
         <MiniCard
@@ -352,7 +354,7 @@
           >
             Socials
           </h1>
-          <div class="w-7 bg-[#85bc33] h-1"></div>
+          <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
         </div>
         <p class="text-slate-700 max-w-screen-lg">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus,
@@ -360,10 +362,10 @@
           eveniet asperiores magnam.
         </p>
       </div>
-      <div class="container mx-auto max-w-screen-lg">
+      <div class="container mx-auto max-w-screen-lg mb-20">
         <div id="socialsbox" class="gap-5 grid grid-cols-4">
           <div
-            class="group border border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
+            class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
           >
             <p class="text-4xl raleway group-hover:text-white font-bold">
               Facebook
@@ -377,20 +379,19 @@
           </div>
           <!-- TODO: bg-instagram ngga kena effect transition -->
           <div
-            class="group border border-gray-100 shadow p-5 hover:bg-instagram relative overflow-hidden transition-all"
+            id="instagram-social"
+            class="border border-gray-100 shadow p-5 relative overflow-hidden"
           >
-            <p class="text-4xl raleway font-bold group-hover:text-white">
-              Instagram
-            </p>
+            <p class="text-4xl raleway font-bold">Instagram</p>
             <Icon
               icon="ph:instagram-logo-light"
               width="100"
               height="100"
-              class="absolute -bottom-7 group-hover:text-white"
+              class="absolute -bottom-7"
             />
           </div>
           <div
-            class="group border border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all"
+            class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all"
           >
             <p class="text-4xl raleway font-bold group-hover:text-white">
               Linkedin
@@ -403,7 +404,7 @@
             />
           </div>
           <div
-            class="group border border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all"
+            class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all"
           >
             <p class="text-4xl raleway font-bold group-hover:text-white">
               Twitter
@@ -416,6 +417,29 @@
             />
           </div>
         </div>
+      </div>
+
+      <div
+        class="container mx-auto max-w-screen-lg text-center rounded-md bg-white shadow-md p-5 border-slate-700 border-4"
+      >
+        <div class="text-center mb-6">
+          <div class="inline-flex flex-col items-center mb-5">
+            <h1 class="text-3xl font-semibold text-slate-700 px-5 py-2">
+              Get in touch
+            </h1>
+            <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
+          </div>
+          <p class="text-xl">
+            Have any offers or any question ? we can talk more deeply here
+          </p>
+        </div>
+        <a
+          href="mailto:giras.gg@gmail.com"
+          class="shadow-md px-4 py-2 inline-flex items-center rounded-md gap-4 border bg-[#393E46] text-white font-semibold text-xl"
+        >
+          Say hello
+          <Icon icon="mdi:email" class="" width="25" height="25" />
+        </a>
       </div>
     </div>
 
@@ -459,7 +483,21 @@ const userOptions = reactive({
   font-family: "Raleway", sans-serif;
 }
 
-/* .bg-instagram {
+#instagram-social {
+  color: black;
+  background: #fafcfd;
+  /* transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms; */
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* #instagram-social:hover > * {
+  color: white;
+} */
+
+#instagram-social:hover {
+  color: white;
   background: linear-gradient(
     45deg,
     #405de6,
@@ -469,7 +507,7 @@ const userOptions = reactive({
     #e1306c,
     #fd1d1d
   );
-} */
+}
 
 .our-gradient {
   /* background-image: linear-gradient(to bottom, #2b2b2b 0%, black 100%); */
