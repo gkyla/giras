@@ -343,7 +343,7 @@
 
     <!-- Socials -->
     <div
-      class="flex flex-col items-center justify-center bg-[#f4f7fb] p-10 pb-16"
+      class="flex flex-col items-center justify-center bg-[#f4f7fb] p-10 pb-10"
     >
       <div
         class="flex container mx-auto max-w-screen-xl flex-col gap-4 items-center justify-center mb-10 text-center"
@@ -418,16 +418,16 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="bg-[#393E46] h-full p-4">
       <div
-        class="container mx-auto max-w-screen-lg text-center rounded-md bg-white shadow-md p-5 border-slate-700 border-4"
+        class="container mx-auto max-w-screen-lg text-center rounded-md p-5 text-white"
       >
         <div class="text-center mb-6">
           <div class="inline-flex flex-col items-center mb-5">
-            <h1 class="text-3xl font-semibold text-slate-700 px-5 py-2">
-              Get in touch
-            </h1>
-            <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
+            <h1 class="text-3xl font-semibold px-5 py-2">Get in touch</h1>
+            <!-- <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div> -->
           </div>
           <p class="text-xl">
             Have any offers or any question ? we can talk more deeply here
