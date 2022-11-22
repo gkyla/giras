@@ -31,10 +31,6 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
   img: {
     type: String,
   },
