@@ -3,7 +3,7 @@
 
   <header class="bg-white shadow-2xl fixed top-0 left-0 right-0 z-50">
     <div
-      class="container mx-auto max-w-screen-xl flex items-center py-3 relative"
+      class="container mx-auto max-w-screen-xl flex items-center py-3 relative px-2"
     >
       <div class="absolute mr-auto text-white font-bold text-center">
         <div
@@ -13,21 +13,41 @@
           <span class="text-slate-700 text-xs inline-block">est 2022.</span>
         </div>
       </div>
-      <nav class="mx-auto absolute -translate-x-1/2 left-1/2">
-        <ul class="flex items-center [&>:not(li)]:mx-3 font-bold">
-          <li><router-link to="#home">Home</router-link></li>
-          <span>|</span>
-          <li><router-link to="#history">History</router-link></li>
-          <span>|</span>
-          <li><router-link to="#aboutme">About Me</router-link></li>
-          <span>|</span>
-          <li><router-link to="#myworks">My Works</router-link></li>
-          <span>|</span>
-          <li><router-link to="#socials">Socials</router-link></li>
+      <nav
+        class="mx-auto absolute lg:-translate-x-1/2 left-1/2 top-[62px] lg:top-1/2 lg:-translate-y-1/2 right-0 h-[calc(100vh-62px)] lg:h-auto bg-white transition-all"
+        :class="[
+          { 'translate-x-0': !navIsOpened, 'translate-x-full': navIsOpened },
+        ]"
+      >
+        <ul
+          class="flex lg:items-center justify-center flex-col lg:flex-row [&>:not(li)]:mx-3 font-bold relative"
+        >
+          <li>
+            <router-link to="#home" class="p-4 lg:p-0">Home</router-link>
+          </li>
+          <span class="hidden lg:inline-block">|</span>
+          <li>
+            <router-link to="#history" class="p-4 lg:p-0">History</router-link>
+          </li>
+          <span class="hidden lg:inline-block">|</span>
+          <li>
+            <router-link to="#aboutme" class="p-4 lg:p-0">About Me</router-link>
+          </li>
+          <span class="hidden lg:inline-block">|</span>
+          <li>
+            <router-link to="#myworks" class="p-4 lg:p-0">My Works</router-link>
+          </li>
+          <span class="hidden lg:inline-block">|</span>
+          <li>
+            <router-link to="#socials" class="p-4 lg:p-0">Socials</router-link>
+          </li>
         </ul>
       </nav>
+      <button class="ml-auto" @click="toggleNav">
+        <Icon icon="icon-park:hamburger-button" width="40" height="40" />
+      </button>
       <button
-        class="flex items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-auto shadow-md group"
+        class="hidden items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-auto shadow-md group"
       >
         <Icon icon="mdi:email" class="text-[#85bc33]" width="25" height="25" />
         <p
@@ -37,7 +57,7 @@
         </p>
       </button>
       <button
-        class="flex items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-2 shadow-md group"
+        class="hidden items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-2 shadow-md group"
       >
         <Icon
           icon="clarity:sign-in-line"
@@ -76,7 +96,7 @@
 
   <div id="history" class="mt-16">
     <div
-      class="container mx-auto max-w-screen-xl mb-20 flex justify-center flex-col"
+      class="container mx-auto max-w-screen-xl mb-20 flex justify-center flex-col px-2"
     >
       <div class="flex gap-4 items-center justify-center text-center">
         <div
@@ -107,9 +127,11 @@
       </div>
     </div>
 
-    <div class="container mx-auto max-w-screen-xl mb-64">
-      <div class="grid grid-cols-3 place-items-center">
-        <div class="relative">
+    <div class="container mx-auto max-w-screen-xl mb-64 px-2">
+      <div
+        class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-center px-3"
+      >
+        <div class="relative col-span-2 lg:col-span-1">
           <img
             src="./assets/img/polkadot.png"
             alt="polkadot pattern"
@@ -160,8 +182,10 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-3 place-items-center mt-40">
-        <div class="relative">
+      <div
+        class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-center mt-40 px-3"
+      >
+        <div class="relative col-span-2 lg:col-span-1">
           <img
             src="./assets/img/polkadot.png"
             alt="polkadot pattern"
@@ -220,9 +244,11 @@
     <div
       ref="aboutMe"
       id="aboutme"
-      class="w-full h-[600px] bg-[#f4f7fb] flex justify-center p-10 mb-16"
+      class="w-full min-h-[600px] bg-[#f4f7fb] flex justify-center p-10 mb-16"
     >
-      <div class="container mx-auto max-w-screen-xl flex flex-col items-center">
+      <div
+        class="container mx-auto max-w-screen-xl flex flex-col items-center px-2"
+      >
         <div class="flex flex-col gap-4 items-center text-center">
           <h1
             class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
@@ -233,7 +259,7 @@
         </div>
 
         <div
-          class="grid grid-cols-3 gap-4 place-items-center mt-20 max-w-[1120px]"
+          class="grid lg:grid-cols-3 gap-4 place-items-center mt-20 max-w-[1120px]"
         >
           <div class="self-start text-xl col-span-2">
             <p class="mb-7">
@@ -250,10 +276,10 @@
               velit magnam, iure harum aperiam vitae.
             </p>
           </div>
-          <div class="">
+          <div class="col-span-2 lg:col-span-1">
             <img
               :src="userOptions.heroImage"
-              class="h-[300px] w-[300px] rounded"
+              class="lg:h-[300px] lg:w-[300px] rounded"
             />
           </div>
         </div>
@@ -263,7 +289,7 @@
     <!-- My Works -->
     <div
       id="myworks"
-      class="container mx-auto max-w-screen-xl flex flex-col items-center justify-center mb-20"
+      class="container mx-auto max-w-screen-xl flex flex-col items-center justify-center mb-20 px-2"
     >
       <div class="flex flex-col gap-4 items-center justify-center mb-10">
         <h1 class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start">
@@ -271,7 +297,10 @@
         </h1>
         <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
       </div>
-      <div id="worksbox" class="grid grid-cols-3 gap-7">
+      <div
+        id="worksbox"
+        class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7"
+      >
         <MiniCard
           title="Lorem ipsum dolor sit amet."
           date="10 March 2020"
@@ -328,14 +357,15 @@
     </div>
 
     <!-- Socials -->
+    <!-- TODO fix overlaping socials  -->
     <div
       ref="socials"
       id="socials"
-      class="flex flex-col items-center justify-center bg-[#f4f7fb] relative h-[550px]"
+      class="flex flex-col items-center justify-center bg-[#f4f7fb] relative min-h-[550px]"
     >
-      <div class="absolute p-10">
+      <div class="absolute top-0 left-0 right-0 bottom-0 p-10 z-20">
         <div
-          class="flex container mx-auto max-w-screen-xl flex-col gap-4 items-center justify-center mb-10 text-center"
+          class="flex container mx-auto max-w-screen-xl flex-col gap-4 items-center justify-center mb-10 text-center px-2"
         >
           <div class="flex flex-col items-center gap-3">
             <h1
@@ -351,8 +381,8 @@
             eveniet asperiores magnam.
           </p>
         </div>
-        <div class="container mx-auto max-w-screen-lg mb-20">
-          <div id="socialsbox" class="gap-5 grid grid-cols-4">
+        <div class="container mx-auto max-w-screen-lg mb-20 px-2 relative">
+          <div id="socialsbox" class="gap-5 grid lg:grid-cols-4 relative">
             <div
               class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
             >
@@ -369,7 +399,7 @@
             <!-- TODO: bg-instagram ngga kena effect transition -->
             <div
               id="instagram-social"
-              class="border border-gray-100 shadow p-5 relative overflow-hidden"
+              class="border border-gray-100 shadow p-5 min-h-[155px] relative overflow-hidden"
             >
               <p class="text-4xl raleway font-bold">Instagram</p>
               <Icon
@@ -380,7 +410,7 @@
               />
             </div>
             <div
-              class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all"
+              class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all min-h-[155px]"
             >
               <p class="text-4xl raleway font-bold group-hover:text-white">
                 Linkedin
@@ -393,7 +423,7 @@
               />
             </div>
             <div
-              class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all"
+              class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all min-h-[155px]"
             >
               <p class="text-4xl raleway font-bold group-hover:text-white">
                 Twitter
@@ -466,8 +496,12 @@ const userOptions = reactive({
   //   },
   // ],
 });
-
 const socials = ref();
+const navIsOpened = ref(false);
+function toggleNav() {
+  navIsOpened.value = !navIsOpened.value;
+  console.log(navIsOpened.value);
+}
 
 onMounted(() => {
   /* Particle JS */
@@ -481,14 +515,17 @@ onMounted(() => {
 });
 </script>
 
+<style>
+.particles-js-canvas-el {
+  @apply blur-sm  absolute top-0 left-0 right-0 bottom-0;
+  /* @apply absolute top-0 left-0 right-0 bottom-0; */
+}
+</style>
+
 <style scoped>
 canvas {
   /* @apply block; */
   /* @apply absolute z-0; */
-}
-
-.particles-js-canvas-el {
-  /* @apply absolute top-0 left-0 right-0 bottom-0; */
 }
 
 .raleway {
