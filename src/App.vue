@@ -1,6 +1,5 @@
 <template>
-  <!-- TODO: Responsive design : Nav (Done), prose -->
-  <!-- TODO: fix padding of tailwind prose -->
+  <!-- TODO: add some AOS effect to the element -->
 
   <header class="bg-white shadow-2xl fixed top-0 left-0 right-0 z-50">
     <div
@@ -144,12 +143,18 @@
         :src="userOptions.heroImage"
         class="w-full h-full brightness-[.83] bg-cover object-cover pointer-events-none"
       />
-      <div class="font-bold text-4xl text-white text-center absolute z-10">
+      <div
+        class="font-bold text-4xl text-white text-center absolute z-10"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
         <p class="mb-4">Hello I'm</p>
         <p>Giras Gendrasena</p>
         <button
           class="rounded-full mt-4 px-4 py-1 bg-[#393E46] text-lg text-white shadow-xl"
           @click="$router.push('#history')"
+          data-aos="fade-up"
+          data-aos-duration="1500"
         >
           Explore
         </button>
@@ -158,7 +163,7 @@
 
     <div id="history" class="mt-16">
       <div
-        class="container mx-auto max-w-screen-xl mb-20 flex justify-center flex-col px-2"
+        class="container mx-auto max-w-screen-xl sm:mb-16 md:mb-20 flex justify-center flex-col px-2"
       >
         <div class="flex gap-4 items-center justify-center text-center">
           <div
@@ -184,6 +189,7 @@
         <div
           id="downarrow"
           class="mx-auto mt-[2rem] text-[#85bc33] p-2 bg-white rounded-full hover:shadow-md cursor-pointer transition-all"
+          @click="$router.push('#firstHistory')"
         >
           <Icon icon="material-symbols:arrow-downward" width="60" height="60" />
         </div>
@@ -191,7 +197,8 @@
 
       <div class="container mx-auto max-w-screen-xl mb-64 px-2">
         <div
-          class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end lg:place-items px-3"
+          id="firstHistoryWrapper"
+          class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end md:place-items-center lg:place-items-start px-3"
         >
           <div class="relative col-span-2 lg:col-span-1 mx-auto">
             <img
@@ -205,8 +212,9 @@
               class="w-[430px] h-full relative z-10"
             />
           </div>
-          <div class="px-10 col-span-2 prose prose-lg self-start">
+          <div class="lg:px-10 px-3 col-span-2 prose prose-lg self-start">
             <h1
+              id="firstHistory"
               class="font-bold text-xl lg:text-2xl bg-[#85bc33] text-white inline-block px-2 py-2 shadow-lg mt-10 lg:mt-0"
             >
               National Aeronautics and Space Administration
@@ -246,7 +254,7 @@
         </div>
 
         <div
-          class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end lg:place-items mt-40 px-3"
+          class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end md:place-items-center lg:place-items-start md:mt-40 -mt-10 px-3"
         >
           <div class="relative col-span-2 lg:col-span-1 mx-auto">
             <img
@@ -260,7 +268,7 @@
               class="w-[430px] h-full relative z-10"
             />
           </div>
-          <div class="px-10 col-span-2 prose prose-lg self-start">
+          <div class="lg:px-10 px-3 col-span-2 prose prose-lg self-start">
             <h1
               class="font-bold text-2xl bg-[#85bc33] text-white inline-block px-2 py-2 shadow-lg mt-10 lg:mt-0"
             >
@@ -461,7 +469,6 @@
                   class="absolute -bottom-7 group-hover:text-white"
                 />
               </div>
-              <!-- TODO: bg-instagram ngga kena effect transition -->
               <div
                 id="instagram-social"
                 class="border border-gray-100 shadow p-5 min-h-[155px] relative overflow-hidden"
