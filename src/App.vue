@@ -1,6 +1,5 @@
 <template>
   <!-- TODO: add some AOS effect to the element -->
-
   <header class="bg-white shadow-2xl fixed top-0 left-0 right-0 z-50">
     <div
       class="container mx-auto max-w-screen-xl flex items-center py-3 relative px-2"
@@ -30,29 +29,71 @@
           class="flex lg:items-center justify-center flex-col lg:flex-row [&>:not(li)]:mx-3 font-bold relative"
         >
           <li>
-            <router-link to="#home" class="p-5 lg:p-0 flex">Home</router-link>
+            <router-link
+              to="#home"
+              class="p-5 lg:p-0 flex transition-all"
+              :class="[
+                {
+                  'lg:border-b-[3px] border-l-[6px] lg:border-l-0  bg-slate-100 lg:bg-white border-[#85bc33]':
+                    currentSection === '0-navHeader',
+                },
+              ]"
+              >Home</router-link
+            >
           </li>
           <span class="hidden lg:inline-block">|</span>
           <li>
-            <router-link to="#history" class="p-5 lg:p-0 flex"
+            <router-link
+              to="#history"
+              class="p-5 lg:p-0 flex transition-all"
+              :class="[
+                {
+                  'lg:border-b-[3px] border-l-[6px] lg:border-l-0  bg-slate-100 lg:bg-white border-[#85bc33]':
+                    currentSection === '1-navHeader',
+                },
+              ]"
               >History</router-link
             >
           </li>
           <span class="hidden lg:inline-block">|</span>
           <li>
-            <router-link to="#aboutme" class="p-5 lg:p-0 flex"
+            <router-link
+              to="#aboutme"
+              class="p-5 lg:p-0 flex transition-all"
+              :class="[
+                {
+                  'lg:border-b-[3px] border-l-[6px] lg:border-l-0  bg-slate-100 lg:bg-white border-[#85bc33]':
+                    currentSection === '2-navHeader',
+                },
+              ]"
               >About Me</router-link
             >
           </li>
           <span class="hidden lg:inline-block">|</span>
           <li>
-            <router-link to="#myworks" class="p-5 lg:p-0 flex"
+            <router-link
+              to="#myworks"
+              class="p-5 lg:p-0 flex transition-all"
+              :class="[
+                {
+                  'lg:border-b-[3px] border-l-[6px] lg:border-l-0 bg-slate-100 lg:bg-white border-[#85bc33]':
+                    currentSection === '3-navHeader',
+                },
+              ]"
               >My Works</router-link
             >
           </li>
           <span class="hidden lg:inline-block">|</span>
           <li>
-            <router-link to="#socials" class="p-5 lg:p-0 flex"
+            <router-link
+              to="#socials"
+              class="p-5 lg:p-0 flex transition-all"
+              :class="[
+                {
+                  'lg:border-b-[3px] border-l-[6px] lg:border-l-0  bg-slate-100 lg:bg-white border-[#85bc33]':
+                    currentSection === '4-navHeader',
+                },
+              ]"
               >Socials</router-link
             >
           </li>
@@ -99,11 +140,11 @@
           </div>
         </div>
       </nav>
-      <button class="ml-auto" @click="toggleNav">
+      <button class="ml-auto lg:hidden" @click="toggleNav">
         <Icon icon="icon-park:hamburger-button" width="40" height="40" />
       </button>
       <button
-        class="hidden items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-auto shadow-md group"
+        class="hidden lg:inline-flex items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-auto shadow-md group"
       >
         <Icon icon="mdi:email" class="text-[#85bc33]" width="25" height="25" />
         <p
@@ -113,7 +154,7 @@
         </p>
       </button>
       <button
-        class="hidden items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-2 shadow-md group"
+        class="hidden lg:inline-flex items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-2 shadow-md group"
       >
         <Icon
           icon="clarity:sign-in-line"
@@ -140,6 +181,7 @@
       class="w-full h-[600px] flex justify-center items-center relative z-[3] mt-14"
     >
       <img
+        id="0-navHeader"
         :src="userOptions.heroImage"
         class="w-full h-full brightness-[.83] bg-cover object-cover pointer-events-none"
       />
@@ -161,9 +203,10 @@
       </div>
     </div>
 
-    <div id="history" class="mt-16">
+    <div id="history" class="mt-[5.5rem]">
       <div
         class="container mx-auto max-w-screen-xl sm:mb-16 md:mb-20 flex justify-center flex-col px-2"
+        id="1-navHeader"
       >
         <div class="flex gap-4 items-center justify-center text-center">
           <div
@@ -199,6 +242,8 @@
         <div
           id="firstHistoryWrapper"
           class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end md:place-items-center lg:place-items-start px-3"
+          data-aos="fade-up"
+          data-aos-duration="1300"
         >
           <div class="relative col-span-2 lg:col-span-1 mx-auto">
             <img
@@ -255,6 +300,8 @@
 
         <div
           class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end md:place-items-center lg:place-items-start md:mt-40 -mt-10 px-3"
+          data-aos="fade-up"
+          data-aos-duration="1300"
         >
           <div class="relative col-span-2 lg:col-span-1 mx-auto">
             <img
@@ -323,6 +370,7 @@
           <div class="flex flex-col gap-4 items-center text-center">
             <h1
               class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
+              id="2-navHeader"
             >
               About Me
             </h1>
@@ -331,6 +379,8 @@
 
           <div
             class="grid lg:grid-cols-3 gap-4 place-items-center mt-20 max-w-[1120px]"
+            data-aos="fade-up"
+            data-aos-duration="1300"
           >
             <div class="self-start text-xl col-span-2">
               <p class="mb-7">
@@ -365,6 +415,7 @@
         <div class="flex flex-col gap-4 items-center justify-center mb-10">
           <h1
             class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
+            id="3-navHeader"
           >
             My Works
           </h1>
@@ -378,6 +429,8 @@
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
             img="../assets/img/hero.jpg"
+            data-aos="zoom-in-up"
+            data-aos-duration="800"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
             laborum maiores? Eligendi quia id ad?
@@ -387,6 +440,8 @@
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
             img="../assets/img/hero.jpg"
+            data-aos="zoom-in-up"
+            data-aos-duration="800"
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione!
           </MiniCard>
@@ -395,6 +450,8 @@
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
             img="../assets/img/hero.jpg"
+            data-aos="zoom-in-up"
+            data-aos-duration="800"
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati
             exercitationem quaerat velit est dolorem!
@@ -404,6 +461,8 @@
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
             img="../assets/img/hero.jpg"
+            data-aos="zoom-in-up"
+            data-aos-duration="800"
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore
             explicabo libero hic in impedit eius magnam distinctio?
@@ -413,6 +472,8 @@
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
             img="../assets/img/hero.jpg"
+            data-aos="zoom-in-up"
+            data-aos-duration="800"
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore,
             laborum.
@@ -422,6 +483,8 @@
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
             img="../assets/img/hero.jpg"
+            data-aos="zoom-in-up"
+            data-aos-duration="800"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
             assumenda voluptatibus ad quae eligendi!
@@ -443,6 +506,7 @@
             <div class="flex flex-col items-center gap-3">
               <h1
                 class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
+                id="4-navHeader"
               >
                 Socials
               </h1>
@@ -458,6 +522,8 @@
             <div id="socialsbox" class="gap-5 grid lg:grid-cols-4 relative">
               <div
                 class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
+                data-aos="zoom-in-up"
+                data-aos-duration="800"
               >
                 <p class="text-4xl raleway group-hover:text-white font-bold">
                   Facebook
@@ -472,6 +538,8 @@
               <div
                 id="instagram-social"
                 class="border border-gray-100 shadow p-5 min-h-[155px] relative overflow-hidden"
+                data-aos="zoom-in-up"
+                data-aos-duration="1200"
               >
                 <p class="text-4xl raleway font-bold">Instagram</p>
                 <Icon
@@ -483,6 +551,8 @@
               </div>
               <div
                 class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all min-h-[155px]"
+                data-aos="zoom-in-up"
+                data-aos-duration="800"
               >
                 <p class="text-4xl raleway font-bold group-hover:text-white">
                   Linkedin
@@ -496,6 +566,8 @@
               </div>
               <div
                 class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all min-h-[155px]"
+                data-aos="zoom-in-up"
+                data-aos-duration="800"
               >
                 <p class="text-4xl raleway font-bold group-hover:text-white">
                   Twitter
@@ -540,15 +612,14 @@
           <!-- Footer -->
           <div class="flex justify-between p-4 text-slate-100">
             <p class="text-sm">Copyright &copy; Giras Gendrasena 2022</p>
-            <p class="text-sm">Back to top</p>
+            <router-link to="#home" class="text-sm hover:underline"
+              >Back to top</router-link
+            >
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- <RouterView /> -->
-
-  <!-- <div class="mt-60"></div> -->
 </template>
 
 <script setup>
@@ -560,23 +631,36 @@ import { Icon } from "@iconify/vue";
 /* eslint-disable */
 const userOptions = reactive({
   heroImage: new URL("./assets/img/hero.jpg", import.meta.url).href,
-  // projectList: [
-  //   {
-  //     title: "idk",
-  //     img: new URL("./assets/img/project-list/forest.jpg", import.meta.url)
-  //       .href,
-  //   },
-  // ],
 });
+
 const socials = ref();
 const navIsOpened = ref(false);
+
 function toggleNav() {
   navIsOpened.value = !navIsOpened.value;
   console.log(navIsOpened.value);
 }
 
+const currentSection = ref("");
+
 onMounted(() => {
   /* Particle JS */
+  const observe = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0) {
+          currentSection.value = entry.target.getAttribute("id");
+          console.log(entry);
+        }
+      });
+    },
+    { rootMargin: "0px 0px -70% 0px" }
+  );
+
+  document.querySelectorAll('[id$="-navHeader"]').forEach((el) => {
+    observe.observe(el);
+  });
+
   particlesJS.load(
     socials.value.id,
     "/src/libs/particlesjs-bg.json",
