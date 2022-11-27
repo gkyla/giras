@@ -423,7 +423,7 @@
           <MiniCard
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
-            img="../assets/img/hero.jpg"
+            :img="userOptions.heroImage"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
@@ -434,7 +434,7 @@
           <MiniCard
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
-            img="../assets/img/hero.jpg"
+            :img="userOptions.heroImage"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
@@ -444,7 +444,7 @@
           <MiniCard
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
-            img="../assets/img/hero.jpg"
+            :img="userOptions.heroImage"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
@@ -455,7 +455,7 @@
           <MiniCard
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
-            img="../assets/img/hero.jpg"
+            :img="userOptions.heroImage"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
@@ -466,7 +466,7 @@
           <MiniCard
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
-            img="../assets/img/hero.jpg"
+            :img="userOptions.heroImage"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
@@ -477,7 +477,7 @@
           <MiniCard
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
-            img="../assets/img/hero.jpg"
+            :img="userOptions.heroImage"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
