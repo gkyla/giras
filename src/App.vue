@@ -515,73 +515,44 @@
           </div>
           <div class="container mx-auto max-w-screen-lg mb-20 px-2 relative">
             <div id="socialsbox" class="gap-5 grid lg:grid-cols-4 relative">
-              <a href="#">
-                <div
-                  class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
-                  data-aos="zoom-in-up"
-                  data-aos-duration="800"
-                >
-                  <p class="text-4xl raleway group-hover:text-white font-bold">
-                    Facebook
-                  </p>
-                  <Icon
-                    icon="iconoir:facebook"
-                    width="100"
-                    height="100"
-                    class="absolute -bottom-7 group-hover:text-white"
-                  />
-                </div>
-              </a>
-              <a href="#" class="inline-block">
-                <div
-                  id="instagram-social"
-                  class="border border-gray-100 shadow p-5 min-h-[155px] relative overflow-hidden"
-                  data-aos="zoom-in-up"
-                  data-aos-duration="1200"
-                >
-                  <p class="text-4xl raleway font-bold">Instagram</p>
-                  <Icon
-                    icon="ph:instagram-logo-light"
-                    width="100"
-                    height="100"
-                    class="absolute -bottom-7"
-                  />
-                </div>
-              </a>
-              <a href="#">
-                <div
-                  class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all min-h-[155px]"
-                  data-aos="zoom-in-up"
-                  data-aos-duration="800"
-                >
-                  <p class="text-4xl raleway font-bold group-hover:text-white">
-                    Linkedin
-                  </p>
-                  <Icon
-                    icon="uit:linkedin-alt"
-                    width="100"
-                    height="100"
-                    class="absolute -bottom-7 group-hover:text-white"
-                  />
-                </div>
-              </a>
-              <a href="#">
-                <div
-                  class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all min-h-[155px]"
-                  data-aos="zoom-in-up"
-                  data-aos-duration="800"
-                >
-                  <p class="text-4xl raleway font-bold group-hover:text-white">
-                    Twitter
-                  </p>
-                  <Icon
-                    icon="uit:twitter-alt"
-                    width="100"
-                    height="100"
-                    class="absolute -bottom-9 group-hover:text-white"
-                  />
-                </div>
-              </a>
+              <SocialCard
+                name="Facebook"
+                :iconify="{
+                  icon: 'iconoir:facebook',
+                  width: '100',
+                  height: '100',
+                }"
+                background-on-hover="hover:bg-[#4267B2]"
+              />
+              <!-- Use independent style (#instagram-social) -->
+              <SocialCard
+                id="instagram-social"
+                name="Instagram"
+                :iconify="{
+                  icon: 'ph:instagram-logo-light',
+                  width: '100',
+                  height: '100',
+                }"
+              />
+              <SocialCard
+                name="Linkedin"
+                :iconify="{
+                  icon: 'uit:linkedin-alt',
+                  width: '100',
+                  height: '100',
+                }"
+                background-on-hover="hover:bg-[#0077b5]"
+              />
+
+              <SocialCard
+                name="Twitter"
+                :iconify="{
+                  icon: 'uit:twitter-alt',
+                  width: '100',
+                  height: '100',
+                }"
+                background-on-hover="hover:bg-[#1DA1F2] "
+              />
             </div>
           </div>
         </div>
@@ -627,6 +598,7 @@
 
 <script setup>
 import MiniCard from "./components/MiniCard.vue";
+import SocialCard from "./components/socials/SocialCard.vue";
 
 import { onMounted, reactive, ref } from "vue";
 import { Icon } from "@iconify/vue";
@@ -689,18 +661,12 @@ canvas {
   font-family: "Raleway", sans-serif;
 }
 
-#instagram-social {
+/* #instagram-social {
   color: black;
   background: #fafcfd;
-  /* transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms; */
+
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* #instagram-social:hover > * {
-  color: white;
-} */
 
 #instagram-social:hover {
   color: white;
@@ -713,7 +679,7 @@ canvas {
     #e1306c,
     #fd1d1d
   );
-}
+} */
 
 .our-gradient {
   /* background-image: linear-gradient(to bottom, #2b2b2b 0%, black 100%); */
