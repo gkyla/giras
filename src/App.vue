@@ -123,7 +123,7 @@
             class="items-center border-2 border-[#85bc33] rounded-lg px-[16px] py-[10px] gap-4 font-semibold shadow-md flex"
           >
             <Icon
-              icon="clarity:sign-in-line"
+              icon="mdi:user"
               class="text-[#85bc33]"
               width="25"
               height="25"
@@ -156,12 +156,7 @@
       <button
         class="hidden lg:inline-flex items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-2 shadow-md group"
       >
-        <Icon
-          icon="clarity:sign-in-line"
-          class="text-[#85bc33]"
-          width="25"
-          height="25"
-        />
+        <Icon icon="mdi:user" class="text-[#85bc33]" width="25" height="25" />
         <p
           class="text-sm text-slate-800 w-0 overflow-hidden group-hover:w-14 transition-all"
         >
@@ -520,65 +515,73 @@
           </div>
           <div class="container mx-auto max-w-screen-lg mb-20 px-2 relative">
             <div id="socialsbox" class="gap-5 grid lg:grid-cols-4 relative">
-              <div
-                class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
-                data-aos="zoom-in-up"
-                data-aos-duration="800"
-              >
-                <p class="text-4xl raleway group-hover:text-white font-bold">
-                  Facebook
-                </p>
-                <Icon
-                  icon="iconoir:facebook"
-                  width="100"
-                  height="100"
-                  class="absolute -bottom-7 group-hover:text-white"
-                />
-              </div>
-              <div
-                id="instagram-social"
-                class="border border-gray-100 shadow p-5 min-h-[155px] relative overflow-hidden"
-                data-aos="zoom-in-up"
-                data-aos-duration="1200"
-              >
-                <p class="text-4xl raleway font-bold">Instagram</p>
-                <Icon
-                  icon="ph:instagram-logo-light"
-                  width="100"
-                  height="100"
-                  class="absolute -bottom-7"
-                />
-              </div>
-              <div
-                class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all min-h-[155px]"
-                data-aos="zoom-in-up"
-                data-aos-duration="800"
-              >
-                <p class="text-4xl raleway font-bold group-hover:text-white">
-                  Linkedin
-                </p>
-                <Icon
-                  icon="uit:linkedin-alt"
-                  width="100"
-                  height="100"
-                  class="absolute -bottom-7 group-hover:text-white"
-                />
-              </div>
-              <div
-                class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all min-h-[155px]"
-                data-aos="zoom-in-up"
-                data-aos-duration="800"
-              >
-                <p class="text-4xl raleway font-bold group-hover:text-white">
-                  Twitter
-                </p>
-                <Icon
-                  icon="uit:twitter-alt"
-                  width="100"
-                  height="100"
-                  class="absolute -bottom-9 group-hover:text-white"
-                />
-              </div>
+              <a href="#">
+                <div
+                  class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#4267B2] relative overflow-hidden min-h-[155px] transition-all"
+                  data-aos="zoom-in-up"
+                  data-aos-duration="800"
+                >
+                  <p class="text-4xl raleway group-hover:text-white font-bold">
+                    Facebook
+                  </p>
+                  <Icon
+                    icon="iconoir:facebook"
+                    width="100"
+                    height="100"
+                    class="absolute -bottom-7 group-hover:text-white"
+                  />
+                </div>
+              </a>
+              <a href="#" class="inline-block">
+                <div
+                  id="instagram-social"
+                  class="border border-gray-100 shadow p-5 min-h-[155px] relative overflow-hidden"
+                  data-aos="zoom-in-up"
+                  data-aos-duration="1200"
+                >
+                  <p class="text-4xl raleway font-bold">Instagram</p>
+                  <Icon
+                    icon="ph:instagram-logo-light"
+                    width="100"
+                    height="100"
+                    class="absolute -bottom-7"
+                  />
+                </div>
+              </a>
+              <a href="#">
+                <div
+                  class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#0077b5] relative overflow-hidden transition-all min-h-[155px]"
+                  data-aos="zoom-in-up"
+                  data-aos-duration="800"
+                >
+                  <p class="text-4xl raleway font-bold group-hover:text-white">
+                    Linkedin
+                  </p>
+                  <Icon
+                    icon="uit:linkedin-alt"
+                    width="100"
+                    height="100"
+                    class="absolute -bottom-7 group-hover:text-white"
+                  />
+                </div>
+              </a>
+              <a href="#">
+                <div
+                  class="group border bg-[#fafcfd] border-gray-100 shadow p-5 hover:bg-[#1DA1F2] relative overflow-hidden transition-all min-h-[155px]"
+                  data-aos="zoom-in-up"
+                  data-aos-duration="800"
+                >
+                  <p class="text-4xl raleway font-bold group-hover:text-white">
+                    Twitter
+                  </p>
+                  <Icon
+                    icon="uit:twitter-alt"
+                    width="100"
+                    height="100"
+                    class="absolute -bottom-9 group-hover:text-white"
+                  />
+                </div>
+              </a>
             </div>
           </div>
         </div>
