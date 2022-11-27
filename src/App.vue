@@ -641,7 +641,6 @@ const navIsOpened = ref(false);
 
 function toggleNav() {
   navIsOpened.value = !navIsOpened.value;
-  console.log(navIsOpened.value);
 }
 
 const currentSection = ref("");
@@ -653,7 +652,6 @@ onMounted(() => {
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           currentSection.value = entry.target.getAttribute("id");
-          console.log(entry);
         }
       });
     },
