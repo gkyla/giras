@@ -1,5 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import ContentEditor from "../views/ContentEditor.vue";
+
+/* ContentChildrenViewer */
+import HistoryTab from "../views/content/HistoryTab.vue";
+import AboutmeTab from "../views/content/AboutmeTab.vue";
+import HomeTab from "../views/content/HomeTab.vue";
+import MyworksTab from "../views/content/MyworksTab.vue";
+import SocialsTab from "../views/content/SocialsTab.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +31,38 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/content",
+      name: "ContentEditor",
+      children: [
+        {
+          path: "home",
+          name: "HomeTab",
+          component: HomeTab,
+        },
+        {
+          path: "history",
+          name: "history",
+          component: HistoryTab,
+        },
+        {
+          path: "aboutme",
+          name: "AboutmeTab",
+          component: AboutmeTab,
+        },
+        {
+          path: "myworks",
+          name: "MyworksTab",
+          component: MyworksTab,
+        },
+        {
+          path: "socials",
+          name: "SocialsTab",
+          component: SocialsTab,
+        },
+      ],
+      component: ContentEditor,
     },
   ],
 });
