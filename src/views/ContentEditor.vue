@@ -71,4 +71,8 @@ html {
 }
 </style>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.router-link-exact-active {
+  @apply border-[#85bc33] transition-all;
+}
+</style>
