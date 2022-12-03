@@ -41,7 +41,7 @@
         </router-link>
       </aside>
     </div>
-    <div class="flex-1 p-10 border-l-[3px] border-slate-200">
+    <div class="flex-1 p-10 border-l-[3px] border-slate-200 relative">
       <div class="mb-5">
         <h1 class="font-semibold text-xl mb-2">Edit your content</h1>
         <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
