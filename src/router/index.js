@@ -19,11 +19,14 @@ const router = createRouter({
         top: 65,
       };
     } else {
-      return {
-        el: to.hash,
-        behavior: "smooth",
-        top: 100 /* tittle for each section now will be visible */,
-      };
+      /* Prevent error when the page doesnt have hash  */
+      if (to.hash !== "") {
+        return {
+          el: to.hash,
+          behavior: "smooth",
+          top: 100 /* tittle for each section now will be visible */,
+        };
+      }
     }
   },
   routes: [
