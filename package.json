@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@vueup/vue-quill": "^1.0.0",
     "aos": "^2.3.4",
     "pinia": "^2.0.23",
     "vue": "^3.2.41",

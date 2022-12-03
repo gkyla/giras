@@ -2,25 +2,40 @@
   <InputControl identifier="image1" input-type="file"
     >display Image</InputControl
   >
-  <InputControl
+  <!-- <InputControl
     identifier="title2"
     v-model="AboutmeInput.lineTwo"
     input-type="textarea"
     :row="7"
     >Tittle Line 2</InputControl
+  > -->
+  <InputControl
+    identifier="quill"
+    input-type="textarea"
+    v-model:model-value="AboutmeInput.lineTwo"
+    >About me</InputControl
   >
+
+  <button @click="logBro">log</button>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 
 import InputControl from "../../components/InputControl.vue";
+
+function logBro() {
+  console.log(AboutmeInput.lineTwo);
+}
 
 const AboutmeInput = reactive({
   // lineOne: "Hello I'm",
   /* TODO: FIND MARKDOWN LIBS */
-  lineTwo:
-    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus perspiciatis totam nobis sequi nihild architecto consectetur itaque atque numquam perferendis, quasi velit magnam, iure harum aperiam vitae. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus perspiciatis totam nobis sequi nihil aliquid cum fuga architecto consectetur itaque atque numquam perferendis, quasi velit magnam, iure harum aperiam vitae",
+
+  /* this  need to be delta object */
+  lineTwo: {
+    ops: [],
+  },
 });
 </script>
 

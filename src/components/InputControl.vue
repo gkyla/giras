@@ -27,17 +27,25 @@
       :placeholder="placeholder"
       @input="$emit('update:modelValue', $event.target.value)"
     />
-    <textarea
+    <div class="h-[400px] w-[600px]" v-if="inputType === 'textarea'">
+      <QuillEditor
+        theme="snow"
+        v-model:content="quillModelValue"
+        @input="$emit('update:modelValue', quillModelValue)"
+        contentType="delta"
+        @ready="onEditorReady($event)"
+      ></QuillEditor>
+    </div>
+    <!-- <textarea
       name=""
       :id="identifier"
       :placeholder="placeholder"
       :cols="col"
       :rows="row"
       class="border-2 border-slate-500 rounded-md shadow-sm p-2"
-      v-if="inputType === 'textarea'"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-    ></textarea>
+    ></textarea> -->
     <input
       type="file"
       :id="identifier"
@@ -48,6 +56,17 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
+
+const quillModelValue = ref(props.modelValue);
+
+function onEditorReady(e) {
+  console.log(e.getContents());
+}
+
 const props = defineProps({
   inputType: {
     type: String,

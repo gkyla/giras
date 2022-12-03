@@ -1,4 +1,5 @@
 <template>
+  <InputControl identifier="homeimg" input-type="file">Background</InputControl>
   <InputControl identifier="title1" v-model="homeInput.lineOne"
     >Tittle Line 1</InputControl
   >

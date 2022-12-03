@@ -8,7 +8,7 @@
     input-type="textarea"
     >Headline Description</InputControl
   >
-  <div class="border border-slate-200 w-full"></div>
+  <div class="border border-slate-200 w-full mt-16"></div>
   <div class="flex items-center gap-3">
     <div>
       <h1 class="font-bold text-xl mt-5 mb-2">
