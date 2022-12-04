@@ -31,17 +31,21 @@
     />
 
     <!-- Textarea, use Quill  -->
-    <div class="h-[400px] w-[600px]" v-if="inputType === 'textarea'">
+    <div
+      class="w-[600px]"
+      :class="[
+        {
+          'h-[400px]': !inputHeight,
+        },
+        inputHeight,
+      ]"
+      v-if="inputType === 'textarea'"
+    >
       <QuillEditor
-        theme="snow"
         v-model:content="quillModelValue"
         @input="$emit('update:modelValue', quillModelValue)"
         contentType="html"
-        :toolbar="[
-          ['bold', 'italic', 'underline', 'link', 'blockquote', 'strike'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          ['clean'],
-        ]"
+        :options="quillOptions"
         @update:content="onEditorReady"
       ></QuillEditor>
     </div>
@@ -57,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
@@ -67,6 +71,18 @@ const quillModelValue = ref(props.modelValue);
 function onEditorReady(e) {
   console.log(quillModelValue.value);
 }
+
+const quillOptions = reactive({
+  modules: {
+    toolbar: [
+      ["bold", "italic", "underline", "link", "blockquote", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["clean"],
+    ],
+  },
+  placeholder: "Saat itu ketika aku ...",
+  theme: "snow",
+});
 
 const props = defineProps({
   inputType: {
@@ -96,6 +112,13 @@ const props = defineProps({
   inputWidth: {
     type: String,
     /* value use tailwind width classes */
+  },
+  inputHeight: {
+    type: String,
+
+    validator(value) {
+      return value.startsWith("h-"); /* Tailwind height classes */
+    },
   },
 });
 

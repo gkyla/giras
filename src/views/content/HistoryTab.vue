@@ -89,8 +89,9 @@
             <InputControl
               identifier="historyContentEdit"
               v-model="historyInput.historyPosts[currentIndexClicked].historyContent"
+              inputHeight="h-[200px]"
               input-type="textarea"
-              >Event Post</InputControl
+              >History</InputControl
             >
           </div>
 
@@ -107,6 +108,7 @@
             <InputControl
               identifier="historyContentEdit"
               v-model="newHistoryPost.historyContent"
+              inputHeight="h-[200px]"
               input-type="textarea"
               >History Content</InputControl
             >
