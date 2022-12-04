@@ -1,7 +1,5 @@
 <template>
-  <InputControl identifier="image1" input-type="file"
-    >display Image</InputControl
-  >
+  <InputControl identifier="image1" input-type="file">display Image</InputControl>
   <!-- <InputControl
     identifier="title2"
     v-model="AboutmeInput.lineTwo"
@@ -33,9 +31,7 @@ const AboutmeInput = reactive({
   /* TODO: FIND MARKDOWN LIBS */
 
   /* this  need to be delta object */
-  lineTwo: {
-    ops: [],
-  },
+  lineTwo: "<ul><li>wewewewewewqq</li><li>Dua</li><li><br></li></ul>",
 });
 </script>
 
