@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex gap-6 mb-5"
+    class="flex mb-5 gap-4"
     :class="[
       {
         'items-start': inputType !== 'input',
@@ -8,7 +8,7 @@
     ]"
   >
     <div
-      class="flex items-center gap-4"
+      class="flex items-center gap-6"
       :class="[
         {
           'w-36': !labelWidth,
@@ -32,12 +32,13 @@
 
     <!-- Textarea, use Quill  -->
     <div
-      class="w-[600px]"
       :class="[
         {
           'h-[400px]': !inputHeight,
+          'w-[600px]': !inputWidth,
         },
         inputHeight,
+        inputWidth,
       ]"
       v-if="inputType === 'textarea'"
     >
@@ -89,12 +90,6 @@ const props = defineProps({
     type: String,
     default: "input",
   },
-  row: {
-    default: "6",
-  },
-  col: {
-    default: "60",
-  },
   identifier: {
     type: String,
     required: true,
@@ -111,6 +106,10 @@ const props = defineProps({
   },
   inputWidth: {
     type: String,
+
+    validator(value) {
+      return value.startsWith("w-"); /* Tailwind width classes */
+    },
     /* value use tailwind width classes */
   },
   inputHeight: {
