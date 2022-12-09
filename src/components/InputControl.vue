@@ -42,12 +42,15 @@
       ]"
       v-if="inputType === 'textarea'"
     >
+      <!-- Use @update:content instead @input for updating v-model -->
       <QuillEditor
+        ref="quillEditor"
         v-model:content="quillModelValue"
-        @input="$emit('update:modelValue', quillModelValue)"
+        @update:content="$emit('update:modelValue', quillModelValue)"
         contentType="html"
         :options="quillOptions"
-        @update:content="onEditorReady"
+        @textChange="onTextChange"
+        @ready="onReady"
       ></QuillEditor>
     </div>
 
@@ -62,16 +65,39 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, watch, nextTick } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import { useInputState } from "../stores/inputState";
 
+const emit = defineEmits(["update:modelValue", "getQuill"]);
 const quillModelValue = ref(props.modelValue);
+const quillEditor = ref(null);
 
-function onEditorReady(e) {
-  console.log(quillModelValue.value);
+const inputState = useInputState();
+
+function onReady() {
+  inputState.quillEditor = quillEditor.value;
 }
+
+// onMounted(() => {
+//   console.log(quillEditor.value);
+//   emit("getQuill", quillEditor);
+// });
+
+function onTextChange() {
+  console.log(quillModelValue.value);
+  // quillEditor.value.setText("w");
+}
+
+// watch(quillModelValue, (newVal, oldVal) => {
+//   console.log("newVal", newVal);
+
+/* KALO INI DI COMMENT TRUS DIN UNCOMENT TEXT BERUBAH JADI MEKI MEKI */
+// quillEditor.value.setHTML(newVal);
+// emit("getQuill", quillEditor);
+// });
 
 const quillOptions = reactive({
   modules: {
@@ -120,8 +146,6 @@ const props = defineProps({
     },
   },
 });
-
-const emit = defineEmits(["update:modelValue"]);
 </script>
 
 <style lang="scss" scoped></style>
