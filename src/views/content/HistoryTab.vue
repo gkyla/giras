@@ -148,13 +148,15 @@ import InputControl from "../../components/InputControl.vue";
 import { useHistoryTab } from "../../stores/historyTab";
 import { useInputState } from "../../stores/inputState";
 
+/* TODO: Add Delete history */
+/* TODO: Work on headline section */
+/* TODO : Add Revert functionality (Headline) */
+
 const history = useHistoryTab();
 const inputState = useInputState();
 
-/* Track which post we chose to edit */
+/* variable for tracking  */
 const currentIndexClicked = ref(null);
-
-/* State for detecting if we want create a new History */
 const showModal = ref(false);
 const isCreating = ref(false);
 
@@ -165,8 +167,6 @@ let newHistoryPost = reactive({
   historyContent: "",
 });
 const currentEditedHistoryPost = ref(null);
-
-const quillEditor = ref();
 
 watch(showModal, (newVal, oldVal) => {
   if (newVal) {
