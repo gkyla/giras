@@ -49,8 +49,9 @@
         @update:content="$emit('update:modelValue', quillModelValue)"
         contentType="html"
         :options="quillOptions"
-        @textChange="onTextChange"
         @ready="onReady"
+        @selectionChange="onSelectionChange"
+        @textChange="onTextChange"
       ></QuillEditor>
     </div>
 
@@ -78,26 +79,48 @@ const quillEditor = ref(null);
 const inputState = useInputState();
 
 function onReady() {
-  inputState.quillEditor = quillEditor.value;
+  // inputState.quillEditor = quillEditor.value;'
+  // if (props.inputType === "textarea") {
+  // inputState.$patch((state) => {
+  //   state.quillEditor[props.identifier] = {
+  //     quill: quillEditor.value,
+  //     identifier: props.identifier,
+  //   };
+  // });
+  // }
 }
 
-// onMounted(() => {
-//   console.log(quillEditor.value);
-//   emit("getQuill", quillEditor);
-// });
+/* CurrentEditHistory ngga masuk ke data karna dalem if statemanet */
+
+onMounted(() => {
+  if (props.inputType === "textarea") {
+    inputState.$patch((state) => {
+      state.quillEditor[props.identifier] = {
+        quill: quillEditor.value,
+        identifier: props.identifier,
+      };
+    });
+  }
+});
+
+/* Reassing quillEditor element every selection change
+  now quillEditor should always get the right element
+*/
+
+function onSelectionChange() {
+  console.log("selecntion change");
+  inputState.$patch((state) => {
+    state.quillEditor[props.identifier] = {
+      quill: quillEditor.value,
+      identifier: props.identifier,
+    };
+  });
+  // }
+}
 
 function onTextChange() {
   console.log(quillModelValue.value);
-  // quillEditor.value.setText("w");
 }
-
-// watch(quillModelValue, (newVal, oldVal) => {
-//   console.log("newVal", newVal);
-
-/* KALO INI DI COMMENT TRUS DIN UNCOMENT TEXT BERUBAH JADI MEKI MEKI */
-// quillEditor.value.setHTML(newVal);
-// emit("getQuill", quillEditor);
-// });
 
 const quillOptions = reactive({
   modules: {

@@ -18,7 +18,7 @@ export const useHistoryTab = defineStore("history", () => {
       historyContent: "<h1>Hello bro</h1>",
     },
   ]);
-  const _initialValue = ref({
+  const _initialValuePost = ref({
     imgLink: "",
     title: "",
     event: "",
@@ -29,5 +29,5 @@ export const useHistoryTab = defineStore("history", () => {
     posts.value.push(post);
   }
 
-  return { headline, posts, headlineDescription, _initialValue, addPost };
+  return { headline, posts, headlineDescription, _initialValuePost, addPost };
 });

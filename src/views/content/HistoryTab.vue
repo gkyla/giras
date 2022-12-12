@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSubmitHeadline">
+  <form @submit.prevent="handleSaveHeadline">
     <InputControl identifier="Headline" v-model="currentHeadline.headline"
       >Headline</InputControl
     >
@@ -12,7 +12,15 @@
       >Headline Description</InputControl
     >
     <div class="flex mt-16 gap-2 self-end">
-      <button class="btn_close ml-auto" @click.self="revertHeadline" type="button">
+      <button
+        class="ml-auto"
+        :class="{
+          btn_close_clickable: isRevertable,
+          btn_close_unclickable: !isRevertable,
+        }"
+        @click.self="handleRevertHeadline"
+        type="button"
+      >
         Revert
       </button>
       <button class="btn_save" type="submit">Save</button>
@@ -50,7 +58,8 @@
       <div>
         <button
           class="rounded-lg inline-flex gap-2 items-center border-2 px-3 py-1"
-          @click="(showModal = true), (currentIndexClicked = index)"
+          @click="editHistory(index)"
+          type="button"
         >
           Edit <Icon icon="material-symbols:edit" />
         </button>
@@ -97,7 +106,6 @@
           >
           <InputControl
             identifier="historyContentEdit"
-            ref="quillEditor"
             v-model="currentEditedHistoryPost.historyContent"
             inputHeight="h-[200px]"
             input-type="textarea"
@@ -149,8 +157,6 @@ import { useHistoryTab } from "../../stores/historyTab";
 import { useInputState } from "../../stores/inputState";
 
 /* TODO: Add Delete history */
-/* TODO: Work on headline section */
-/* TODO : Add Revert functionality (Headline) */
 
 const history = useHistoryTab();
 const inputState = useInputState();
@@ -159,6 +165,7 @@ const inputState = useInputState();
 const currentIndexClicked = ref(null);
 const showModal = ref(false);
 const isCreating = ref(false);
+const isRevertable = ref(false);
 
 let newHistoryPost = reactive({
   imgLink: "",
@@ -170,14 +177,20 @@ const currentEditedHistoryPost = ref(null);
 
 watch(showModal, (newVal, oldVal) => {
   if (newVal) {
+    console.log("showModal", newVal);
     if (!isCreating.value) {
       currentEditedHistoryPost.value = {
         ...history.posts[currentIndexClicked.value],
       };
 
-      inputState.quillEditor.setHTML(
-        history.posts[currentIndexClicked.value].historyContent
-      );
+      if (
+        currentIndexClicked.value >= 0 &&
+        inputState.quillEditor["historyContentEdit"]
+      ) {
+        inputState.quillEditor["historyContentEdit"].quill.setHTML(
+          history.posts[currentIndexClicked.value].historyContent
+        );
+      }
     }
   }
 });
@@ -187,7 +200,41 @@ const currentHeadline = reactive({
   headlineDescription: history.headlineDescription,
 });
 
+watch(currentHeadline, (newVal, oldVal) => {
+  if (newVal.headlineDescription !== history.headlineDescription) {
+    isRevertable.value = true;
+  } else {
+    isRevertable.value = false;
+  }
+});
+
+const headlineOldValue = ref({ ...currentHeadline });
+
+function handleSaveHeadline() {
+  headlineOldValue.value = { ...currentHeadline };
+
+  history.$patch({
+    headline: currentHeadline.headline,
+    headlineDescription: currentHeadline.headlineDescription,
+  });
+
+  currentHeadline.headline = history.headline;
+  currentHeadline.headlineDescription = history.headlineDescription;
+}
+
+function handleRevertHeadline() {
+  currentHeadline.headline = headlineOldValue.value?.headline;
+  currentHeadline.headlineDescription = headlineOldValue.value?.headlineDescription;
+
+  inputState.quillEditor["headlineDescription"].quill.setHTML(
+    currentHeadline.headlineDescription
+  );
+
+  console.log("kerevert dek");
+}
+
 function handleSavePost() {
+  console.log("kesave dek");
   if (!isCreating.value /* Edit */) {
     console.log("before saving edit :", currentEditedHistoryPost.value);
 
@@ -203,12 +250,20 @@ function handleSavePost() {
 
     console.log("after", newHistoryPost);
 
-    newHistoryPost = reactive({ ...history._initialValue });
-    inputState.quillEditor.setHTML(
+    newHistoryPost = reactive({ ...history._initialValuePost });
+    inputState.quillEditor["AddHistoryContent"].quill.setHTML(
       newHistoryPost.historyContent
-    ); /* Then show blank quill */
+    );
+
+    /* Then show blank quill */
     handleClose();
   }
+}
+
+function editHistory(index) {
+  console.log("clicked", index);
+  currentIndexClicked.value = index;
+  showModal.value = true;
 }
 
 function handleClose() {
