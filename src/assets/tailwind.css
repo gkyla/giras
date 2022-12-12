@@ -21,6 +21,14 @@
     @apply px-4 py-2 rounded-xl bg-red-800 font-semibold text-white shadow border-2 hover:brightness-110 transition-all;
   }
 
+  .btn_close_clickable {
+    @apply px-4 py-2 rounded-xl bg-red-800 font-semibold text-white shadow border-2 brightness-100 hover:brightness-110 transition-all pointer-events-auto;
+  }
+
+  .btn_close_unclickable {
+    @apply px-4 py-2 rounded-xl bg-red-800 font-semibold text-white shadow border-2  brightness-50 transition-all pointer-events-none;
+  }
+
   .btn_save {
     @apply px-4 py-2 rounded-xl bg-[#85bc33] font-semibold text-white shadow border-2 hover:brightness-110 transition-all;
   }
