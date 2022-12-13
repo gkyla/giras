@@ -8,7 +8,7 @@
     >Tittle Line 2</InputControl
   > -->
   <InputControl
-    identifier="quill"
+    identifier="aboutMeEdit"
     input-type="textarea"
     v-model:model-value="AboutmeInput.lineTwo"
     >About me</InputControl
