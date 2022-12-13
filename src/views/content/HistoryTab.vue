@@ -187,9 +187,8 @@ watch(showModal, (newVal, oldVal) => {
         currentIndexClicked.value >= 0 &&
         inputState.quillEditor["historyContentEdit"]
       ) {
-        inputState.quillEditor["historyContentEdit"].quill.setHTML(
-          history.posts[currentIndexClicked.value].historyContent
-        );
+        inputState.quillEditor["historyContentEdit"].quill.innerHTML =
+          history.posts[currentIndexClicked.value].historyContent;
       }
     }
   }
@@ -226,9 +225,8 @@ function handleRevertHeadline() {
   currentHeadline.headline = headlineOldValue.value?.headline;
   currentHeadline.headlineDescription = headlineOldValue.value?.headlineDescription;
 
-  inputState.quillEditor["headlineDescription"].quill.setHTML(
-    currentHeadline.headlineDescription
-  );
+  inputState.quillEditor["headlineDescription"].quill.innerHTML =
+    currentHeadline.headlineDescription;
 
   console.log("kerevert dek");
 }
@@ -251,9 +249,8 @@ function handleSavePost() {
     console.log("after", newHistoryPost);
 
     newHistoryPost = reactive({ ...history._initialValuePost });
-    inputState.quillEditor["AddHistoryContent"].quill.setHTML(
-      newHistoryPost.historyContent
-    );
+    inputState.quillEditor["AddHistoryContent"].quill.innerHTML =
+      newHistoryPost.historyContent;
 
     /* Then show blank quill */
     handleClose();

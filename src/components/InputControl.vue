@@ -66,56 +66,37 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, nextTick } from "vue";
+import { ref, reactive, onMounted, watch, nextTick, watchEffect } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import { useInputState } from "../stores/inputState";
 
-const emit = defineEmits(["update:modelValue", "getQuill"]);
+const emit = defineEmits(["update:modelValue"]);
 const quillModelValue = ref(props.modelValue);
 const quillEditor = ref(null);
-
 const inputState = useInputState();
 
 function onReady() {
-  // inputState.quillEditor = quillEditor.value;'
-  // if (props.inputType === "textarea") {
-  // inputState.$patch((state) => {
-  //   state.quillEditor[props.identifier] = {
-  //     quill: quillEditor.value,
-  //     identifier: props.identifier,
-  //   };
-  // });
-  // }
-}
-
-/* CurrentEditHistory ngga masuk ke data karna dalem if statemanet */
-
-onMounted(() => {
   if (props.inputType === "textarea") {
     inputState.$patch((state) => {
       state.quillEditor[props.identifier] = {
-        quill: quillEditor.value,
+        quill: quillEditor.value.getEditor().querySelector(".ql-editor"),
         identifier: props.identifier,
       };
     });
   }
-});
-
-/* Reassing quillEditor element every selection change
-  now quillEditor should always get the right element
-*/
+}
 
 function onSelectionChange() {
-  console.log("selecntion change");
-  inputState.$patch((state) => {
-    state.quillEditor[props.identifier] = {
-      quill: quillEditor.value,
-      identifier: props.identifier,
-    };
-  });
-  // }
+  if (props.inputType === "textarea") {
+    inputState.$patch((state) => {
+      state.quillEditor[props.identifier] = {
+        quill: quillEditor.value.getEditor().querySelector(".ql-editor"),
+        identifier: props.identifier,
+      };
+    });
+  }
 }
 
 function onTextChange() {
