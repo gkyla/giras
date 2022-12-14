@@ -3,7 +3,7 @@ import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
-import "./libs/particles";
+import "./libs/particles"; /* TODO: move bellow mount app */
 
 import "./assets/tailwind.css"; /* Tailwind */
 import "./assets/main.css"; /* base */
