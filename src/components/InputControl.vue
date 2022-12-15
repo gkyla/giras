@@ -81,7 +81,7 @@ function onReady() {
   if (props.inputType === "textarea") {
     inputState.$patch((state) => {
       state.quillEditor[props.identifier] = {
-        quill: quillEditor.value.getEditor().querySelector(".ql-editor"),
+        el: quillEditor.value.getEditor().querySelector(".ql-editor"),
         identifier: props.identifier,
       };
     });
@@ -92,7 +92,7 @@ function onSelectionChange() {
   if (props.inputType === "textarea") {
     inputState.$patch((state) => {
       state.quillEditor[props.identifier] = {
-        quill: quillEditor.value.getEditor().querySelector(".ql-editor"),
+        el: quillEditor.value.getEditor().querySelector(".ql-editor"),
         identifier: props.identifier,
       };
     });
