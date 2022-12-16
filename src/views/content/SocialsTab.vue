@@ -57,31 +57,17 @@ let currentSocials = reactive({
   twitter: socialsState.twitter,
 });
 
-function compareSocialsState(type, newVal) {
-  if (type === "socialState") {
-    return {
-      facebook: socialsState.facebook,
-      instagram: socialsState.instagram,
-      linkedin: socialsState.instagram,
-      twitter: socialsState.twitter,
-    };
-  }
-
-  if (type === "currentSocials" && newVal) {
-    return {
-      facebook: currentSocials.facebook,
-      instagram: currentSocials.instagram,
-      linkedin: currentSocials.instagram,
-      twitter: currentSocials.twitter,
-    };
-  }
+function compareableSocialsState() {
+  return {
+    facebook: socialsState.facebook,
+    instagram: socialsState.instagram,
+    linkedin: socialsState.instagram,
+    twitter: socialsState.twitter,
+  };
 }
 
-/* TODO: fix revertable */
 watch(currentSocials, (newVal, oldVal) => {
-  if (
-    compareSocialsState("currentSocials", newVal) === compareSocialsState("socialsState")
-  ) {
+  if (JSON.stringify(newVal) === JSON.stringify(compareableSocialsState())) {
     isRevertable.value = false;
   } else {
     isRevertable.value = true;
