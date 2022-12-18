@@ -59,23 +59,40 @@
     <input
       type="file"
       :id="identifier"
+      @change="getFile"
       accept="image/png, image/jpeg"
       v-if="inputType === 'file'"
+    />
+
+    <DatePicker
+      v-if="inputType === 'date'"
+      v-model="date"
+      @update:model-value="$emit('update:modelValue', date)"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, nextTick, watchEffect } from "vue";
+import { ref, reactive } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import DatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 import { useInputState } from "../stores/inputState";
 
 const emit = defineEmits(["update:modelValue"]);
 const quillModelValue = ref(props.modelValue);
 const quillEditor = ref(null);
 const inputState = useInputState();
+const date = ref(props.modelValue);
+
+/* TODO: CUSTOM FORMat DATEPICKER */
+
+function getFile(e) {
+  console.log(e.target.files["0"]);
+  console.log(typeof e.target.files);
+}
 
 function onReady() {
   if (props.inputType === "textarea") {
