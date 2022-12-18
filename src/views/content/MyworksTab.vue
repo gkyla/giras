@@ -39,7 +39,7 @@
         />
         <div>
           <h1 class="text-xl font-semibold">{{ post.title }}</h1>
-          <span class="text-sm">{{ post.date }}</span>
+          <span class="text-sm">{{ dateFormat(post.date) }}</span>
         </div>
       </div>
 
@@ -93,7 +93,7 @@
             >Event Post</InputControl
           >
           <InputControl
-            identifier="historyContentEdit"
+            identifier="WorkContentEdit"
             v-model="currentEditedWorkPost.content"
             inputHeight="h-[200px]"
             input-type="textarea"
@@ -112,7 +112,7 @@
           <InputControl identifier="addHeadling" v-model="newWorkPost.title"
             >Tittle</InputControl
           >
-          <InputControl identifier="dateEdit" inputType="date" v-model="newWorkPost.date"
+          <InputControl identifier="dateNew" inputType="date" v-model="newWorkPost.date"
             >Date</InputControl
           >
           <InputControl
@@ -139,7 +139,7 @@
 <script setup>
 /* TODO: make this done */
 
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, computed } from "vue";
 import { Icon } from "@iconify/vue";
 import { VueFinalModal } from "vue-final-modal";
 import InputControl from "../../components/InputControl.vue";
@@ -162,11 +162,29 @@ const currentIndexClicked = ref(null);
 const showModal = ref(false);
 const isCreating = ref(false);
 
+function dateFormat(postDate) {
+  let options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const temp = new Intl.DateTimeFormat("en-US", options).format(postDate).split(" ");
+  temp[2] = temp[2].replace(",", " ");
+  return temp.join(" ");
+}
+
 watch(showModal, (newVal, oldVal) => {
   if (newVal) {
-    if (currentEditedWorkPost.value >= 0) {
+    if (currentIndexClicked.value >= 0) {
+      console.log("edited");
       /* edit */
-      currentEditedWorkPost.value = myWorksState.posts[currentIndexClicked.value];
+      currentEditedWorkPost.value = {
+        ...myWorksState.posts[currentIndexClicked.value],
+      };
+
+      /* TODO: update datepicker element value on every different currentEditedWorkPost value */
+      console.log(currentEditedWorkPost.value);
     }
   }
 });
