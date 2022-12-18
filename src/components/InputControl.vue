@@ -66,14 +66,16 @@
 
     <DatePicker
       v-if="inputType === 'date'"
-      v-model="date"
+      model-value="date"
+      ref="datePickerEl"
+      format="EEEE, d MMMM yyyy"
       @update:model-value="$emit('update:modelValue', date)"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, watch } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
@@ -86,13 +88,20 @@ const quillModelValue = ref(props.modelValue);
 const quillEditor = ref(null);
 const inputState = useInputState();
 const date = ref(props.modelValue);
-
-/* TODO: CUSTOM FORMat DATEPICKER */
+const datePickerEl = ref(null);
 
 function getFile(e) {
   console.log(e.target.files["0"]);
   console.log(typeof e.target.files);
 }
+
+/* TODO : update every open new currentEditedWorks */
+watch(date, (newVal, oldVal) => {
+  if (newVal) {
+    console.log(datePickerEl.value);
+    console.log(date.value);
+  }
+});
 
 function onReady() {
   if (props.inputType === "textarea") {
@@ -145,7 +154,7 @@ const props = defineProps({
     type: String,
   },
   modelValue: {
-    type: String,
+    type: [String, Date],
   },
   labelWidth: {
     type: String,
