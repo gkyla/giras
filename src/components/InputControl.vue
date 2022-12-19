@@ -66,7 +66,7 @@
 
     <DatePicker
       v-if="inputType === 'date'"
-      model-value="date"
+      v-model="date"
       ref="datePickerEl"
       format="EEEE, d MMMM yyyy"
       @update:model-value="$emit('update:modelValue', date)"
@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from "vue";
+import { ref, reactive, watch, onBeforeUnmount, onMounted } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
@@ -95,11 +95,13 @@ function getFile(e) {
   console.log(typeof e.target.files);
 }
 
-/* TODO : update every open new currentEditedWorks */
-watch(date, (newVal, oldVal) => {
-  if (newVal) {
-    console.log(datePickerEl.value);
-    console.log(date.value);
+onMounted(() => {
+  if (props.inputType === "date") {
+    inputState.$patch((state) => {
+      state.datePicker[props.identifier] = {
+        el: datePickerEl.value,
+      };
+    });
   }
 });
 

@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 export const useInputState = defineStore("inputState", () => {
   const quillEditor = ref({}); /* Reffrence of quillEditor */
   const currentIdentifierSelection = ref(null);
+  const datePicker = ref({});
 
   function is(id) {
     // return quillEditor.value.find((obj) => {
@@ -11,5 +12,5 @@ export const useInputState = defineStore("inputState", () => {
     // });
   }
 
-  return { quillEditor, is, currentIdentifierSelection };
+  return { quillEditor, is, currentIdentifierSelection, datePicker };
 });

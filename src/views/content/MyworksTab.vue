@@ -144,8 +144,10 @@ import { Icon } from "@iconify/vue";
 import { VueFinalModal } from "vue-final-modal";
 import InputControl from "../../components/InputControl.vue";
 import { useMyWorks } from "../../stores/myWorksTab";
+import { useInputState } from "../../stores/inputState";
 
 const myWorksState = useMyWorks();
+const inputState = useInputState();
 
 const currentMyWorks = reactive({
   title: myWorksState.title,
@@ -175,6 +177,8 @@ function dateFormat(postDate) {
 }
 
 watch(showModal, (newVal, oldVal) => {
+  // inputState.datePicker?.dateNew.el.clearValue();
+  inputState.datePicker?.dateNew.el.updateInternalModelValue(new Date("2 March 1978"));
   if (newVal) {
     if (currentIndexClicked.value >= 0) {
       console.log("edited");
@@ -184,7 +188,10 @@ watch(showModal, (newVal, oldVal) => {
       };
 
       /* TODO: update datepicker element value on every different currentEditedWorkPost value */
-      console.log(currentEditedWorkPost.value);
+    } else {
+      // inputState.datePicker?.dateNew.el.updateInternalModelValue(
+      //   new Date("2 March 1978")
+      // );
     }
   }
 });
