@@ -180,4 +180,9 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+/* Datepicker element */
+.dp__input_wrap {
+  width: 350px;
+}
+</style>
