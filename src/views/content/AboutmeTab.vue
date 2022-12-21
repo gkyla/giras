@@ -1,20 +1,41 @@
 <template>
+  <form class="mb-10" @submit.prevent="handleEditSectionTitle">
+    <InputControl identifier="Headline" v-model="currentData.sectionTitle"
+      >Section tittle</InputControl
+    >
+    <div class="flex gap-2">
+      <button
+        class="ml-auto"
+        :class="{
+          btn_close_clickable: isRevertableSectionTitle,
+          btn_close_unclickable: !isRevertableSectionTitle,
+        }"
+        @click.self="handleRevertSectionTitle"
+        type="button"
+      >
+        Revert
+      </button>
+      <button class="btn_save" type="submit">Save</button>
+    </div>
+  </form>
+  <div class="border border-slate-200 w-full mb-10"></div>
+
   <form @submit.prevent="editAboutme">
-    <InputControl identifier="image1" input-type="file">display Image</InputControl>
+    <InputControl identifier="image1" input-type="file">Display Image</InputControl>
     <InputControl
       identifier="aboutMeEdit"
       input-type="textarea"
       input-height="h-[230px]"
       input-width="w-[680px]"
       v-model="currentData.content"
-      >About me</InputControl
+      >Content</InputControl
     >
     <div class="flex mt-16 gap-2 self-end">
       <button
         class="ml-auto"
         :class="{
-          btn_close_clickable: isRevertable,
-          btn_close_unclickable: !isRevertable,
+          btn_close_clickable: isRevertableContent,
+          btn_close_unclickable: !isRevertableContent,
         }"
         @click.self="handleRevert"
         type="button"
@@ -36,30 +57,55 @@ import { useAboutMe } from "../../stores/aboutMe";
 const aboutMeState = useAboutMe();
 const inputState = useInputState();
 
-const isRevertable = ref(false);
+const isRevertableContent = ref(false);
+const isRevertableSectionTitle = ref(false);
 let currentData = reactive({
+  sectionTitle: aboutMeState.sectionTitle,
   displayImage: aboutMeState.displayImage,
   content: aboutMeState.content,
 });
 
 watch(currentData, (newVal, oldVal) => {
   if (newVal.content === aboutMeState.content) {
-    isRevertable.value = false;
+    isRevertableContent.value = false;
   } else {
-    isRevertable.value = true;
+    isRevertableContent.value = true;
+  }
+
+  if (newVal.sectionTitle === aboutMeState.sectionTitle) {
+    isRevertableSectionTitle.value = false;
+  } else {
+    isRevertableSectionTitle.value = true;
   }
 });
 
+function handleEditSectionTitle() {
+  aboutMeState.$patch({
+    sectionTitle: currentData.sectionTitle,
+  });
+
+  isRevertableSectionTitle.value = false;
+}
+
+function handleRevertSectionTitle() {
+  currentData.sectionTitle = aboutMeState.sectionTitle;
+}
+
 function handleRevert() {
-  currentData = aboutMeState.revert(currentData);
+  currentData.content = aboutMeState.content;
 
   inputState.quillEditor["aboutMeEdit"].el.innerHTML = aboutMeState.content;
 }
 
 function editAboutme() {
-  aboutMeState.edit(currentData);
+  aboutMeState.$patch({
+    displayImage: currentData.displayImage,
+    content: currentData.content,
+  });
 
   inputState.quillEditor["aboutMeEdit"].el.innerHTML = aboutMeState.content;
+
+  isRevertableContent.value = false;
 }
 </script>
 
