@@ -1,7 +1,23 @@
 <template>
-  <InputControl identifier="Headline" v-model="currentMyWorks.title" label-width="w-48"
-    >Change section tittle</InputControl
-  >
+  <form class="mb-10" @submit.prevent="handleEditSectionTitle">
+    <InputControl identifier="Headline" v-model="currentMyWorks.sectionTitle"
+      >Section tittle</InputControl
+    >
+    <div class="flex gap-2">
+      <button
+        class="ml-auto"
+        :class="{
+          btn_close_clickable: isRevertable,
+          btn_close_unclickable: !isRevertable,
+        }"
+        @click.self="handleRevertSectionTitle"
+        type="button"
+      >
+        Revert
+      </button>
+      <button class="btn_save" type="submit">Save</button>
+    </div>
+  </form>
   <div class="border border-slate-200 w-full"></div>
 
   <div class="flex items-center gap-3">
@@ -46,7 +62,7 @@
       <div>
         <button
           class="rounded-lg inline-flex gap-2 items-center border-2 px-3 py-1"
-          @click="editPosts(index)"
+          @click="handleEditPost(index)"
           type="button"
         >
           Edit <Icon icon="material-symbols:edit" />
@@ -55,14 +71,14 @@
     </div>
   </div>
 
-  <div v-show="showModal">
+  <div v-if="showModal">
     <VueFinalModal
       v-model="showModal"
       classes="flex justify-center items-center p-10"
       content-class="bg-white p-10 rounded-lg"
       :click-to-close="false"
     >
-      <form @submit.prevent="handleSave">
+      <form @submit.prevent="handleSavePost">
         <div class="flex items-center justify-between">
           <div class="mb-10">
             <h1 class="text-2xl mb-2">
@@ -147,10 +163,9 @@ import { useMyWorks } from "../../stores/myWorksTab";
 import { useInputState } from "../../stores/inputState";
 
 const myWorksState = useMyWorks();
-const inputState = useInputState();
 
 const currentMyWorks = reactive({
-  title: myWorksState.title,
+  sectionTitle: myWorksState.sectionTitle,
   posts: myWorksState.posts,
 });
 const newWorkPost = reactive({
@@ -163,6 +178,7 @@ const currentEditedWorkPost = ref(null);
 const currentIndexClicked = ref(null);
 const showModal = ref(false);
 const isCreating = ref(false);
+const isRevertable = ref(false);
 
 function dateFormat(postDate) {
   let options = {
@@ -177,8 +193,6 @@ function dateFormat(postDate) {
 }
 
 watch(showModal, (newVal, oldVal) => {
-  // inputState.datePicker?.dateNew.el.clearValue();
-  inputState.datePicker?.dateNew.el.updateInternalModelValue(new Date("2 March 1978"));
   if (newVal) {
     if (currentIndexClicked.value >= 0) {
       console.log("edited");
@@ -186,17 +200,43 @@ watch(showModal, (newVal, oldVal) => {
       currentEditedWorkPost.value = {
         ...myWorksState.posts[currentIndexClicked.value],
       };
-
-      /* TODO: update datepicker element value on every different currentEditedWorkPost value */
-    } else {
-      // inputState.datePicker?.dateNew.el.updateInternalModelValue(
-      //   new Date("2 March 1978")
-      // );
     }
   }
 });
 
-function editPosts(i) {
+watch(currentMyWorks, (newVal, oldVal) => {
+  if (newVal.sectionTitle === myWorksState.sectionTitle) {
+    isRevertable.value = false;
+  } else {
+    isRevertable.value = true;
+  }
+});
+
+function handleEditSectionTitle() {
+  myWorksState.$patch({
+    sectionTitle: currentMyWorks.sectionTitle,
+  });
+
+  isRevertable.value = false;
+}
+
+function handleRevertSectionTitle() {
+  currentMyWorks.sectionTitle = myWorksState.sectionTitle;
+}
+
+function handleSavePost() {
+  if (!isCreating.value) {
+    myWorksState.$patch((state) => {
+      state.posts[currentIndexClicked.value] = currentEditedWorkPost.value;
+    });
+  } else {
+    myWorksState.$patch((state) => {
+      state.posts.push({ ...newWorkPost });
+    });
+  }
+}
+
+function handleEditPost(i) {
   console.log("editPOst");
   currentIndexClicked.value = i;
   showModal.value = true;

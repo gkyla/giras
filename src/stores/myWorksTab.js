@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useMyWorks = defineStore("myWorksTab", () => {
-  const title = ref("My Works");
+  const sectionTitle = ref("My Works");
   const posts = ref([
     {
       imgLink:
@@ -34,5 +34,5 @@ export const useMyWorks = defineStore("myWorksTab", () => {
     },
   ]);
 
-  return { title, posts };
+  return { sectionTitle, posts };
 });
