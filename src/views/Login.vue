@@ -1,0 +1,46 @@
+<template>
+  <div class="flex justify-center items-center min-h-screen bg-slate-50">
+    <form
+      class="shadow-md rounded-md p-10 bg-white border border-t-4 border-t-[#85bc33]"
+      @submit.prevent="submitForm"
+    >
+      <div class="mb-5">
+        <h1 class="text-2xl font-semibold mb-2">Login</h1>
+        <div class="heading_divider"></div>
+      </div>
+      <InputControl identifier="id" v-model="user.id">Username</InputControl>
+      <InputControl identifier="id" v-model="user.password">Password</InputControl>
+      <div class="flex justify-between mt-7">
+        <button
+          class="font-semibold flex items-center hover:underline underline-offset-4 transition-all"
+          type="button"
+          @click="$router.push('/')"
+        >
+          <Icon icon="ic:round-arrow-back" />
+          Back to Homepage
+        </button>
+        <div>
+          <button class="btn_close ml-auto" type="reset">Reset</button>
+          <button class="btn_save ml-2" type="submit">Login</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script setup>
+import { reactive } from "vue";
+import InputControl from "../components/InputControl.vue";
+import { Icon } from "@iconify/vue";
+
+const user = reactive({
+  id: "",
+  password: "",
+});
+
+function submitForm() {
+  console.log("wkwkwk");
+}
+</script>
+
+<style></style>
