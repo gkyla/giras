@@ -105,6 +105,7 @@
           </button>
           <button
             class="items-center border-2 border-[#85bc33] rounded-lg px-[16px] py-[10px] gap-4 font-semibold shadow-md flex"
+            @click="$router.push('/login')"
           >
             <Icon icon="mdi:user" class="text-[#85bc33]" width="25" height="25" />
             <p class="text-sm text-slate-800 overflow-hidden transition-all">Login</p>
@@ -132,6 +133,7 @@
       </button>
       <button
         class="hidden lg:inline-flex items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-2 shadow-md group"
+        @click="$router.push('/login')"
       >
         <Icon icon="mdi:user" class="text-[#85bc33]" width="25" height="25" />
         <p
