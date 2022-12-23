@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ContentEditor from "../views/ContentEditor.vue";
+import Login from "../views/Login.vue";
 
 /* ContentChildrenViewer */
 import HistoryTab from "../views/content/HistoryTab.vue";
@@ -36,8 +37,14 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+    {
       path: "/content",
       name: "ContentEditor",
+      component: ContentEditor,
       children: [
         {
           path: "home",
@@ -65,7 +72,6 @@ const router = createRouter({
           component: SocialsTab,
         },
       ],
-      component: ContentEditor,
     },
   ],
 });
