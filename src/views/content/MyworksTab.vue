@@ -1,5 +1,5 @@
 <template>
-  <form class="mb-10" @submit.prevent="handleEditSectionTitle">
+  <!-- <form class="mb-10" @submit.prevent="handleEditSectionTitle">
     <InputControl identifier="Headline" v-model="currentMyWorks.sectionTitle"
       >Section tittle</InputControl
     >
@@ -18,7 +18,7 @@
       <button class="btn_save" type="submit">Save</button>
     </div>
   </form>
-  <div class="border border-slate-200 w-full"></div>
+  <div class="border border-slate-200 w-full"></div> -->
 
   <div class="flex items-center gap-3">
     <div>
@@ -212,17 +212,17 @@ watch(currentMyWorks, (newVal, oldVal) => {
   }
 });
 
-function handleEditSectionTitle() {
-  myWorksState.$patch({
-    sectionTitle: currentMyWorks.sectionTitle,
-  });
+// function handleEditSectionTitle() {
+//   myWorksState.$patch({
+//     sectionTitle: currentMyWorks.sectionTitle,
+//   });
 
-  isRevertable.value = false;
-}
+//   isRevertable.value = false;
+// }
 
-function handleRevertSectionTitle() {
-  currentMyWorks.sectionTitle = myWorksState.sectionTitle;
-}
+// function handleRevertSectionTitle() {
+//   currentMyWorks.sectionTitle = myWorksState.sectionTitle;
+// }
 
 function handleSavePost() {
   if (!isCreating.value) {

@@ -1,5 +1,5 @@
 <template>
-  <form class="mb-10" @submit.prevent="handleEditSectionTitle">
+  <!-- <form class="mb-10" @submit.prevent="handleEditSectionTitle">
     <InputControl identifier="Headline" v-model="currentData.sectionTitle"
       >Section tittle</InputControl
     >
@@ -18,7 +18,7 @@
       <button class="btn_save" type="submit">Save</button>
     </div>
   </form>
-  <div class="border border-slate-200 w-full mb-10"></div>
+  <div class="border border-slate-200 w-full mb-10"></div> -->
 
   <form @submit.prevent="editAboutme">
     <InputControl identifier="image1" input-type="file">Display Image</InputControl>
@@ -72,24 +72,24 @@ watch(currentData, (newVal, oldVal) => {
     isRevertableContent.value = true;
   }
 
-  if (newVal.sectionTitle === aboutMeState.sectionTitle) {
-    isRevertableSectionTitle.value = false;
-  } else {
-    isRevertableSectionTitle.value = true;
-  }
+  // if (newVal.sectionTitle === aboutMeState.sectionTitle) {
+  //   isRevertableSectionTitle.value = false;
+  // } else {
+  //   isRevertableSectionTitle.value = true;
+  // }
 });
 
-function handleEditSectionTitle() {
-  aboutMeState.$patch({
-    sectionTitle: currentData.sectionTitle,
-  });
+// function handleEditSectionTitle() {
+//   aboutMeState.$patch({
+//     sectionTitle: currentData.sectionTitle,
+//   });
 
-  isRevertableSectionTitle.value = false;
-}
+//   isRevertableSectionTitle.value = false;
+// }
 
-function handleRevertSectionTitle() {
-  currentData.sectionTitle = aboutMeState.sectionTitle;
-}
+// function handleRevertSectionTitle() {
+//   currentData.sectionTitle = aboutMeState.sectionTitle;
+// }
 
 function handleRevert() {
   currentData.content = aboutMeState.content;
