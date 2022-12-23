@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container mx-auto max-w-screen-xl bg-white shadow-lg p-5 flex mt-20 rounded-xl"
+    class="container mx-auto max-w-screen-xl bg-white shadow-lg p-5 flex my-20 rounded-xl border border-t-4 border-t-[#85bc33]"
   >
     <div class="flex-none w-80 p-10">
       <div class="mb-5">
