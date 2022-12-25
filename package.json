@@ -11,6 +11,7 @@
     "@vuepic/vue-datepicker": "^3.6.3",
     "@vueup/vue-quill": "^1.0.0",
     "aos": "^2.3.4",
+    "firebase": "^9.15.0",
     "pinia": "^2.0.23",
     "vue": "^3.2.41",
     "vue-final-modal": "^3.4.11",
