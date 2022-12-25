@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { getCurrentUser } from "../libs/firebase";
+
 import HomeView from "../views/HomeView.vue";
 import ContentEditor from "../views/ContentEditor.vue";
 import Login from "../views/Login.vue";
@@ -45,6 +47,7 @@ const router = createRouter({
       path: "/content",
       name: "ContentEditor",
       component: ContentEditor,
+      meta: { requiresAuth: true },
       children: [
         {
           path: "home",
@@ -74,6 +77,34 @@ const router = createRouter({
       ],
     },
   ],
+});
+
+router.beforeEach(async (to, from) => {
+  console.log("hello");
+  // const user = await getCurrentUser();
+  // console.log(user);
+  if (to.meta.requiresAuth) {
+    console.log("apakah");
+    const user = await getCurrentUser();
+    console.log(user);
+
+    if (user) {
+      return true;
+    } else {
+      return "/login";
+    }
+  }
+
+  if (to.path === "/login") {
+    console.log("ditunggu");
+    const user = await getCurrentUser();
+    console.log("sudah ditunggu");
+    if (user) {
+      return "/content/home";
+    }
+  }
+
+  return true;
 });
 
 export default router;
