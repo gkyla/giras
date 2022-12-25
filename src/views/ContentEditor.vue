@@ -2,6 +2,7 @@
   <div
     class="container mx-auto max-w-screen-xl bg-white shadow-lg p-5 flex my-20 rounded-xl border border-t-4 border-t-[#85bc33]"
   >
+    <button class="bg-slate-400 p-10" @click="logoutUser">logout</button>
     <div class="flex-none w-80 p-10">
       <div class="mb-5">
         <h1 class="font-semibold text-xl mb-2">Section Viewer</h1>
@@ -53,6 +54,15 @@
 
 <script setup>
 import { RouterView, RouterLink } from "vue-router";
+import { logout } from "../libs/firebase";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+async function logoutUser() {
+  await logout();
+  router.push("/");
+}
 
 // Home
 // |

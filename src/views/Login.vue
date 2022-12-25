@@ -8,8 +8,8 @@
         <h1 class="text-2xl font-semibold mb-2">Login</h1>
         <div class="heading_divider"></div>
       </div>
-      <InputControl identifier="id" v-model="user.id">Username</InputControl>
-      <InputControl identifier="id" v-model="user.password">Password</InputControl>
+      <InputControl identifier="id" v-model="user.email">Email</InputControl>
+      <InputControl identifier="password" v-model="user.password">Password</InputControl>
       <div class="flex justify-between mt-7">
         <button
           class="font-semibold flex items-center hover:underline underline-offset-4 transition-all"
@@ -32,14 +32,21 @@
 import { reactive } from "vue";
 import InputControl from "../components/InputControl.vue";
 import { Icon } from "@iconify/vue";
+import { signIn } from "../libs/firebase";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const user = reactive({
-  id: "",
+  email: "",
   password: "",
 });
 
-function submitForm() {
-  console.log("wkwkwk");
+async function submitForm() {
+  try {
+    await signIn(user);
+    router.push("/content/home");
+  } catch (error) {}
 }
 </script>
 
