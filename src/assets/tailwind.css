@@ -34,7 +34,7 @@
   }
 
   .btn_addNew {
-    @apply self-center ml-auto mt-5 border-2 border-slate-500 hover:border-[#85bc33]  px-5 py-2 rounded-full text-sm flex items-center gap-2 transition-all hover:font-semibold;
+    @apply self-center  border-2 border-slate-500 hover:border-[#85bc33]  px-5 py-2 rounded-full text-sm flex items-center gap-2 transition-all hover:font-semibold;
   }
 
   .heading_divider {
