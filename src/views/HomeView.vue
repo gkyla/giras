@@ -414,8 +414,6 @@
 </template>
 
 <script setup>
-/* TODO: Seperate Navbar so it will be easy to debug  */
-
 import TheNavbar from "../components/TheNavbar.vue";
 import MiniCard from "../components/MiniCard.vue";
 import SocialCard from "../components/socials/SocialCard.vue";

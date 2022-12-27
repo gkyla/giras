@@ -81,8 +81,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   console.log("hello");
-  // const user = await getCurrentUser();
-  // console.log(user);
   if (to.meta.requiresAuth) {
     console.log("apakah");
     const user = await getCurrentUser();
