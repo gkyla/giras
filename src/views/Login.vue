@@ -9,7 +9,9 @@
         <div class="heading_divider"></div>
       </div>
       <InputControl identifier="id" v-model="user.email">Email</InputControl>
-      <InputControl identifier="password" v-model="user.password">Password</InputControl>
+      <InputControl identifier="password" input-type="password" v-model="user.password"
+        >Password</InputControl
+      >
       <div class="flex justify-between mt-7">
         <button
           class="font-semibold flex items-center hover:underline underline-offset-4 transition-all"
