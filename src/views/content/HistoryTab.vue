@@ -28,13 +28,16 @@
   </form>
 
   <div class="section_divider"></div>
-  <div class="flex items-center gap-3">
+  <div class="flex items-center gap-3 my-5">
     <div>
-      <h1 class="font-bold text-xl mt-5 mb-2">History ({{ history.posts.length }})</h1>
+      <h1 class="font-bold text-xl mb-2">History ({{ history.posts.length }})</h1>
       <div class="heading_divider"></div>
     </div>
 
-    <button class="btn_addNew group" @click="(showModal = true), (isCreating = true)">
+    <button
+      class="btn_addNew ml-auto group"
+      @click="(showModal = true), (isCreating = true)"
+    >
       <Icon
         icon="ic:baseline-plus"
         width="20"
@@ -50,9 +53,16 @@
       :key="post.title"
       class="w-full p-4 rounded-lg border-2 mb-3 flex justify-between"
     >
-      <div>
-        <h1 class="text-xl font-semibold">{{ post.title }}</h1>
-        <span class="text-sm">{{ post.event }}</span>
+      <div class="flex gap-5 items-center">
+        <img
+          :src="post.imgLink"
+          :alt="post.name"
+          class="inline-block w-10 h-10 rounded-md"
+        />
+        <div>
+          <h1 class="text-xl font-semibold">{{ post.title }}</h1>
+          <span class="text-sm">{{ post.event }}</span>
+        </div>
       </div>
 
       <div>

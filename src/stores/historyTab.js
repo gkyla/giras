@@ -6,13 +6,15 @@ export const useHistoryTab = defineStore("history", () => {
   const headlineDescription = ref("<p>Initial</p>");
   const posts = ref([
     {
-      imgLink: "temp",
+      imgLink:
+        "https://images.unsplash.com/photo-1508923567004-3a6b8004f3d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
       title: "National Aeronautics and Space Administration",
       event: "Software Engineer Tech Lead, Fall 2015 - May 2019",
       historyContent: "<h1>Hello</h1>",
     },
     {
-      imgLink: "temp",
+      imgLink:
+        "https://images.unsplash.com/photo-1508923567004-3a6b8004f3d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
       title: "Facebook Gaming",
       event: "CEO, Fall 2015 - May 2019",
       historyContent: "<h1>Hello bro</h1>",
