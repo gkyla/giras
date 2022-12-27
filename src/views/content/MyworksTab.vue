@@ -20,18 +20,13 @@
   </form>
   <div class="border border-slate-200 w-full"></div> -->
 
-  <div class="flex items-center gap-3">
+  <div class="flex items-center gap-3 my-5">
     <div>
-      <h1 class="font-bold text-xl mt-5 mb-2">
-        My works ({{ currentMyWorks.posts.length }})
-      </h1>
+      <h1 class="font-bold text-xl mb-2">My works ({{ currentMyWorks.posts.length }})</h1>
       <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
     </div>
 
-    <button
-      class="self-center ml-auto mt-5 border-2 border-slate-500 hover:border-[#85bc33] group px-5 py-2 rounded-full text-sm flex items-center gap-2 transition-all hover:font-semibold"
-      @click="handleCreating"
-    >
+    <button class="btn_addNew ml-auto" @click="handleCreating">
       <Icon
         icon="ic:baseline-plus"
         width="20"
@@ -97,7 +92,7 @@
             identifier="imageEdit"
             v-model="currentEditedWorkPost.imgLink"
             input-type="file"
-            >Change Image</InputControl
+            >Image</InputControl
           >
           <InputControl identifier="HeadlineEdit" v-model="currentEditedWorkPost.title"
             >Tittle</InputControl
@@ -123,7 +118,7 @@
             identifier="addImage"
             v-model="newWorkPost.imgLink"
             input-type="file"
-            >Tittle</InputControl
+            >Image</InputControl
           >
           <InputControl identifier="addHeadling" v-model="newWorkPost.title"
             >Tittle</InputControl
