@@ -30,6 +30,17 @@
       @input="$emit('update:modelValue', $event.target.value)"
     />
 
+    <!-- Password -->
+    <input
+      type="password"
+      :id="identifier"
+      v-if="inputType === 'password'"
+      class="border-2 border-slate-500 rounded-md shadow-sm p-2 min-w-[340px]"
+      :value="modelValue"
+      :placeholder="placeholder"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
+
     <!-- Textarea, use Quill  -->
     <div
       :class="[
@@ -75,7 +86,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, onBeforeUnmount, onMounted } from "vue";
+import { ref, reactive, computed, watch, onBeforeUnmount, onMounted } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
