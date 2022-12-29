@@ -4,7 +4,7 @@
 
 <script setup>
 import { RouterView } from "vue-router";
-import { getCurrentUser } from "./libs/firebase";
+import { getCurrentUser, getDocuments, getEveryCollection } from "./libs/firebase";
 import { useUserState } from "./stores/userState";
 
 const userState = useUserState();
@@ -15,6 +15,8 @@ const userState = useUserState();
 getCurrentUser().then((user) => {
   userState.$patch({ isFirstTime: false });
 });
+
+getEveryCollection();
 </script>
 
 <style lang="scss"></style>

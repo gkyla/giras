@@ -6,12 +6,9 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useUserState } from "../../stores/userState";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAOg_2OOPSJ1zpvdGoCMPVasem6eH7nJ9I",
   authDomain: "girasena.firebaseapp.com",
@@ -25,8 +22,17 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app);
 
-async function signIn({ email, password }) {
+// Collection Ref
+const homeRef = collection(db, "home");
+const historyRef = collection(db, "history");
+const historyPostsRef = collection(db, "history-posts");
+const aboutMeRef = collection(db, "aboutMe");
+const myWorksRef = collection(db, "myWorks");
+const socialsRef = collection(db, "socials");
+
+export async function signIn({ email, password }) {
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -39,14 +45,14 @@ async function signIn({ email, password }) {
   }
 }
 
-async function logout() {
+export async function logout() {
   const userState = useUserState();
 
   await signOut(auth);
   userState.$patch({ user: null });
 }
 
-function getCurrentUser() {
+export function getCurrentUser() {
   const userState = useUserState();
 
   return new Promise((resolve) => {
@@ -58,4 +64,49 @@ function getCurrentUser() {
   });
 }
 
-export { signIn, logout, getCurrentUser };
+export async function getDocuments() {
+  const snapshots = await getDocs(aboutMeRef);
+  snapshots.docs.forEach((doc) => {
+    console.log(doc.data());
+  });
+}
+
+const listRef = [homeRef, historyRef, historyPostsRef, myWorksRef, socialsRef];
+
+export async function getEveryCollection() {
+  const promisedListRef = [];
+  listRef.forEach((ref) => {
+    promisedListRef.push(getDocs(ref));
+  });
+
+  const allSnapshots = await Promise.all(promisedListRef);
+
+  // Get desired data
+  const filteredData = [];
+  const filteredDataById = [];
+  allSnapshots.forEach(({ docs }) => {
+    docs.forEach((doc) => {
+      const pathIdRef = doc.ref.path.split("/")[0];
+      const findDocs = filteredData.some((doc) => doc.pathId === pathIdRef);
+
+      if (!findDocs) {
+        filteredData.push({
+          pathId: doc.ref.path.split("/")[0],
+          data: [
+            {
+              id: doc.id,
+              ...doc.data(),
+            },
+          ],
+        });
+      } else {
+        filteredData
+          .find((doc) => doc.pathId === pathIdRef)
+          .data.push({ id: doc.id, ...doc.data() });
+      }
+    });
+  });
+
+  // TODO: add to stores
+  // console.log(filteredData);
+}
