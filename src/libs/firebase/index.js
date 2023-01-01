@@ -8,6 +8,10 @@ import {
 } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useUserState } from "../../stores/userState";
+import { useHome } from "../../stores/homeTab";
+import { useHistoryTab } from "../../stores/historyTab";
+import { useSocials } from "../../stores/socialsTab";
+import { useMyWorks } from "../../stores/myWorksTab";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAOg_2OOPSJ1zpvdGoCMPVasem6eH7nJ9I",
@@ -29,7 +33,7 @@ const homeRef = collection(db, "home");
 const historyRef = collection(db, "history");
 const historyPostsRef = collection(db, "history-posts");
 const aboutMeRef = collection(db, "aboutMe");
-const myWorksRef = collection(db, "myWorks");
+const myWorksRef = collection(db, "works");
 const socialsRef = collection(db, "socials");
 
 export async function signIn({ email, password }) {
@@ -83,7 +87,6 @@ export async function getEveryCollection() {
 
   // Get desired data
   const filteredData = [];
-  const filteredDataById = [];
   allSnapshots.forEach(({ docs }) => {
     docs.forEach((doc) => {
       const pathIdRef = doc.ref.path.split("/")[0];
@@ -108,5 +111,37 @@ export async function getEveryCollection() {
   });
 
   // TODO: add to stores
-  // console.log(filteredData);
+  const homeState = useHome();
+  const historyState = useHistoryTab();
+  const socialsState = useSocials();
+  const myWorksState = useMyWorks();
+
+  console.log(filteredData);
+  filteredData.forEach(({ pathId, data }) => {
+    switch (pathId) {
+      case "home":
+        homeState.edit(data[0]);
+        break;
+      case "history":
+        historyState.editSection(data[0]);
+        break;
+      case "history-posts":
+        data.forEach((d) => {
+          historyState.addPost(d);
+        });
+        break;
+      case "socials":
+        socialsState.edit(data[0]);
+        break;
+      case "works":
+        data.forEach((d) => {
+          myWorksState.addPost({
+            ...d,
+            date: d.date.toDate(),
+          });
+        });
+      default:
+        console.log("err");
+    }
+  });
 }
