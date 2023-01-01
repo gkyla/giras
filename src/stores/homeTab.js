@@ -3,8 +3,8 @@ import { defineStore } from "pinia";
 
 export const useHome = defineStore("homeTab", () => {
   const image = ref(null);
-  const lineOne = ref("Hello I'm");
-  const lineTwo = ref("Giras Gendrasena");
+  const lineOne = ref("");
+  const lineTwo = ref("");
 
   function edit(currentData) {
     lineOne.value = currentData.lineOne;
