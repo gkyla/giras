@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import { useUserState } from "../../stores/userState";
 import { useHome } from "../../stores/homeTab";
 import { useHistoryTab } from "../../stores/historyTab";
@@ -27,6 +28,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app)
 
 // Collection Ref
 const homeRef = collection(db, "home");
@@ -38,11 +40,7 @@ const socialsRef = collection(db, "socials");
 
 export async function signIn({ email, password }) {
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log(userCredential);
   } catch (error) {
     console.log(error);
