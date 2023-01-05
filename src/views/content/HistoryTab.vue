@@ -30,7 +30,9 @@
   <div class="section_divider"></div>
   <div class="flex items-center gap-3 my-5">
     <div>
-      <h1 class="font-bold text-xl mb-2">History ({{ history.posts.length }})</h1>
+      <h1 class="font-bold text-xl mb-2">
+        History ({{ history.posts.length }})
+      </h1>
       <div class="heading_divider"></div>
     </div>
 
@@ -104,9 +106,12 @@
             identifier="imageEdit"
             v-model="currentEditedHistoryPost.imgLink"
             input-type="file"
+            @inputedFile="uploadImage"
             >Change Image</InputControl
           >
-          <InputControl identifier="HeadlineEdit" v-model="currentEditedHistoryPost.title"
+          <InputControl
+            identifier="HeadlineEdit"
+            v-model="currentEditedHistoryPost.title"
             >Tittle</InputControl
           >
           <InputControl
@@ -129,12 +134,15 @@
             identifier="addImage"
             v-model="newHistoryPost.imgLink"
             input-type="file"
+            @inputedFile="uploadImage"
             >Tittle</InputControl
           >
           <InputControl identifier="addHeadling" v-model="newHistoryPost.title"
             >Tittle</InputControl
           >
-          <InputControl identifier="AddHeadlineDescription" v-model="newHistoryPost.event"
+          <InputControl
+            identifier="AddHeadlineDescription"
+            v-model="newHistoryPost.event"
             >Event Post</InputControl
           >
           <InputControl
@@ -147,7 +155,11 @@
         </div>
 
         <div class="flex mt-20 gap-2 self-end">
-          <button class="btn_close ml-auto" @click.stop="handleClose" type="button">
+          <button
+            class="btn_close ml-auto"
+            @click.stop="handleClose"
+            type="button"
+          >
             Cancel
           </button>
 
@@ -165,6 +177,7 @@ import { VueFinalModal } from "vue-final-modal";
 import InputControl from "../../components/InputControl.vue";
 import { useHistoryTab } from "../../stores/historyTab";
 import { useInputState } from "../../stores/inputState";
+import { uploadFile, createHistoryPostRef } from "../../libs/firebase";
 
 /* TODO: Add Delete history */
 
@@ -231,9 +244,21 @@ function handleSaveHeadline() {
   currentHeadline.headlineDescription = history.headlineDescription;
 }
 
+function uploadImage(file) {
+  const ref = createHistoryPostRef("test");
+  console.log("file wew", file);
+  console.log("ref", ref);
+
+  /* TODO upload namefile with specific id,
+    need to figure out how to get the id
+  */
+  uploadFile(ref, file);
+}
+
 function handleRevertHeadline() {
   currentHeadline.headline = headlineOldValue.value?.headline;
-  currentHeadline.headlineDescription = headlineOldValue.value?.headlineDescription;
+  currentHeadline.headlineDescription =
+    headlineOldValue.value?.headlineDescription;
 
   inputState.quillEditor["headlineDescription"].el.innerHTML =
     currentHeadline.headlineDescription;

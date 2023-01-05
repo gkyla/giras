@@ -7,7 +7,13 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+
 import { useUserState } from "../../stores/userState";
 import { useHome } from "../../stores/homeTab";
 import { useHistoryTab } from "../../stores/historyTab";
@@ -28,9 +34,9 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const storage = getStorage(app)
+export const storage = getStorage(app);
 
-// Collection Ref
+// firestore Collection Ref
 const homeRef = collection(db, "home");
 const historyRef = collection(db, "history");
 const historyPostsRef = collection(db, "history-posts");
@@ -38,9 +44,19 @@ const aboutMeRef = collection(db, "aboutMe");
 const myWorksRef = collection(db, "works");
 const socialsRef = collection(db, "socials");
 
+// storage ref
+export function createHistoryPostRef(id) {
+  // TODO: get post id
+  return ref(storage, `images/history-post-${id}`);
+}
+
 export async function signIn({ email, password }) {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     console.log(userCredential);
   } catch (error) {
     console.log(error);
@@ -142,4 +158,37 @@ export async function getEveryCollection() {
         console.log("err");
     }
   });
+}
+
+/* Storage */
+
+export function uploadFile(ref, file) {
+  const uploadTask = uploadBytesResumable(ref, file);
+
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log("Upload is " + progress + "% done");
+      switch (snapshot.state) {
+        case "paused":
+          console.log("Upload is paused");
+          break;
+        case "running":
+          console.log("Upload is running");
+          break;
+      }
+    },
+    (error) => {
+      // Unsuccess
+      console.error(error);
+    },
+    () => {
+      console.log("upload snapshot :", uploadTask.snapshot);
+      // Success upload
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log("ini bos download URL nya : ", downloadURL);
+      });
+    }
+  );
 }

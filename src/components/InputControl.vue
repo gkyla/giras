@@ -86,7 +86,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch, onBeforeUnmount, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
@@ -94,7 +94,7 @@ import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useInputState } from "../stores/inputState";
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "inputedFile"]);
 const quillModelValue = ref(props.modelValue);
 const quillEditor = ref(null);
 const inputState = useInputState();
@@ -102,8 +102,8 @@ const date = ref(props.modelValue);
 const datePickerEl = ref(null);
 
 function getFile(e) {
-  console.log(e.target.files["0"]);
-  console.log(typeof e.target.files);
+  const file = e.target.files[0];
+  emit("inputedFile", file);
 }
 
 onMounted(() => {
