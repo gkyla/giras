@@ -71,7 +71,7 @@
       type="file"
       :id="identifier"
       @change="getFile"
-      accept="image/png, image/jpeg"
+      accept="image/*"
       v-if="inputType === 'file'"
     />
 
@@ -102,8 +102,30 @@ const date = ref(props.modelValue);
 const datePickerEl = ref(null);
 
 function getFile(e) {
+  const fileTypes = [
+    "image/apng",
+    "image/bmp",
+    "image/gif",
+    "image/jpeg",
+    "image/pjpeg",
+    "image/png",
+    "image/svg+xml",
+    "image/tiff",
+    "image/webp",
+    "image/x-icon",
+  ];
   const file = e.target.files[0];
-  emit("inputedFile", file);
+  function validFileType() {
+    console.log(file.type);
+    return fileTypes.includes(file.type);
+  }
+
+  if (validFileType()) {
+    emit("inputedFile", file);
+  } else {
+    // TODO: add alert UI
+    console.error("please upload image only");
+  }
 }
 
 onMounted(() => {

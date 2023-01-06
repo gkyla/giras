@@ -102,11 +102,12 @@
 
         <!-- Handle edit  -->
         <div v-if="!isCreating && currentEditedHistoryPost">
+          <!-- TODO: add toggle if want to change image / keep it -->
           <InputControl
             identifier="imageEdit"
             v-model="currentEditedHistoryPost.imgLink"
             input-type="file"
-            @inputedFile="uploadImage"
+            @inputedFile="getImage"
             >Change Image</InputControl
           >
           <InputControl
@@ -134,7 +135,7 @@
             identifier="addImage"
             v-model="newHistoryPost.imgLink"
             input-type="file"
-            @inputedFile="uploadImage"
+            @inputedFile="getImage"
             >Tittle</InputControl
           >
           <InputControl identifier="addHeadling" v-model="newHistoryPost.title"
@@ -155,6 +156,17 @@
         </div>
 
         <div class="flex mt-20 gap-2 self-end">
+          <!-- TODO add delete functionality -->
+          <button class="btn_close bg-red-700 flex items-center" type="button">
+            Delete Post
+            <Icon
+              icon="mdi:trash-can-outline"
+              width="25"
+              height="25"
+              class="ml-2"
+            />
+          </button>
+
           <button
             class="btn_close ml-auto"
             @click.stop="handleClose"
@@ -177,7 +189,12 @@ import { VueFinalModal } from "vue-final-modal";
 import InputControl from "../../components/InputControl.vue";
 import { useHistoryTab } from "../../stores/historyTab";
 import { useInputState } from "../../stores/inputState";
-import { uploadFile, createHistoryPostRef } from "../../libs/firebase";
+import {
+  uploadFile,
+  createStorageRef,
+  addDocument,
+  setDocument,
+} from "../../libs/firebase";
 
 /* TODO: Add Delete history */
 
@@ -186,6 +203,7 @@ const inputState = useInputState();
 
 /* variable for tracking  */
 const currentIndexClicked = ref(null);
+const currentFile = ref(null);
 const showModal = ref(false);
 const isCreating = ref(false);
 const isRevertable = ref(false);
@@ -244,15 +262,15 @@ function handleSaveHeadline() {
   currentHeadline.headlineDescription = history.headlineDescription;
 }
 
-function uploadImage(file) {
-  const ref = createHistoryPostRef("test");
-  console.log("file wew", file);
-  console.log("ref", ref);
+const getImage = (file) => (currentFile.value = file);
 
-  /* TODO upload namefile with specific id,
-    need to figure out how to get the id
-  */
-  uploadFile(ref, file);
+async function uploadImage(id) {
+  // const postId = history.posts[currentIndexClicked.value].id;
+  const ref = createStorageRef("history-posts", id);
+
+  const url = await uploadFile(ref, currentFile.value);
+  currentFile.value = null;
+  return url;
 }
 
 function handleRevertHeadline() {
@@ -266,22 +284,35 @@ function handleRevertHeadline() {
   console.log("kerevert dek");
 }
 
-function handleSavePost() {
+async function handleSavePost() {
   console.log("kesave dek");
   if (!isCreating.value /* Edit */) {
-    console.log("before saving edit :", currentEditedHistoryPost.value);
+    // console.log("before saving edit :", currentEditedHistoryPost.value);
+    const postId = history.posts[currentIndexClicked.value].id;
+
+    const imgUrl = await uploadImage();
+    console.log("ini lord url nya", imgUrl);
+
+    await setDocument("history-posts", postId, {
+      ...history.posts[currentIndexClicked.value],
+      imgLink: imgUrl,
+    });
 
     history.$patch((state) => {
       state.posts[currentIndexClicked.value] = {
         ...currentEditedHistoryPost.value,
+        imgLink: imgUrl,
       };
     });
   } else {
     /* Creating new Posts */
-    history.addPost({ ...newHistoryPost });
-    console.log("before", newHistoryPost);
+    const imgUrl = await uploadImage();
+    const id = await addDocument("history-post", {
+      ...newHistoryPost,
+      imgLink: imgUrl,
+    });
 
-    console.log("after", newHistoryPost);
+    history.addPost({ ...newHistoryPost, id, imgLink: imgUrl });
 
     newHistoryPost = reactive({ ...history._initialValuePost });
     inputState.quillEditor["AddHistoryContent"].el.innerHTML =

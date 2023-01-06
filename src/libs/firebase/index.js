@@ -6,7 +6,14 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, getDocs, collection } from "firebase/firestore";
+import {
+  getFirestore,
+  getDocs,
+  collection,
+  doc,
+  setDoc,
+  addDoc,
+} from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -45,9 +52,16 @@ const myWorksRef = collection(db, "works");
 const socialsRef = collection(db, "socials");
 
 // storage ref
-export function createHistoryPostRef(id) {
-  // TODO: get post id
-  return ref(storage, `images/history-post-${id}`);
+export function createStorageRef(type) {
+  switch (type) {
+    case "history-posts":
+    case "home":
+    case "aboutMe":
+    case "works":
+      return ref(storage, `images/${type}-${crypto.randomUUID()}`);
+    default:
+      console.log("something wrong ", type);
+  }
 }
 
 export async function signIn({ email, password }) {
@@ -82,6 +96,7 @@ export function getCurrentUser() {
   });
 }
 
+/* GET  DOC */
 export async function getDocuments() {
   const snapshots = await getDocs(aboutMeRef);
   snapshots.docs.forEach((doc) => {
@@ -160,35 +175,61 @@ export async function getEveryCollection() {
   });
 }
 
+/* SAVE */
+export async function addDocument(type, payload) {
+  switch (type) {
+    case "works":
+      return await addDoc(myWorksRef, payload);
+
+    case "history-posts":
+      return await addDoc(historyPostsRef, payload);
+  }
+}
+
+/* update */
+export async function setDocument(type, id, payload) {
+  switch (type) {
+    case "works":
+      return await setDoc(doc(db, "works", id), payload);
+
+    case "history-posts":
+      return await setDoc(doc(db, "history-posts", id), payload);
+  }
+}
+
+/* TODO: add delete functionality */
+
 /* Storage */
 
 export function uploadFile(ref, file) {
   const uploadTask = uploadBytesResumable(ref, file);
-
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log("Upload is " + progress + "% done");
-      switch (snapshot.state) {
-        case "paused":
-          console.log("Upload is paused");
-          break;
-        case "running":
-          console.log("Upload is running");
-          break;
+  return new Promise((resolve, reject) => {
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+        }
+      },
+      (error) => {
+        // Unsuccess
+        reject(error);
+      },
+      () => {
+        console.log("upload snapshot :", uploadTask.snapshot);
+        // Success upload
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          resolve(downloadURL);
+        });
       }
-    },
-    (error) => {
-      // Unsuccess
-      console.error(error);
-    },
-    () => {
-      console.log("upload snapshot :", uploadTask.snapshot);
-      // Success upload
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log("ini bos download URL nya : ", downloadURL);
-      });
-    }
-  );
+    );
+  });
 }
