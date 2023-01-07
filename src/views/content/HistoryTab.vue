@@ -102,14 +102,53 @@
 
         <!-- Handle edit  -->
         <div v-if="!isCreating && currentEditedHistoryPost">
-          <!-- TODO: add toggle if want to change image / keep it -->
-          <InputControl
-            identifier="imageEdit"
-            v-model="currentEditedHistoryPost.imgLink"
-            input-type="file"
-            @inputedFile="getImage"
-            >Change Image</InputControl
+          <div v-if="isChangeImg" class="grid items-center gap-4 rounded">
+            <div class="flex">
+              <InputControl
+                identifier="imageEdit"
+                input-type="file"
+                @inputedFile="getImage"
+                >Image</InputControl
+              >
+            </div>
+            <div class="flex gap-4 mb-5">
+              <div class="flex items-center gap-6 w-36"></div>
+              <img
+                class="max-w-[100px] max-h-[100px] rounded-md"
+                :src="currentEditedHistoryPost.imgLink"
+                :alt="currentEditedHistoryPost.title"
+              />
+              <button
+                class="underline underline-offset-2 font-bold ml-2 hover:text-slate-600 transition-all"
+                type="button"
+                @click="isChangeImg = false"
+              >
+                Keep image
+              </button>
+            </div>
+          </div>
+          <div
+            class="flex gap-4 mb-5"
+            v-show="currentEditedHistoryPost?.imgLink && !isChangeImg"
           >
+            <div class="flex items-center gap-6 w-36">
+              <span class="font-bold">Image :</span>
+            </div>
+            <div class="flex">
+              <img
+                class="max-w-[100px] max-h-[100px] rounded-md"
+                :src="currentEditedHistoryPost.imgLink"
+                :alt="currentEditedHistoryPost.title"
+              />
+              <button
+                class="underline underline-offset-2 font-bold ml-6 hover:text-slate-600 transition-all"
+                type="button"
+                @click="isChangeImg = true"
+              >
+                Change image
+              </button>
+            </div>
+          </div>
           <InputControl
             identifier="HeadlineEdit"
             v-model="currentEditedHistoryPost.title"
@@ -136,7 +175,7 @@
             v-model="newHistoryPost.imgLink"
             input-type="file"
             @inputedFile="getImage"
-            >Tittle</InputControl
+            >Image</InputControl
           >
           <InputControl identifier="addHeadling" v-model="newHistoryPost.title"
             >Tittle</InputControl
@@ -157,7 +196,11 @@
 
         <div class="flex mt-20 gap-2 self-end">
           <!-- TODO add delete functionality -->
-          <button class="btn_close bg-red-700 flex items-center" type="button">
+          <button
+            class="btn_close bg-red-700 flex items-center"
+            type="button"
+            @click="handleDeletePost"
+          >
             Delete Post
             <Icon
               icon="mdi:trash-can-outline"
@@ -194,9 +237,10 @@ import {
   createStorageRef,
   addDocument,
   setDocument,
+  deleteDocument,
 } from "../../libs/firebase";
 
-/* TODO: Add Delete history */
+// TODO: force element to display fetchend data for the firsttime (looks like its not updating)
 
 const history = useHistoryTab();
 const inputState = useInputState();
@@ -207,6 +251,7 @@ const currentFile = ref(null);
 const showModal = ref(false);
 const isCreating = ref(false);
 const isRevertable = ref(false);
+const isChangeImg = ref(false);
 
 let newHistoryPost = reactive({
   imgLink: "",
@@ -231,6 +276,9 @@ watch(showModal, (newVal, oldVal) => {
         inputState.quillEditor["historyContentEdit"].el.innerHTML =
           history.posts[currentIndexClicked.value].historyContent;
       }
+
+      // Reset image changer state
+      isChangeImg.value = false;
     }
   }
 });
@@ -264,12 +312,14 @@ function handleSaveHeadline() {
 
 const getImage = (file) => (currentFile.value = file);
 
-async function uploadImage(id) {
-  // const postId = history.posts[currentIndexClicked.value].id;
-  const ref = createStorageRef("history-posts", id);
-
+async function uploadImage() {
+  const ref = createStorageRef("history-posts");
   const url = await uploadFile(ref, currentFile.value);
   currentFile.value = null;
+
+  // TODO: Remove img from storage if user delete history-posts
+  // If user replace img then remove the old one
+
   return url;
 }
 
@@ -283,11 +333,21 @@ function handleRevertHeadline() {
 
   console.log("kerevert dek");
 }
+async function handleDeletePost() {
+  console.log("kedelet juga kah manis");
+  const id = currentEditedHistoryPost.value.id;
+  await deleteDocument("history-posts", id);
+  history.$patch((state) => {
+    const index = state.posts.findIndex((post) => post.id === id);
+
+    state.posts.splice(index, 1);
+  });
+  handleClose();
+}
 
 async function handleSavePost() {
   console.log("kesave dek");
   if (!isCreating.value /* Edit */) {
-    // console.log("before saving edit :", currentEditedHistoryPost.value);
     const postId = history.posts[currentIndexClicked.value].id;
 
     const imgUrl = await uploadImage();
@@ -304,10 +364,13 @@ async function handleSavePost() {
         imgLink: imgUrl,
       };
     });
+
+    // Immediately update local Value
+    currentEditedHistoryPost.value = history.posts[currentIndexClicked.value];
   } else {
     /* Creating new Posts */
     const imgUrl = await uploadImage();
-    const id = await addDocument("history-post", {
+    const id = await addDocument("history-posts", {
       ...newHistoryPost,
       imgLink: imgUrl,
     });
