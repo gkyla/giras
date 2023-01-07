@@ -2,7 +2,10 @@
   <TheNavbar @nav-status="(val) => (navIsOpened = val)" />
 
   <!-- Wrapper -->
-  <div class="transition-all lg:blur-none" :class="[{ 'blur-sm': navIsOpened }]">
+  <div
+    class="transition-all lg:blur-none"
+    :class="[{ 'blur-sm': navIsOpened }]"
+  >
     <div
       id="home"
       class="w-full h-[600px] flex justify-center items-center relative z-[3] mt-14"
@@ -40,17 +43,20 @@
             id="bullet1"
             class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
           ></div>
-          <h1 class="text-4xl font-semibold text-slate-600">My Amazing History</h1>
+          <h1 class="text-4xl font-semibold text-slate-600">
+            My Amazing History
+          </h1>
           <div
             id="bullet1"
             class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
           ></div>
         </div>
         <p class="mt-10 mx-auto text-center max-w-screen-lg">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore maiores, harum
-          corporis minus nihil iusto eligendi distinctio. Obcaecati accusamus deleniti,
-          quisquam in dolorum recusandae delectus iusto fugiat illo id saepe voluptatem ut
-          consectetur sequi facere! Reiciendis assumenda consequatur cum nulla.
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
+          maiores, harum corporis minus nihil iusto eligendi distinctio.
+          Obcaecati accusamus deleniti, quisquam in dolorum recusandae delectus
+          iusto fugiat illo id saepe voluptatem ut consectetur sequi facere!
+          Reiciendis assumenda consequatur cum nulla.
         </p>
 
         <div
@@ -93,19 +99,21 @@
             >
             <div>
               <p class="mb-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga repellat,
-                modi facilis
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
+                repellat, modi facilis
                 <span class="font-bold"
-                  >dolor ex animi voluptatem autem doloremque adipisci odio saepe maiores.
-                  Debitis minima,
+                  >dolor ex animi voluptatem autem doloremque adipisci odio
+                  saepe maiores. Debitis minima,
                 </span>
-                doloribus modi dicta quis cumque repellendus recusandae, molestiae
-                voluptatibus velit nihil. Iste, at. Cumque, atque quae.
+                doloribus modi dicta quis cumque repellendus recusandae,
+                molestiae voluptatibus velit nihil. Iste, at. Cumque, atque
+                quae.
               </p>
 
               <p class="mb-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam
-                dolorem similique odit maiores neque eveniet sit repudiandae ut aliquam.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+                laboriosam dolorem similique odit maiores neque eveniet sit
+                repudiandae ut aliquam.
               </p>
             </div>
 
@@ -143,25 +151,28 @@
             >
               Facebook Gaming
             </h1>
-            <span class="text-[#85bc33] mb-7 block">CEO, Fall 2015 - May 2019</span>
+            <span class="text-[#85bc33] mb-7 block"
+              >CEO, Fall 2015 - May 2019</span
+            >
             <div>
               <p class="mb-6">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id commodi ipsam
-                facilis atque, vitae praesentium non quo, ipsa doloremque debitis labore
-                earum a repudiandae veritatis necessitatibus laboriosam. At, quo animi!
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
+                commodi ipsam facilis atque, vitae praesentium non quo, ipsa
+                doloremque debitis labore earum a repudiandae veritatis
+                necessitatibus laboriosam. At, quo animi!
               </p>
 
               <p class="mb-6">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis ex
-                perspiciatis, repudiandae obcaecati autem eaque sit ipsam cumque,
-                consectetur
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis
+                ex perspiciatis, repudiandae obcaecati autem eaque sit ipsam
+                cumque, consectetur
                 <span class="font-bold">
-                  temporibus eveniet, fugit maxime totam dolor tenetur. Labore ipsam ex
-                  quaerat corporis officia, consequuntur
+                  temporibus eveniet, fugit maxime totam dolor tenetur. Labore
+                  ipsam ex quaerat corporis officia, consequuntur
                 </span>
 
-                optio dolores voluptatibus ad laborum veritatis assumenda minus, qui ipsum
-                aut ipsa.
+                optio dolores voluptatibus ad laborum veritatis assumenda minus,
+                qui ipsum aut ipsa.
               </p>
             </div>
 
@@ -183,7 +194,9 @@
         id="aboutme"
         class="w-full min-h-[600px] bg-[#f4f7fb] flex justify-center p-10 mb-16"
       >
-        <div class="container mx-auto max-w-screen-xl flex flex-col items-center px-2">
+        <div
+          class="container mx-auto max-w-screen-xl flex flex-col items-center px-2"
+        >
           <div class="flex flex-col gap-4 items-center text-center">
             <h1
               class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
@@ -202,15 +215,16 @@
             <div class="self-start text-xl col-span-2">
               <p class="mb-7">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
-                perspiciatis totam nobis sequi nihild architecto consectetur itaque atque
-                numquam perferendis, quasi velit magnam, iure harum aperiam vitae.
+                perspiciatis totam nobis sequi nihild architecto consectetur
+                itaque atque numquam perferendis, quasi velit magnam, iure harum
+                aperiam vitae.
               </p>
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
                 perspiciatis totam nobis
-                <span class="font-semibold">sequi nihil aliquid</span> cum fuga architecto
-                consectetur itaque atque numquam perferendis, quasi velit magnam, iure
-                harum aperiam vitae.
+                <span class="font-semibold">sequi nihil aliquid</span> cum fuga
+                architecto consectetur itaque atque numquam perferendis, quasi
+                velit magnam, iure harum aperiam vitae.
               </p>
             </div>
             <div class="col-span-2 lg:col-span-1">
@@ -237,7 +251,10 @@
           </h1>
           <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
         </div>
-        <div id="worksbox" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7">
+        <div
+          id="worksbox"
+          class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7"
+        >
           <MiniCard
             title="Lorem ipsum dolor sit amet."
             date="10 March 2020"
@@ -245,8 +262,8 @@
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, laborum
-            maiores? Eligendi quia id ad?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
+            laborum maiores? Eligendi quia id ad?
           </MiniCard>
 
           <MiniCard
@@ -277,8 +294,8 @@
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore explicabo
-            libero hic in impedit eius magnam distinctio?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore
+            explicabo libero hic in impedit eius magnam distinctio?
           </MiniCard>
 
           <MiniCard
@@ -288,7 +305,8 @@
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, laborum.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore,
+            laborum.
           </MiniCard>
 
           <MiniCard
@@ -298,14 +316,13 @@
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora assumenda
-            voluptatibus ad quae eligendi!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+            assumenda voluptatibus ad quae eligendi!
           </MiniCard>
         </div>
       </div>
 
       <!-- Socials -->
-      <!-- TODO fix overlaping socials  -->
       <div
         ref="socials"
         id="socials"
@@ -325,9 +342,9 @@
               <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
             </div>
             <p class="text-slate-700 max-w-screen-lg">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, similique
-              animi et distinctio asperiores corrupti. Vitae deserunt eveniet asperiores
-              magnam.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus,
+              similique animi et distinctio asperiores corrupti. Vitae deserunt
+              eveniet asperiores magnam.
             </p>
           </div>
           <div class="container mx-auto max-w-screen-lg mb-20 px-2 relative">
@@ -429,9 +446,13 @@ const socials = ref(); /* Social section */
 const navIsOpened = ref(false);
 
 onMounted(() => {
-  particlesJS.load(socials.value.id, "/src/libs/particlesjs-bg.json", function () {
-    console.log("callback - particles.js config loaded");
-  });
+  particlesJS.load(
+    socials.value.id,
+    "/src/libs/particlesjs-bg.json",
+    function () {
+      console.log("callback - particles.js config loaded");
+    }
+  );
 });
 </script>
 
