@@ -22,7 +22,9 @@
 
   <div class="flex items-center gap-3 my-5">
     <div>
-      <h1 class="font-bold text-xl mb-2">My works ({{ currentMyWorks.posts.length }})</h1>
+      <h1 class="font-bold text-xl mb-2">
+        My works ({{ currentMyWorks.posts.length }})
+      </h1>
       <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
     </div>
 
@@ -94,7 +96,9 @@
             input-type="file"
             >Image</InputControl
           >
-          <InputControl identifier="HeadlineEdit" v-model="currentEditedWorkPost.title"
+          <InputControl
+            identifier="HeadlineEdit"
+            v-model="currentEditedWorkPost.title"
             >Tittle</InputControl
           >
           <InputControl
@@ -123,7 +127,10 @@
           <InputControl identifier="addHeadling" v-model="newWorkPost.title"
             >Tittle</InputControl
           >
-          <InputControl identifier="dateNew" inputType="date" v-model="newWorkPost.date"
+          <InputControl
+            identifier="dateNew"
+            inputType="date"
+            v-model="newWorkPost.date"
             >Date</InputControl
           >
           <InputControl
@@ -136,7 +143,11 @@
         </div>
 
         <div class="flex mt-20 gap-2 self-end">
-          <button class="btn_close ml-auto" @click.stop="handleClose" type="button">
+          <button
+            class="btn_close ml-auto"
+            @click.stop="handleClose"
+            type="button"
+          >
             Cancel
           </button>
 
@@ -182,7 +193,9 @@ function dateFormat(postDate) {
     month: "long",
     day: "numeric",
   };
-  const temp = new Intl.DateTimeFormat("en-US", options).format(postDate).split(" ");
+  const temp = new Intl.DateTimeFormat("en-US", options)
+    .format(postDate)
+    .split(" ");
   temp[2] = temp[2].replace(",", " ");
   return temp.join(" ");
 }
