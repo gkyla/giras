@@ -13,6 +13,7 @@ import {
   doc,
   setDoc,
   addDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -139,7 +140,6 @@ export async function getEveryCollection() {
     });
   });
 
-  // TODO: add to stores
   const homeState = useHome();
   const historyState = useHistoryTab();
   const socialsState = useSocials();
@@ -197,7 +197,15 @@ export async function setDocument(type, id, payload) {
   }
 }
 
-/* TODO: add delete functionality */
+export async function deleteDocument(type, id, payload) {
+  switch (type) {
+    case "works":
+      return await deleteDoc(doc(db, "works", id));
+
+    case "history-posts":
+      return await deleteDoc(doc(db, "history-posts", id));
+  }
+}
 
 /* Storage */
 
