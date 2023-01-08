@@ -237,8 +237,6 @@ import {
   deleteImageStorage,
 } from "../../libs/firebase";
 
-// TODO: force element to display fetchend data for the firsttime (looks like its not updating)
-
 const history = useHistoryTab();
 const inputState = useInputState();
 
