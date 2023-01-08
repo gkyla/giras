@@ -238,6 +238,7 @@ import {
   addDocument,
   setDocument,
   deleteDocument,
+  deleteImageStorage,
 } from "../../libs/firebase";
 
 // TODO: force element to display fetchend data for the firsttime (looks like its not updating)
@@ -342,6 +343,8 @@ async function handleDeletePost() {
 
     state.posts.splice(index, 1);
   });
+  await deleteImageStorage(currentEditedHistoryPost.value.imgLink);
+
   handleClose();
 }
 
@@ -370,12 +373,11 @@ async function handleSavePost() {
   } else {
     /* Creating new Posts */
     const imgUrl = await uploadImage();
-    const id = await addDocument("history-posts", {
+    const doc = await addDocument("history-posts", {
       ...newHistoryPost,
       imgLink: imgUrl,
     });
-
-    history.addPost({ ...newHistoryPost, id, imgLink: imgUrl });
+    history.addPost({ ...newHistoryPost, id: doc.id, imgLink: imgUrl });
 
     newHistoryPost = reactive({ ...history._initialValuePost });
     inputState.quillEditor["AddHistoryContent"].el.innerHTML =
