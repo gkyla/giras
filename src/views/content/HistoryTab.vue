@@ -127,10 +127,7 @@
               </button>
             </div>
           </div>
-          <div
-            class="flex gap-4 mb-5"
-            v-show="currentEditedHistoryPost?.imgLink && !isChangeImg"
-          >
+          <div class="flex gap-4 mb-5" v-show="!isChangeImg">
             <div class="flex items-center gap-6 w-36">
               <span class="font-bold">Image :</span>
             </div>
@@ -195,7 +192,6 @@
         </div>
 
         <div class="flex mt-20 gap-2 self-end">
-          <!-- TODO add delete functionality -->
           <button
             class="btn_close bg-red-700 flex items-center"
             type="button"
@@ -311,17 +307,39 @@ function handleSaveHeadline() {
   currentHeadline.headlineDescription = history.headlineDescription;
 }
 
-const getImage = (file) => (currentFile.value = file);
+function getImage(file) {
+  currentFile.value = file;
+}
 
 async function uploadImage() {
   const ref = createStorageRef("history-posts");
-  const url = await uploadFile(ref, currentFile.value);
-  currentFile.value = null;
+  const hasImageBefore = !!currentEditedHistoryPost.value?.imgLink;
+  console.log(currentFile.value);
 
-  // TODO: Remove img from storage if user delete history-posts
-  // If user replace img then remove the old one
-
-  return url;
+  if (hasImageBefore) {
+    // If has image remove first then upload the new one
+    if (currentFile.value) {
+      await deleteImageStorage(currentEditedHistoryPost.value?.imgLink);
+      console.log("deleted first");
+      const url = await uploadFile(ref, currentFile.value);
+      currentFile.value = null;
+      console.log("user mengupdate gambar nya");
+      return url;
+    } else {
+      console.log("return gambar yang sudah ada");
+      return currentEditedHistoryPost.value.imgLink;
+    }
+  } else {
+    if (currentFile.value) {
+      const url = await uploadFile(ref, currentFile.value);
+      currentFile.value = null;
+      console.log("user mengupload file gambar pertama kali");
+      return url;
+    } else {
+      console.log("user tidak memasukan file apapun");
+      return null;
+    }
+  }
 }
 
 function handleRevertHeadline() {
@@ -355,12 +373,11 @@ async function handleSavePost() {
 
     const imgUrl = await uploadImage();
     console.log("ini lord url nya", imgUrl);
-
     await setDocument("history-posts", postId, {
-      ...history.posts[currentIndexClicked.value],
+      ...currentEditedHistoryPost.value,
       imgLink: imgUrl,
     });
-
+    console.log("saved to database");
     history.$patch((state) => {
       state.posts[currentIndexClicked.value] = {
         ...currentEditedHistoryPost.value,
