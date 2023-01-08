@@ -245,10 +245,14 @@ export function uploadFile(ref, file) {
 
 // Delete image
 export async function deleteImageStorage(link) {
-  const rawPath = new URL(link).pathname; /* doesnt includes query */
-  const [, fileName] = rawPath.split("images%2F"); /* our ref folder */
+  if (link) {
+    const rawPath = new URL(link).pathname; /* doesnt includes query */
+    const [, fileName] = rawPath.split("images%2F"); /* our ref folder */
 
-  const imageRef = ref(storage, `images/${fileName}`);
-  await deleteObject(imageRef);
-  console.log("image deleted");
+    const imageRef = ref(storage, `images/${fileName}`);
+    await deleteObject(imageRef);
+    console.log("image deleted");
+  } else {
+    console.log("no link");
+  }
 }
