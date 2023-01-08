@@ -179,22 +179,46 @@ export async function getEveryCollection() {
 /* SAVE */
 export async function addDocument(type, payload) {
   switch (type) {
+    case "home":
+      return await addDoc(homeRef, payload);
+
+    case "aboutMe":
+      return await addDoc(aboutMeRef, payload);
+
     case "works":
       return await addDoc(myWorksRef, payload);
 
+    case "history":
+      return await addDoc(historyRef, payload);
+
     case "history-posts":
       return await addDoc(historyPostsRef, payload);
+
+    case "socials":
+      return await addDoc(socialsRef, payload);
   }
 }
 
 /* update */
 export async function setDocument(type, id, payload) {
   switch (type) {
+    case "home":
+      return await setDoc(doc(db, "home", id), payload);
+
+    case "aboutMe":
+      return await setDoc(doc(db, "aboutMe", id), payload);
+
     case "works":
       return await setDoc(doc(db, "works", id), payload);
 
+    case "history":
+      return await setDoc(doc(db, "history", id), payload);
+
     case "history-posts":
       return await setDoc(doc(db, "history-posts", id), payload);
+
+    case "socials":
+      return await setDoc(doc(db, "socials", id), payload);
   }
 }
 
@@ -248,8 +272,10 @@ export async function deleteImageStorage(link) {
   if (link) {
     const rawPath = new URL(link).pathname; /* doesnt includes query */
     const [, fileName] = rawPath.split("images%2F"); /* our ref folder */
-
     const imageRef = ref(storage, `images/${fileName}`);
+
+    /* TODO : if imageRef doesnt exist skip deleteObject */
+
     await deleteObject(imageRef);
     console.log("image deleted");
   } else {
