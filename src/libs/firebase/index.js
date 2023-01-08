@@ -20,6 +20,7 @@ import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
+  deleteObject,
 } from "firebase/storage";
 
 import { useUserState } from "../../stores/userState";
@@ -240,4 +241,14 @@ export function uploadFile(ref, file) {
       }
     );
   });
+}
+
+// Delete image
+export async function deleteImageStorage(link) {
+  const rawPath = new URL(link).pathname; /* doesnt includes query */
+  const [, fileName] = rawPath.split("images%2F"); /* our ref folder */
+
+  const imageRef = ref(storage, `images/${fileName}`);
+  await deleteObject(imageRef);
+  console.log("image deleted");
 }
