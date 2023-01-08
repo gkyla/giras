@@ -116,8 +116,10 @@ function getFile(e) {
   ];
   const file = e.target.files[0];
   function validFileType() {
-    console.log(file.type);
-    return fileTypes.includes(file.type);
+    if (file) {
+      console.log(file.type);
+      return fileTypes.includes(file.type);
+    }
   }
 
   if (validFileType()) {
