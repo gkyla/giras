@@ -21,6 +21,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
   deleteObject,
+  getBlob,
 } from "firebase/storage";
 
 import { useUserState } from "../../stores/userState";
@@ -170,8 +171,9 @@ export async function getEveryCollection() {
             date: d.date.toDate(),
           });
         });
+        break;
       default:
-        console.log("err");
+        console.log("err", pathId);
     }
   });
 }
@@ -274,10 +276,14 @@ export async function deleteImageStorage(link) {
     const [, fileName] = rawPath.split("images%2F"); /* our ref folder */
     const imageRef = ref(storage, `images/${fileName}`);
 
-    /* TODO : if imageRef doesnt exist skip deleteObject */
+    const res = await fetch(link);
+    console.log("fetched link check: ", res);
 
-    await deleteObject(imageRef);
-    console.log("image deleted");
+    /* if imageRef doesnt exist skip deleteObject */
+    if (res.ok && res.status !== 404) {
+      await deleteObject(imageRef);
+      console.log("image deleted");
+    }
   } else {
     console.log("no link");
   }
