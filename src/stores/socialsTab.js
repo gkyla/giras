@@ -6,6 +6,7 @@ export const useSocials = defineStore("socialsTab", () => {
   const instagram = ref("");
   const linkedin = ref("");
   const twitter = ref("");
+  const id = ref(null);
 
   function revert(currentData) {
     currentData.facebook = facebook.value;
@@ -21,6 +22,7 @@ export const useSocials = defineStore("socialsTab", () => {
     instagram.value = currentData.instagram;
     linkedin.value = currentData.linkedin;
     twitter.value = currentData.twitter;
+    id.value = currentData.id;
   }
 
   return { facebook, instagram, linkedin, twitter, edit, revert };

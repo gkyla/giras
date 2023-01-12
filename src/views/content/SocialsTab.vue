@@ -46,6 +46,7 @@ import { reactive, ref, watch } from "vue";
 
 import InputControl from "../../components/InputControl.vue";
 import { useSocials } from "../../stores/socialsTab";
+import { addDocument, setDocument } from "../../libs/firebase";
 
 const socialsState = useSocials();
 const isRevertable = ref(false);
@@ -74,8 +75,10 @@ watch(currentSocials, (newVal, oldVal) => {
   }
 });
 
-function editSocials() {
+async function editSocials() {
   socialsState.edit(currentSocials);
+  await setDocument("socials", "links", currentSocials);
+  console.log("socials added");
 }
 
 function handleRevert() {
