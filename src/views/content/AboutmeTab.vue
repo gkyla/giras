@@ -1,6 +1,6 @@
 <template>
   <!-- <form class="mb-10" @submit.prevent="handleEditSectionTitle">
-    <InputControl identifier="Headline" v-model="currentData.sectionTitle"
+    <InputControl identifier="Headline" v-model="currentAboutMe.sectionTitle"
       >Section tittle</InputControl
     >
     <div class="flex gap-2">
@@ -21,13 +21,56 @@
   <div class="border border-slate-200 w-full mb-10"></div> -->
 
   <form @submit.prevent="editAboutme">
-    <InputControl identifier="image1" input-type="file">Display Image</InputControl>
+    <div v-if="isChangeImg" class="grid items-center gap-4 rounded">
+      <div class="flex">
+        <InputControl
+          identifier="imageAboutMe"
+          input-type="file"
+          @inputedFile="getImage"
+          >Image</InputControl
+        >
+      </div>
+      <div class="flex gap-4 mb-5">
+        <div class="flex items-center gap-6 w-36"></div>
+        <img
+          class="max-w-[100px] max-h-[100px] rounded-md"
+          :src="currentAboutMe.imgLink"
+          :alt="currentAboutMe.title"
+        />
+        <button
+          class="underline underline-offset-2 font-bold ml-2 hover:text-slate-600 transition-all"
+          type="button"
+          @click="isChangeImg = false"
+        >
+          Keep image
+        </button>
+      </div>
+    </div>
+    <div class="flex gap-4 mb-5" v-show="!isChangeImg">
+      <div class="flex items-center gap-6 w-36">
+        <span class="font-bold">Image :</span>
+      </div>
+      <div class="flex">
+        <img
+          class="max-w-[100px] max-h-[100px] rounded-md"
+          :src="currentAboutMe.imgLink"
+          :alt="currentAboutMe.title"
+        />
+        <button
+          class="underline underline-offset-2 font-bold ml-6 hover:text-slate-600 transition-all"
+          type="button"
+          @click="isChangeImg = true"
+        >
+          Change image
+        </button>
+      </div>
+    </div>
     <InputControl
       identifier="aboutMeEdit"
       input-type="textarea"
       input-height="h-[230px]"
       input-width="w-[680px]"
-      v-model="currentData.content"
+      v-model="currentAboutMe.content"
       >Content</InputControl
     >
     <div class="flex mt-16 gap-2 self-end">
@@ -37,7 +80,7 @@
           btn_close_clickable: isRevertableContent,
           btn_close_unclickable: !isRevertableContent,
         }"
-        @click.self="handleRevert"
+        @click="handleRevert"
         type="button"
       >
         Revert
@@ -53,59 +96,85 @@ import { reactive, ref, watch } from "vue";
 import InputControl from "../../components/InputControl.vue";
 import { useInputState } from "../../stores/inputState";
 import { useAboutMe } from "../../stores/aboutMe";
+import { uploadImage } from "../../libs/utils";
+import { setDocument } from "../../libs/firebase";
 
 const aboutMeState = useAboutMe();
 const inputState = useInputState();
 
 const isRevertableContent = ref(false);
-const isRevertableSectionTitle = ref(false);
-let currentData = reactive({
-  sectionTitle: aboutMeState.sectionTitle,
-  displayImage: aboutMeState.displayImage,
+// const isRevertableSectionTitle = ref(false);
+const currentFile = ref(null);
+const isChangeImg = ref(false);
+
+let currentAboutMe = ref({
+  title: aboutMeState.title,
+  imgLink: aboutMeState.imgLink,
   content: aboutMeState.content,
 });
 
-watch(currentData, (newVal, oldVal) => {
-  if (newVal.content === aboutMeState.content) {
-    isRevertableContent.value = false;
-  } else {
-    isRevertableContent.value = true;
-  }
+watch(
+  currentAboutMe,
+  (newVal, oldVal) => {
+    if (newVal.content === aboutMeState.content) {
+      isRevertableContent.value = false;
+    } else {
+      isRevertableContent.value = true;
+    }
 
-  // if (newVal.sectionTitle === aboutMeState.sectionTitle) {
-  //   isRevertableSectionTitle.value = false;
-  // } else {
-  //   isRevertableSectionTitle.value = true;
-  // }
-});
+    // if (newVal.title === aboutMeState.title) {
+    //   isRevertableSectionTitle.value = false;
+    // } else {
+    //   isRevertableSectionTitle.value = true;
+    // }
+  },
+  {
+    deep: true,
+  }
+);
+
+const getImage = (file) => (currentFile.value = file);
 
 // function handleEditSectionTitle() {
 //   aboutMeState.$patch({
-//     sectionTitle: currentData.sectionTitle,
+//     sectionTitle: currentAboutMe.value.sectionTitle,
 //   });
 
 //   isRevertableSectionTitle.value = false;
 // }
 
 // function handleRevertSectionTitle() {
-//   currentData.sectionTitle = aboutMeState.sectionTitle;
+//   currentAboutMe.value.sectionTitle = aboutMeState.sectionTitle;
 // }
 
 function handleRevert() {
-  currentData.content = aboutMeState.content;
+  currentAboutMe.value.content = aboutMeState.content;
 
   inputState.quillEditor["aboutMeEdit"].el.innerHTML = aboutMeState.content;
 }
 
-function editAboutme() {
+async function editAboutme() {
+  const url = await uploadImage({
+    type: "aboutMe",
+    currentLocalValue: aboutMeState.imgLink,
+    file: currentFile.value,
+  });
+
+  await setDocument("aboutMe", "section", {
+    ...currentAboutMe.value,
+    imgLink: url,
+  });
+  console.log("about me saved");
+
   aboutMeState.$patch({
-    displayImage: currentData.displayImage,
-    content: currentData.content,
+    imgLink: url,
+    content: currentAboutMe.value.content,
   });
 
   inputState.quillEditor["aboutMeEdit"].el.innerHTML = aboutMeState.content;
-
   isRevertableContent.value = false;
+
+  currentAboutMe.value = { ...aboutMeState.getAll };
 }
 </script>
 

@@ -29,6 +29,7 @@ import { useHome } from "../../stores/homeTab";
 import { useHistoryTab } from "../../stores/historyTab";
 import { useSocials } from "../../stores/socialsTab";
 import { useMyWorks } from "../../stores/myWorksTab";
+import { useAboutMe } from "../../stores/aboutMe";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAOg_2OOPSJ1zpvdGoCMPVasem6eH7nJ9I",
@@ -107,12 +108,18 @@ export async function getDocuments() {
   });
 }
 
-const listRef = [homeRef, historyRef, historyPostsRef, myWorksRef, socialsRef];
-
 export async function getEveryCollection() {
-  const promisedListRef = [];
-  listRef.forEach((ref) => {
-    promisedListRef.push(getDocs(ref));
+  const listRef = [
+    homeRef,
+    historyRef,
+    historyPostsRef,
+    myWorksRef,
+    socialsRef,
+    aboutMeRef,
+  ];
+
+  const promisedListRef = listRef.map((ref) => {
+    return getDocs(ref);
   });
 
   const allSnapshots = await Promise.all(promisedListRef);
@@ -146,6 +153,7 @@ export async function getEveryCollection() {
   const historyState = useHistoryTab();
   const socialsState = useSocials();
   const myWorksState = useMyWorks();
+  const aboutMeState = useAboutMe();
 
   console.log(filteredData);
   filteredData.forEach(({ pathId, data }) => {
@@ -171,6 +179,10 @@ export async function getEveryCollection() {
             date: d.date.toDate(),
           });
         });
+        break;
+      case "aboutMe":
+        // aboutMeState.
+        aboutMeState.edit(data[0]);
         break;
       default:
         console.log("err", pathId);
