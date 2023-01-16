@@ -39,32 +39,37 @@
     </button>
   </div>
   <div id="works-container" class="py-4">
-    <div
-      v-for="(post, index) in currentMyWorks.posts"
-      :key="post.title"
-      class="w-full p-4 rounded-lg border-2 mb-3 flex justify-between"
-    >
-      <div class="flex gap-5 items-center">
-        <img
-          :src="post.imgLink"
-          :alt="post.name"
-          class="inline-block w-10 h-10 rounded-md"
-        />
+    <div v-if="currentMyWorks.posts.length > 0">
+      <div
+        v-for="(post, index) in currentMyWorks.posts"
+        :key="post.title"
+        class="w-full p-4 rounded-lg border-2 mb-3 flex justify-between"
+      >
+        <div class="flex gap-5 items-center">
+          <img
+            :src="post.imgLink"
+            :alt="post.name"
+            class="inline-block w-10 h-10 rounded-md"
+          />
+          <div>
+            <h1 class="text-xl font-semibold">{{ post.title }}</h1>
+            <span class="text-sm">{{ dateFormat(post.date) }}</span>
+          </div>
+        </div>
+
         <div>
-          <h1 class="text-xl font-semibold">{{ post.title }}</h1>
-          <span class="text-sm">{{ dateFormat(post.date) }}</span>
+          <button
+            class="rounded-lg inline-flex gap-2 items-center border-2 px-3 py-1"
+            @click="handleEditPost(index)"
+            type="button"
+          >
+            Edit <Icon icon="material-symbols:edit" />
+          </button>
         </div>
       </div>
-
-      <div>
-        <button
-          class="rounded-lg inline-flex gap-2 items-center border-2 px-3 py-1"
-          @click="handleEditPost(index)"
-          type="button"
-        >
-          Edit <Icon icon="material-symbols:edit" />
-        </button>
-      </div>
+    </div>
+    <div v-else>
+      <h1 class="mt-10 text-2xl text-center">No works post has been created</h1>
     </div>
   </div>
 
@@ -90,12 +95,50 @@
 
         <!-- Handle edit  -->
         <div v-if="!isCreating && currentEditedWorkPost">
-          <InputControl
-            identifier="imageEdit"
-            v-model="currentEditedWorkPost.imgLink"
-            input-type="file"
-            >Image</InputControl
-          >
+          <div v-if="isChangeImg" class="grid items-center gap-4 rounded">
+            <div class="flex">
+              <InputControl
+                identifier="imageEditHistory"
+                input-type="file"
+                @inputedFile="getImage"
+                >Image</InputControl
+              >
+            </div>
+            <div class="flex gap-4 mb-5">
+              <div class="flex items-center gap-6 w-36"></div>
+              <img
+                class="max-w-[100px] max-h-[100px] rounded-md"
+                :src="currentEditedWorkPost?.imgLink"
+                :alt="currentEditedWorkPost?.title"
+              />
+              <button
+                class="underline underline-offset-2 font-bold ml-2 hover:text-slate-600 transition-all"
+                type="button"
+                @click="isChangeImg = false"
+              >
+                Keep image
+              </button>
+            </div>
+          </div>
+          <div class="flex gap-4 mb-5" v-show="!isChangeImg">
+            <div class="flex items-center gap-6 w-36">
+              <span class="font-bold">Image :</span>
+            </div>
+            <div class="flex">
+              <img
+                class="max-w-[100px] max-h-[100px] rounded-md"
+                :src="currentEditedWorkPost?.imgLink"
+                :alt="currentEditedWorkPost?.title"
+              />
+              <button
+                class="underline underline-offset-2 font-bold ml-6 hover:text-slate-600 transition-all"
+                type="button"
+                @click="isChangeImg = true"
+              >
+                Change image
+              </button>
+            </div>
+          </div>
           <InputControl
             identifier="HeadlineEdit"
             v-model="currentEditedWorkPost.title"
@@ -122,6 +165,7 @@
             identifier="addImage"
             v-model="newWorkPost.imgLink"
             input-type="file"
+            @inputedFile="getImage"
             >Image</InputControl
           >
           <InputControl identifier="addHeadling" v-model="newWorkPost.title"
@@ -143,6 +187,21 @@
         </div>
 
         <div class="flex mt-20 gap-2 self-end">
+          <button
+            v-if="!isCreating"
+            class="btn_close bg-red-700 flex items-center"
+            type="button"
+            @click="handleDeletePost"
+          >
+            Delete Post
+            <Icon
+              icon="mdi:trash-can-outline"
+              width="25"
+              height="25"
+              class="ml-2"
+            />
+          </button>
+
           <button
             class="btn_close ml-auto"
             @click.stop="handleClose"
@@ -167,6 +226,13 @@ import { VueFinalModal } from "vue-final-modal";
 import InputControl from "../../components/InputControl.vue";
 import { useMyWorks } from "../../stores/myWorksTab";
 import { useInputState } from "../../stores/inputState";
+import {
+  addDocument,
+  setDocument,
+  deleteDocument,
+  deleteImageStorage,
+} from "../../libs/firebase";
+import { uploadImage } from "../../libs/utils";
 
 const myWorksState = useMyWorks();
 
@@ -185,6 +251,8 @@ const currentIndexClicked = ref(null);
 const showModal = ref(false);
 const isCreating = ref(false);
 const isRevertable = ref(false);
+const isChangeImg = ref(false);
+const currentFile = ref(null);
 
 function dateFormat(postDate) {
   let options = {
@@ -220,6 +288,11 @@ watch(currentMyWorks, (newVal, oldVal) => {
   }
 });
 
+function getImage(file) {
+  console.log("getting image", file);
+  currentFile.value = file;
+}
+
 // function handleEditSectionTitle() {
 //   myWorksState.$patch({
 //     sectionTitle: currentMyWorks.sectionTitle,
@@ -232,16 +305,70 @@ watch(currentMyWorks, (newVal, oldVal) => {
 //   currentMyWorks.sectionTitle = myWorksState.sectionTitle;
 // }
 
-function handleSavePost() {
+async function handleSavePost() {
+  /* TODO: fix bug, its like because currentEditedWorkPost is null */
+
   if (!isCreating.value) {
+    /* Edit */
+    const postId = currentEditedWorkPost.value.id;
+
+    const url = await uploadImage({
+      type: "works",
+      currentLocalValue: currentEditedWorkPost.value.imgLink,
+      file: currentFile.value,
+    });
+
+    console.log("id : ", postId);
+    await setDocument("works", postId, {
+      ...currentEditedWorkPost.value,
+      imgLink: url,
+    });
+
     myWorksState.$patch((state) => {
-      state.posts[currentIndexClicked.value] = currentEditedWorkPost.value;
+      state.posts[currentIndexClicked.value] = {
+        ...currentEditedWorkPost.value,
+        imgLink: url,
+      };
     });
   } else {
+    /* New post */
+    const url = await uploadImage({
+      type: "works",
+      currentLocalValue: currentEditedWorkPost.value.imgLink,
+      file: currentFile.value,
+    });
+    console.log("url", url);
+
+    // console.log("id : ", postId);
+    const doc = await addDocument("works", {
+      ...currentEditedWorkPost.value,
+      imgLink: url,
+    });
+    console.log("myworks post created");
+
     myWorksState.$patch((state) => {
-      state.posts.push({ ...newWorkPost });
+      state.posts.push({
+        ...newWorkPost,
+        id: doc.id,
+        imgLink: url,
+      });
     });
   }
+}
+
+async function handleDeletePost() {
+  console.log("kedelet juga kah manis");
+  const id = currentEditedWorkPost.value.id;
+  await deleteDocument("works", id);
+  console.log("post deleted");
+  myWorksState.$patch((state) => {
+    const index = state.posts.findIndex((post) => post.id === id);
+
+    state.posts.splice(index, 1);
+  });
+  await deleteImageStorage(currentEditedWorkPost.value.imgLink);
+
+  handleClose();
 }
 
 function handleEditPost(i) {
