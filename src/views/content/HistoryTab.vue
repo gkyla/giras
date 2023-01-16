@@ -193,6 +193,7 @@
 
         <div class="flex mt-20 gap-2 self-end">
           <button
+            v-if="!isCreating"
             class="btn_close bg-red-700 flex items-center"
             type="button"
             @click="handleDeletePost"
