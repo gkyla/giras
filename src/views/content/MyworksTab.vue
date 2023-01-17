@@ -235,12 +235,13 @@ import {
 import { uploadImage } from "../../libs/utils";
 
 const myWorksState = useMyWorks();
+const inputState = useInputState();
 
 const currentMyWorks = reactive({
   sectionTitle: myWorksState.sectionTitle,
   posts: myWorksState.posts,
 });
-const newWorkPost = reactive({
+let newWorkPost = reactive({
   imgLink: null,
   title: "",
   date: new Date(),
@@ -306,8 +307,6 @@ function getImage(file) {
 // }
 
 async function handleSavePost() {
-  /* TODO: fix bug, its like because currentEditedWorkPost is null */
-
   if (!isCreating.value) {
     /* Edit */
     const postId = currentEditedWorkPost.value.id;
@@ -334,14 +333,14 @@ async function handleSavePost() {
     /* New post */
     const url = await uploadImage({
       type: "works",
-      currentLocalValue: currentEditedWorkPost.value.imgLink,
+      currentLocalValue: newWorkPost.imgLink,
       file: currentFile.value,
     });
     console.log("url", url);
 
     // console.log("id : ", postId);
     const doc = await addDocument("works", {
-      ...currentEditedWorkPost.value,
+      ...newWorkPost,
       imgLink: url,
     });
     console.log("myworks post created");
@@ -353,6 +352,13 @@ async function handleSavePost() {
         imgLink: url,
       });
     });
+
+    // Reset newWorkPost
+    newWorkPost = reactive({ ...myWorksState._initialValuePost });
+    currentFile.value = null;
+    inputState.quillEditor["AddWorks"].el.innerHTML = newWorkPost.content;
+
+    handleClose();
   }
 }
 
