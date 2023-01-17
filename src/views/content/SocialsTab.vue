@@ -82,7 +82,7 @@ async function editSocials() {
 }
 
 function handleRevert() {
-  currentSocials = socialsState.revert(currentSocials);
+  currentSocials = reactive({ ...socialsState.revert(currentSocials) });
 }
 </script>
 

@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useSocials = defineStore("socialsTab", () => {
-  const facebook = ref();
+  const facebook = ref("");
   const instagram = ref("");
   const linkedin = ref("");
   const twitter = ref("");
