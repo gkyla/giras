@@ -5,7 +5,7 @@
         <img
           :src="imgUrl"
           alt="works-picture"
-          class="w-[55px] h-[55px] block rounded-lg"
+          class="w-[55px] h-[55px] block rounded-lg object-cover"
         />
       </div>
       <div class="self-start">
