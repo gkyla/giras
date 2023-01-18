@@ -12,7 +12,7 @@
     >
       <img
         id="0-navHeader"
-        :src="userOptions.heroImage"
+        :src="homeState.imgLink"
         class="w-full h-full brightness-[.83] bg-cover object-cover pointer-events-none"
       />
       <div
@@ -44,7 +44,7 @@
             class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
           ></div>
           <h1 class="text-4xl font-semibold text-slate-600">
-            My Amazing History
+            {{ historyTabState.headline }}
           </h1>
           <div
             id="bullet1"
@@ -52,11 +52,7 @@
           ></div>
         </div>
         <p class="mt-10 mx-auto text-center max-w-screen-lg">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
-          maiores, harum corporis minus nihil iusto eligendi distinctio.
-          Obcaecati accusamus deleniti, quisquam in dolorum recusandae delectus
-          iusto fugiat illo id saepe voluptatem ut consectetur sequi facere!
-          Reiciendis assumenda consequatur cum nulla.
+          {{ historyTabState.headlineDescription }}
         </p>
 
         <div
@@ -67,71 +63,15 @@
           <Icon icon="material-symbols:arrow-downward" width="60" height="60" />
         </div>
       </div>
+      <!-- id="firstHistoryWrapper" -->
 
+      <!-- TODO:fix horizontal spacing tobe not too far  -->
       <div class="container mx-auto max-w-screen-xl mb-64 px-2">
-        <div
-          id="firstHistoryWrapper"
-          class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end md:place-items-center lg:place-items-start px-3"
-          data-aos="fade-up"
-          data-aos-duration="1300"
-        >
-          <div class="relative col-span-2 lg:col-span-1 mx-auto">
-            <img
-              src="../assets/img/polkadot.png"
-              alt="polkadot pattern"
-              class="w-[200px] h-[200px] absolute -hue-rotate-60 -top-16 -left-16"
-            />
-            <img
-              src="../assets/img/project-list/thumb1.jpg"
-              alt="forest"
-              class="w-[430px] h-full relative z-10"
-            />
-          </div>
-          <div class="lg:px-10 px-3 col-span-2 prose prose-lg self-start">
-            <h1
-              id="firstHistory"
-              class="font-bold text-xl lg:text-2xl bg-[#85bc33] text-white inline-block px-2 py-2 shadow-lg mt-10 lg:mt-0"
-            >
-              National Aeronautics and Space Administration
-            </h1>
-            <span class="text-[#85bc33] mb-7 block"
-              >Software Engineer Tech Lead, Fall 2015 - May 2019</span
-            >
-            <div>
-              <p class="mb-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-                repellat, modi facilis
-                <span class="font-bold"
-                  >dolor ex animi voluptatem autem doloremque adipisci odio
-                  saepe maiores. Debitis minima,
-                </span>
-                doloribus modi dicta quis cumque repellendus recusandae,
-                molestiae voluptatibus velit nihil. Iste, at. Cumque, atque
-                quae.
-              </p>
-
-              <p class="mb-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
-                laboriosam dolorem similique odit maiores neque eveniet sit
-                repudiandae ut aliquam.
-              </p>
-            </div>
-
-            <ul>
-              <li>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem,
-                molestias!
-              </li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor, sit amet consectetur adipisicing.</li>
-            </ul>
-          </div>
-        </div>
-
         <div
           class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end md:place-items-center lg:place-items-start md:mt-40 -mt-10 px-3"
           data-aos="fade-up"
           data-aos-duration="1300"
+          v-for="post in historyTabState.posts"
         >
           <div class="relative col-span-2 lg:col-span-1 mx-auto">
             <img
@@ -140,50 +80,24 @@
               class="w-[200px] h-[200px] absolute -hue-rotate-60 -top-16 -left-16"
             />
             <img
-              src="../assets/img/project-list/thumb2.jpg"
-              alt="forest"
-              class="w-[430px] h-full relative z-10"
+              :src="post.imgLink"
+              :alt="post.title"
+              class="w-[430px] h-full relative z-10 shadow"
             />
           </div>
-          <div class="lg:px-10 px-3 col-span-2 prose prose-lg self-start">
+          <div
+            class="lg:px-10 lg:ml-7 px-3 col-span-2 prose prose-lg self-start"
+          >
             <h1
               class="font-bold text-2xl bg-[#85bc33] text-white inline-block px-2 py-2 shadow-lg mt-10 lg:mt-0"
             >
-              Facebook Gaming
+              {{ post.title }}
             </h1>
-            <span class="text-[#85bc33] mb-7 block"
-              >CEO, Fall 2015 - May 2019</span
-            >
-            <div>
-              <p class="mb-6">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
-                commodi ipsam facilis atque, vitae praesentium non quo, ipsa
-                doloremque debitis labore earum a repudiandae veritatis
-                necessitatibus laboriosam. At, quo animi!
-              </p>
-
-              <p class="mb-6">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis
-                ex perspiciatis, repudiandae obcaecati autem eaque sit ipsam
-                cumque, consectetur
-                <span class="font-bold">
-                  temporibus eveniet, fugit maxime totam dolor tenetur. Labore
-                  ipsam ex quaerat corporis officia, consequuntur
-                </span>
-
-                optio dolores voluptatibus ad laborum veritatis assumenda minus,
-                qui ipsum aut ipsa.
-              </p>
-            </div>
-
-            <ul>
-              <li>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem,
-                molestias!
-              </li>
-              <li>Lorem ipsum dolor sit amet.</li>
-              <li>Lorem ipsum dolor, sit amet consectetur adipisicing.</li>
-            </ul>
+            <span class="text-[#85bc33] mb-7 block">{{ post.event }}</span>
+            <div
+              v-dompurify-html="post.historyContent"
+              class="[&>p:has(br)]:hidden"
+            ></div>
           </div>
         </div>
       </div>
@@ -212,25 +126,14 @@
             data-aos="fade-up"
             data-aos-duration="1300"
           >
-            <div class="self-start text-xl col-span-2">
-              <p class="mb-7">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
-                perspiciatis totam nobis sequi nihild architecto consectetur
-                itaque atque numquam perferendis, quasi velit magnam, iure harum
-                aperiam vitae.
-              </p>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
-                perspiciatis totam nobis
-                <span class="font-semibold">sequi nihil aliquid</span> cum fuga
-                architecto consectetur itaque atque numquam perferendis, quasi
-                velit magnam, iure harum aperiam vitae.
-              </p>
-            </div>
+            <div
+              class="self-start text-xl col-span-2 prose [&>p:has(br)]:hidden"
+              v-dompurify-html="aboutMeState.content"
+            ></div>
             <div class="col-span-2 lg:col-span-1">
               <img
-                :src="userOptions.heroImage"
-                class="lg:h-[300px] lg:w-[300px] rounded"
+                :src="aboutMeState.imgLink"
+                class="lg:h-[300px] lg:w-[300px] rounded-md object-cover"
               />
             </div>
           </div>
@@ -256,68 +159,14 @@
           class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7"
         >
           <MiniCard
-            title="Lorem ipsum dolor sit amet."
-            date="10 March 2020"
-            :img="userOptions.heroImage"
+            v-for="work in myWorksState.posts"
+            :title="work.title"
+            :date="dateFormat(work.date)"
+            :img="work.imgLink"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
-            laborum maiores? Eligendi quia id ad?
-          </MiniCard>
-
-          <MiniCard
-            title="Lorem ipsum dolor sit amet."
-            date="10 March 2020"
-            :img="userOptions.heroImage"
-            data-aos="zoom-in-up"
-            data-aos-duration="800"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione!
-          </MiniCard>
-
-          <MiniCard
-            title="Lorem ipsum dolor sit amet."
-            date="10 March 2020"
-            :img="userOptions.heroImage"
-            data-aos="zoom-in-up"
-            data-aos-duration="800"
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati
-            exercitationem quaerat velit est dolorem!
-          </MiniCard>
-
-          <MiniCard
-            title="Lorem ipsum dolor sit amet."
-            date="10 March 2020"
-            :img="userOptions.heroImage"
-            data-aos="zoom-in-up"
-            data-aos-duration="800"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore
-            explicabo libero hic in impedit eius magnam distinctio?
-          </MiniCard>
-
-          <MiniCard
-            title="Lorem ipsum dolor sit amet."
-            date="10 March 2020"
-            :img="userOptions.heroImage"
-            data-aos="zoom-in-up"
-            data-aos-duration="800"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore,
-            laborum.
-          </MiniCard>
-
-          <MiniCard
-            title="Lorem ipsum dolor sit amet."
-            date="10 March 2020"
-            :img="userOptions.heroImage"
-            data-aos="zoom-in-up"
-            data-aos-duration="800"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-            assumenda voluptatibus ad quae eligendi!
+            <div v-dompurify-html="work.content"></div>
           </MiniCard>
         </div>
       </div>
@@ -356,6 +205,7 @@
                   width: '100',
                   height: '100',
                 }"
+                :link="socialsState.facebook"
                 background-on-hover="hover:bg-[#4267B2]"
               />
               <!-- Use independent style (#instagram-social) -->
@@ -367,6 +217,7 @@
                   width: '100',
                   height: '100',
                 }"
+                :link="socialsState.instagram"
               />
               <SocialCard
                 name="Linkedin"
@@ -375,6 +226,7 @@
                   width: '100',
                   height: '100',
                 }"
+                :link="socialsState.linkedin"
                 background-on-hover="hover:bg-[#0077b5]"
               />
 
@@ -385,6 +237,7 @@
                   width: '100',
                   height: '100',
                 }"
+                :link="socialsState.twitter"
                 background-on-hover="hover:bg-[#1DA1F2] "
               />
             </div>
@@ -437,6 +290,12 @@ import SocialCard from "../components/socials/SocialCard.vue";
 
 import { onMounted, reactive, ref } from "vue";
 import { Icon } from "@iconify/vue";
+import { useAboutMe } from "../stores/aboutMe";
+import { useHistoryTab } from "../stores/historyTab";
+import { useHome } from "../stores/homeTab";
+import { useMyWorks } from "../stores/myWorksTab";
+import { useSocials } from "../stores/socialsTab";
+import { dateFormat } from "../libs/utils";
 
 /* eslint-disable */
 const userOptions = reactive({
@@ -444,6 +303,12 @@ const userOptions = reactive({
 });
 const socials = ref(); /* Social section */
 const navIsOpened = ref(false);
+
+const aboutMeState = useAboutMe();
+const historyTabState = useHistoryTab();
+const homeState = useHome();
+const myWorksState = useMyWorks();
+const socialsState = useSocials();
 
 onMounted(() => {
   particlesJS.load(
@@ -463,6 +328,11 @@ onMounted(() => {
 </style>
 
 <style scoped>
+.force-zero-space {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
 .raleway {
   font-family: "Raleway", sans-serif;
 }
