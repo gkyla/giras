@@ -34,3 +34,17 @@ export async function uploadImage({ type, currentLocalValue, file }) {
     }
   }
 }
+
+export function dateFormat(postDate) {
+  let options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const temp = new Intl.DateTimeFormat("en-US", options)
+    .format(postDate)
+    .split(" ");
+  temp[2] = temp[2].replace(",", " ");
+  return temp.join(" ");
+}

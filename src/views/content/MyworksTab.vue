@@ -232,7 +232,7 @@ import {
   deleteDocument,
   deleteImageStorage,
 } from "../../libs/firebase";
-import { uploadImage } from "../../libs/utils";
+import { uploadImage, dateFormat } from "../../libs/utils";
 
 const myWorksState = useMyWorks();
 const inputState = useInputState();
@@ -254,20 +254,6 @@ const isCreating = ref(false);
 const isRevertable = ref(false);
 const isChangeImg = ref(false);
 const currentFile = ref(null);
-
-function dateFormat(postDate) {
-  let options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const temp = new Intl.DateTimeFormat("en-US", options)
-    .format(postDate)
-    .split(" ");
-  temp[2] = temp[2].replace(",", " ");
-  return temp.join(" ");
-}
 
 watch(showModal, (newVal, oldVal) => {
   if (newVal) {
