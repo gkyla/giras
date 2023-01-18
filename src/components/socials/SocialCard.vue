@@ -1,5 +1,5 @@
 <template>
-  <a :href="link">
+  <a :href="link" target="_blank">
     <div
       :id="$attrs.id"
       class="group border bg-[#fafcfd] border-gray-100 shadow p-5 relative overflow-hidden min-h-[155px] transition-all"
