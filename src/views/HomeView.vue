@@ -65,13 +65,13 @@
       </div>
       <!-- id="firstHistoryWrapper" -->
 
-      <!-- TODO:fix horizontal spacing tobe not too far  -->
       <div class="container mx-auto max-w-screen-xl mb-64 px-2">
         <div
           class="grid lg:grid-cols-3 grid-rows-2 md:grid-rows-none place-items-end md:place-items-center lg:place-items-start md:mt-40 -mt-10 px-3"
           data-aos="fade-up"
           data-aos-duration="1300"
-          v-for="post in historyTabState.posts"
+          v-for="(post, index) in historyTabState.posts"
+          :key="post.title"
         >
           <div class="relative col-span-2 lg:col-span-1 mx-auto">
             <img
@@ -87,6 +87,7 @@
           </div>
           <div
             class="lg:px-10 lg:ml-7 px-3 col-span-2 prose prose-lg self-start"
+            :id="index === 0 ? 'firstHistory' : ''"
           >
             <h1
               class="font-bold text-2xl bg-[#85bc33] text-white inline-block px-2 py-2 shadow-lg mt-10 lg:mt-0"
@@ -94,10 +95,7 @@
               {{ post.title }}
             </h1>
             <span class="text-[#85bc33] mb-7 block">{{ post.event }}</span>
-            <div
-              v-dompurify-html="post.historyContent"
-              class="[&>p:has(br)]:hidden"
-            ></div>
+            <div v-dompurify-html="post.historyContent" class=""></div>
           </div>
         </div>
       </div>
@@ -127,7 +125,7 @@
             data-aos-duration="1300"
           >
             <div
-              class="self-start text-xl col-span-2 prose [&>p:has(br)]:hidden"
+              class="self-start text-xl col-span-2 prose prose-content-spacing"
               v-dompurify-html="aboutMeState.content"
             ></div>
             <div class="col-span-2 lg:col-span-1">
