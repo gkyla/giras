@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 export const useHistoryTab = defineStore("history", () => {
   const headline = ref("");
   const headlineDescription = ref("");
+  const id = ref("");
   const posts = ref([
     // {
     //   imgLink:
@@ -32,8 +33,9 @@ export const useHistoryTab = defineStore("history", () => {
   }
 
   function editSection(data) {
-    headline.value = data.title;
-    headlineDescription.value = data.description;
+    headline.value = data.headline;
+    headlineDescription.value = data.headlineDescription;
+    id.value = data.id;
   }
 
   return {
