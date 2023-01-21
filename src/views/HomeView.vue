@@ -13,7 +13,7 @@
       <img
         id="0-navHeader"
         :src="homeState.imgLink"
-        class="w-full h-full brightness-[.83] bg-cover object-cover pointer-events-none"
+        class="w-full h-full brightness-[.75] bg-cover object-cover pointer-events-none"
       />
       <div
         class="font-bold text-4xl text-white text-center absolute z-10"
