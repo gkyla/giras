@@ -95,7 +95,10 @@
               {{ post.title }}
             </h1>
             <span class="text-[#85bc33] mb-7 block">{{ post.event }}</span>
-            <div v-dompurify-html="post.historyContent" class=""></div>
+            <div
+              v-dompurify-html="post.historyContent"
+              class="prose-content-spacing"
+            ></div>
           </div>
         </div>
       </div>
