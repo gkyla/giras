@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { watch, ref } from "vue";
+import { watch, ref, inject } from "vue";
 
 import InputControl from "../../components/InputControl.vue";
 import { useHome } from "../../stores/homeTab";
@@ -78,7 +78,13 @@ import {
   createStorageRef,
   setDocument,
 } from "../../libs/firebase/index";
-import { uploadImage as upload } from "../../libs/utils";
+import {
+  uploadImage as upload,
+  successModal,
+  errorModal,
+} from "../../libs/utils";
+
+const swal = inject("$swal");
 
 const isRevertable = ref(false);
 const homeState = useHome();
@@ -96,6 +102,8 @@ function compareableHomeState() {
   return {
     lineOne: homeState.lineOne,
     lineTwo: homeState.lineTwo,
+    imgLink: homeState.imgLink,
+    id: homeState.id,
   };
 }
 
@@ -116,13 +124,17 @@ watch(
 );
 
 async function uploadImg() {
-  const url = await upload({
-    type: "home",
-    currentLocalValue: currentHomeState.value.imgLink,
-    file: currentFile.value,
-  });
+  try {
+    const url = await upload({
+      type: "home",
+      currentLocalValue: currentHomeState.value.imgLink,
+      file: currentFile.value,
+    });
 
-  return url;
+    return url;
+  } catch (error) {
+    errorModal(swal, error);
+  }
 }
 
 function handleRevert() {
@@ -130,16 +142,24 @@ function handleRevert() {
 }
 
 async function editHome() {
-  const url = await uploadImg();
-  console.log(url);
+  try {
+    const url = await uploadImg();
+    console.log(url);
 
-  await setDocument("home", homeState.id, {
-    ...currentHomeState.value,
-    imgLink: url,
-  });
+    await setDocument("home", homeState.id, {
+      ...currentHomeState.value,
+      imgLink: url,
+    });
 
-  homeState.edit({ ...currentHomeState.value, imgLink: url });
-  currentHomeState.value = { ...homeState.getAll };
+    /* 
+      TODO: fix isRevertable still true after saving to database
+    isRevertable value change to true again after saved to database and local value */
+    homeState.edit({ ...currentHomeState.value, imgLink: url });
+    isRevertable.value = false;
+    successModal(swal, "Section has been successfully edited !");
+  } catch (error) {
+    errorModal(swal, error);
+  }
 }
 </script>
 
