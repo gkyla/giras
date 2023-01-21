@@ -80,11 +80,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
-  console.log("hello");
   if (to.meta.requiresAuth) {
-    console.log("apakah");
     const user = await getCurrentUser();
-    console.log(user);
 
     if (user) {
       return true;
@@ -94,9 +91,7 @@ router.beforeEach(async (to, from) => {
   }
 
   if (to.path === "/login") {
-    console.log("ditunggu");
     const user = await getCurrentUser();
-    console.log("sudah ditunggu");
     if (user) {
       return "/content/home";
     }
