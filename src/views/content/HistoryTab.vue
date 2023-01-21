@@ -223,7 +223,7 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, inject } from "vue";
 import { Icon } from "@iconify/vue";
 import { VueFinalModal } from "vue-final-modal";
 import InputControl from "../../components/InputControl.vue";
@@ -237,9 +237,11 @@ import {
   deleteDocument,
   deleteImageStorage,
 } from "../../libs/firebase";
+import { successModal, errorModal } from "../../libs/utils";
 
 const history = useHistoryTab();
 const inputState = useInputState();
+const swal = inject("$swal");
 
 /* variable for tracking  */
 const currentIndexClicked = ref(null);
@@ -285,7 +287,11 @@ const currentHeadline = reactive({
 });
 
 watch(currentHeadline, (newVal, oldVal) => {
-  if (newVal.headlineDescription !== history.headlineDescription) {
+  const isHeadlineNotSame = newVal.headline !== history.headline;
+  const isDescriptionNotSame =
+    newVal.headlineDescription !== history.headlineDescription;
+
+  if (isDescriptionNotSame || isHeadlineNotSame) {
     isRevertable.value = true;
   } else {
     isRevertable.value = false;
@@ -294,16 +300,27 @@ watch(currentHeadline, (newVal, oldVal) => {
 
 const headlineOldValue = ref({ ...currentHeadline });
 
-function handleSaveHeadline() {
-  headlineOldValue.value = { ...currentHeadline };
+async function handleSaveHeadline() {
+  try {
+    headlineOldValue.value = { ...currentHeadline };
 
-  history.$patch({
-    headline: currentHeadline.headline,
-    headlineDescription: currentHeadline.headlineDescription,
-  });
+    await setDocument("history", "section", {
+      headline: currentHeadline.headline,
+      headlineDescription: currentHeadline.headlineDescription,
+    });
 
-  currentHeadline.headline = history.headline;
-  currentHeadline.headlineDescription = history.headlineDescription;
+    history.$patch({
+      headline: currentHeadline.headline,
+      headlineDescription: currentHeadline.headlineDescription,
+    });
+
+    // currentHeadline.headline = history.headline;
+    // currentHeadline.headlineDescription = history.headlineDescription;
+    isRevertable.value = false;
+    successModal(swal, "Headline has been successfully edited !");
+  } catch (error) {
+    errorModal(swal, error);
+  }
 }
 
 function getImage(file) {
@@ -348,64 +365,69 @@ function handleRevertHeadline() {
 
   inputState.quillEditor["headlineDescription"].el.innerHTML =
     currentHeadline.headlineDescription;
-
-  console.log("kerevert dek");
 }
+
 async function handleDeletePost() {
-  console.log("kedelet juga kah manis");
-  const id = currentEditedHistoryPost.value.id;
-  await deleteDocument("history-posts", id);
-  history.$patch((state) => {
-    const index = state.posts.findIndex((post) => post.id === id);
+  try {
+    const id = currentEditedHistoryPost.value.id;
+    await deleteDocument("history-posts", id);
+    history.$patch((state) => {
+      const index = state.posts.findIndex((post) => post.id === id);
 
-    state.posts.splice(index, 1);
-  });
-  await deleteImageStorage(currentEditedHistoryPost.value.imgLink);
+      state.posts.splice(index, 1);
+    });
+    await deleteImageStorage(currentEditedHistoryPost.value.imgLink);
 
-  handleClose();
+    successModal(swal, "Post has been successfully deleted !");
+    handleClose();
+  } catch (error) {
+    errorModal(swal, error);
+  }
 }
 
 async function handleSavePost() {
-  console.log("kesave dek");
-  if (!isCreating.value /* Edit */) {
-    const postId = history.posts[currentIndexClicked.value].id;
+  try {
+    if (!isCreating.value /* Edit */) {
+      const postId = history.posts[currentIndexClicked.value].id;
 
-    const imgUrl = await uploadImage();
-    console.log("ini lord url nya", imgUrl);
-    await setDocument("history-posts", postId, {
-      ...currentEditedHistoryPost.value,
-      imgLink: imgUrl,
-    });
-    console.log("saved to database");
-    history.$patch((state) => {
-      state.posts[currentIndexClicked.value] = {
+      const imgUrl = await uploadImage();
+      console.log("url", imgUrl);
+      await setDocument("history-posts", postId, {
         ...currentEditedHistoryPost.value,
         imgLink: imgUrl,
-      };
-    });
+      });
+      history.$patch((state) => {
+        state.posts[currentIndexClicked.value] = {
+          ...currentEditedHistoryPost.value,
+          imgLink: imgUrl,
+        };
+      });
+      // Immediately update local Value
+      currentEditedHistoryPost.value = history.posts[currentIndexClicked.value];
+      successModal(swal, "Post has been successfully edited !");
+    } else {
+      /* Creating new Posts */
+      const imgUrl = await uploadImage();
+      const doc = await addDocument("history-posts", {
+        ...newHistoryPost,
+        imgLink: imgUrl,
+      });
+      history.addPost({ ...newHistoryPost, id: doc.id, imgLink: imgUrl });
 
-    // Immediately update local Value
-    currentEditedHistoryPost.value = history.posts[currentIndexClicked.value];
-  } else {
-    /* Creating new Posts */
-    const imgUrl = await uploadImage();
-    const doc = await addDocument("history-posts", {
-      ...newHistoryPost,
-      imgLink: imgUrl,
-    });
-    history.addPost({ ...newHistoryPost, id: doc.id, imgLink: imgUrl });
+      newHistoryPost = reactive({ ...history._initialValuePost });
+      inputState.quillEditor["AddHistoryContent"].el.innerHTML =
+        newHistoryPost.historyContent;
 
-    newHistoryPost = reactive({ ...history._initialValuePost });
-    inputState.quillEditor["AddHistoryContent"].el.innerHTML =
-      newHistoryPost.historyContent;
-
-    /* Then show blank quill */
-    handleClose();
+      /* Then show blank quill */
+      successModal(swal, "Post has been successfully created !");
+      handleClose();
+    }
+  } catch (error) {
+    errorModal(swal, error);
   }
 }
 
 function editHistory(index) {
-  console.log("clicked", index);
   currentIndexClicked.value = index;
   showModal.value = true;
 }
