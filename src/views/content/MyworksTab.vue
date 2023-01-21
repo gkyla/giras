@@ -218,9 +218,7 @@
 </template>
 
 <script setup>
-/* TODO: make this done */
-
-import { reactive, ref, watch, computed } from "vue";
+import { reactive, ref, watch, inject } from "vue";
 import { Icon } from "@iconify/vue";
 import { VueFinalModal } from "vue-final-modal";
 import InputControl from "../../components/InputControl.vue";
@@ -232,10 +230,16 @@ import {
   deleteDocument,
   deleteImageStorage,
 } from "../../libs/firebase";
-import { uploadImage, dateFormat } from "../../libs/utils";
+import {
+  uploadImage,
+  dateFormat,
+  successModal,
+  errorModal,
+} from "../../libs/utils";
 
 const myWorksState = useMyWorks();
 const inputState = useInputState();
+const swal = inject("$swal");
 
 const currentMyWorks = reactive({
   sectionTitle: myWorksState.sectionTitle,
@@ -258,7 +262,6 @@ const currentFile = ref(null);
 watch(showModal, (newVal, oldVal) => {
   if (newVal) {
     if (currentIndexClicked.value >= 0) {
-      console.log("edited");
       /* edit */
       currentEditedWorkPost.value = {
         ...myWorksState.posts[currentIndexClicked.value],
@@ -276,7 +279,6 @@ watch(currentMyWorks, (newVal, oldVal) => {
 });
 
 function getImage(file) {
-  console.log("getting image", file);
   currentFile.value = file;
 }
 
@@ -293,84 +295,91 @@ function getImage(file) {
 // }
 
 async function handleSavePost() {
-  if (!isCreating.value) {
-    /* Edit */
-    const postId = currentEditedWorkPost.value.id;
+  try {
+    if (!isCreating.value) {
+      /* Edit */
+      const postId = currentEditedWorkPost.value.id;
 
-    const url = await uploadImage({
-      type: "works",
-      currentLocalValue: currentEditedWorkPost.value.imgLink,
-      file: currentFile.value,
-    });
+      const url = await uploadImage({
+        type: "works",
+        currentLocalValue: currentEditedWorkPost.value.imgLink,
+        file: currentFile.value,
+      });
 
-    console.log("id : ", postId);
-    await setDocument("works", postId, {
-      ...currentEditedWorkPost.value,
-      imgLink: url,
-    });
-
-    myWorksState.$patch((state) => {
-      state.posts[currentIndexClicked.value] = {
+      console.log("id : ", postId);
+      await setDocument("works", postId, {
         ...currentEditedWorkPost.value,
         imgLink: url,
-      };
-    });
-  } else {
-    /* New post */
-    const url = await uploadImage({
-      type: "works",
-      currentLocalValue: newWorkPost.imgLink,
-      file: currentFile.value,
-    });
-    console.log("url", url);
+      });
 
-    // console.log("id : ", postId);
-    const doc = await addDocument("works", {
-      ...newWorkPost,
-      imgLink: url,
-    });
-    console.log("myworks post created");
+      myWorksState.$patch((state) => {
+        state.posts[currentIndexClicked.value] = {
+          ...currentEditedWorkPost.value,
+          imgLink: url,
+        };
+      });
 
-    myWorksState.$patch((state) => {
-      state.posts.push({
+      successModal(swal, "Work post successfully edited !");
+    } else {
+      /* New post */
+      const url = await uploadImage({
+        type: "works",
+        currentLocalValue: newWorkPost.imgLink,
+        file: currentFile.value,
+      });
+      console.log("url", url);
+
+      // console.log("id : ", postId);
+      const doc = await addDocument("works", {
         ...newWorkPost,
-        id: doc.id,
         imgLink: url,
       });
-    });
 
-    // Reset newWorkPost
-    newWorkPost = reactive({ ...myWorksState._initialValuePost });
-    currentFile.value = null;
-    inputState.quillEditor["AddWorks"].el.innerHTML = newWorkPost.content;
+      myWorksState.$patch((state) => {
+        state.posts.push({
+          ...newWorkPost,
+          id: doc.id,
+          imgLink: url,
+        });
+      });
 
-    handleClose();
+      // Reset newWorkPost
+      newWorkPost = reactive({ ...myWorksState._initialValuePost });
+      currentFile.value = null;
+      inputState.quillEditor["AddWorks"].el.innerHTML = newWorkPost.content;
+
+      successModal(swal, "Work post has been successfully created !");
+      handleClose();
+    }
+  } catch (error) {
+    errorModal(swal, error);
   }
 }
 
 async function handleDeletePost() {
-  console.log("kedelet juga kah manis");
-  const id = currentEditedWorkPost.value.id;
-  await deleteDocument("works", id);
-  console.log("post deleted");
-  myWorksState.$patch((state) => {
-    const index = state.posts.findIndex((post) => post.id === id);
+  try {
+    const id = currentEditedWorkPost.value.id;
+    await deleteDocument("works", id);
+    myWorksState.$patch((state) => {
+      const index = state.posts.findIndex((post) => post.id === id);
 
-    state.posts.splice(index, 1);
-  });
-  await deleteImageStorage(currentEditedWorkPost.value.imgLink);
+      state.posts.splice(index, 1);
+    });
+    await deleteImageStorage(currentEditedWorkPost.value.imgLink);
 
-  handleClose();
+    successModal(swal, "Work post has been successfully deleted !");
+    handleClose();
+  } catch (error) {
+    errorModal(swal, error);
+  }
 }
 
 function handleEditPost(i) {
-  console.log("editPOst");
   currentIndexClicked.value = i;
   showModal.value = true;
 }
 
 function handleCreating() {
-  console.log("handle creating");
   showModal.value = true;
   isCreating.value = true;
 }

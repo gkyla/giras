@@ -1,25 +1,4 @@
 <template>
-  <!-- <form class="mb-10" @submit.prevent="handleEditSectionTitle">
-    <InputControl identifier="Headline" v-model="currentAboutMe.sectionTitle"
-      >Section tittle</InputControl
-    >
-    <div class="flex gap-2">
-      <button
-        class="ml-auto"
-        :class="{
-          btn_close_clickable: isRevertableSectionTitle,
-          btn_close_unclickable: !isRevertableSectionTitle,
-        }"
-        @click.self="handleRevertSectionTitle"
-        type="button"
-      >
-        Revert
-      </button>
-      <button class="btn_save" type="submit">Save</button>
-    </div>
-  </form>
-  <div class="border border-slate-200 w-full mb-10"></div> -->
-
   <form @submit.prevent="editAboutme">
     <div v-if="isChangeImg" class="grid items-center gap-4 rounded">
       <div class="flex">
@@ -91,13 +70,15 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, inject } from "vue";
 
 import InputControl from "../../components/InputControl.vue";
 import { useInputState } from "../../stores/inputState";
 import { useAboutMe } from "../../stores/aboutMe";
-import { uploadImage } from "../../libs/utils";
+import { uploadImage, successModal, errorModal } from "../../libs/utils";
 import { setDocument } from "../../libs/firebase";
+
+const swal = inject("$swal");
 
 const aboutMeState = useAboutMe();
 const inputState = useInputState();
@@ -154,27 +135,32 @@ function handleRevert() {
 }
 
 async function editAboutme() {
-  const url = await uploadImage({
-    type: "aboutMe",
-    currentLocalValue: aboutMeState.imgLink,
-    file: currentFile.value,
-  });
+  try {
+    const url = await uploadImage({
+      type: "aboutMe",
+      currentLocalValue: aboutMeState.imgLink,
+      file: currentFile.value,
+    });
 
-  await setDocument("aboutMe", "section", {
-    ...currentAboutMe.value,
-    imgLink: url,
-  });
-  console.log("about me saved");
+    await setDocument("aboutMe", "section", {
+      ...currentAboutMe.value,
+      imgLink: url,
+    });
 
-  aboutMeState.$patch({
-    imgLink: url,
-    content: currentAboutMe.value.content,
-  });
+    aboutMeState.$patch({
+      imgLink: url,
+      content: currentAboutMe.value.content,
+    });
 
-  inputState.quillEditor["aboutMeEdit"].el.innerHTML = aboutMeState.content;
-  isRevertableContent.value = false;
+    inputState.quillEditor["aboutMeEdit"].el.innerHTML = aboutMeState.content;
+    isRevertableContent.value = false;
 
-  currentAboutMe.value = { ...aboutMeState.getAll };
+    currentAboutMe.value = { ...aboutMeState.getAll };
+
+    successModal(swal, "Aboutme has been successfully edited!");
+  } catch (error) {
+    errorModal(swal, error);
+  }
 }
 </script>
 

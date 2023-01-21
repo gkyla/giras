@@ -42,14 +42,16 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, inject } from "vue";
 
 import InputControl from "../../components/InputControl.vue";
 import { useSocials } from "../../stores/socialsTab";
 import { addDocument, setDocument } from "../../libs/firebase";
+import { successModal, errorModal } from "../../libs/utils";
 
 const socialsState = useSocials();
 const isRevertable = ref(false);
+const swal = inject("$swal");
 
 let currentSocials = reactive({
   facebook: socialsState.facebook,
@@ -76,9 +78,13 @@ watch(currentSocials, (newVal, oldVal) => {
 });
 
 async function editSocials() {
-  socialsState.edit(currentSocials);
-  await setDocument("socials", "links", currentSocials);
-  console.log("socials added");
+  try {
+    socialsState.edit(currentSocials);
+    await setDocument("socials", "links", currentSocials);
+    successModal(swal, "Socials has been successfully edited !");
+  } catch (error) {
+    errorModal(swal, error);
+  }
 }
 
 function handleRevert() {
