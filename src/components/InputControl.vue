@@ -86,15 +86,17 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, inject } from "vue";
 
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useInputState } from "../stores/inputState";
+import { errorModal } from "../libs/utils";
 
 const emit = defineEmits(["update:modelValue", "inputedFile"]);
+const swal = inject("$swal");
 const quillModelValue = ref(props.modelValue);
 const quillEditor = ref(null);
 const inputState = useInputState();
@@ -102,31 +104,35 @@ const date = ref(props.modelValue);
 const datePickerEl = ref(null);
 
 function getFile(e) {
-  const fileTypes = [
-    "image/apng",
-    "image/bmp",
-    "image/gif",
-    "image/jpeg",
-    "image/pjpeg",
-    "image/png",
-    "image/svg+xml",
-    "image/tiff",
-    "image/webp",
-    "image/x-icon",
-  ];
-  const file = e.target.files[0];
-  function validFileType() {
-    if (file) {
-      console.log(file.type);
-      return fileTypes.includes(file.type);
+  try {
+    const fileTypes = [
+      "image/apng",
+      "image/bmp",
+      "image/gif",
+      "image/jpeg",
+      "image/pjpeg",
+      "image/png",
+      "image/svg+xml",
+      "image/tiff",
+      "image/webp",
+      "image/x-icon",
+    ];
+    const file = e.target.files[0];
+    function validFileType() {
+      if (file) {
+        console.log(file.type);
+        return fileTypes.includes(file.type);
+      }
     }
-  }
 
-  if (validFileType()) {
-    emit("inputedFile", file);
-  } else {
-    // TODO: add alert UI
-    console.error("please upload image only");
+    if (validFileType()) {
+      emit("inputedFile", file);
+    } else {
+      // throw so we can catch it and show the errorModal
+      throw Error("You can only upload image");
+    }
+  } catch (error) {
+    errorModal(swal, error);
   }
 }
 
@@ -163,7 +169,7 @@ function onSelectionChange() {
 }
 
 function onTextChange() {
-  console.log(quillModelValue.value);
+  // console.log(quillModelValue.value);
 }
 
 const quillOptions = reactive({
