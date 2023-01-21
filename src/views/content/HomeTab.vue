@@ -151,9 +151,6 @@ async function editHome() {
       imgLink: url,
     });
 
-    /* 
-      TODO: fix isRevertable still true after saving to database
-    isRevertable value change to true again after saved to database and local value */
     homeState.edit({ ...currentHomeState.value, imgLink: url });
     isRevertable.value = false;
     successModal(swal, "Section has been successfully edited !");
