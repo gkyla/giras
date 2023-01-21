@@ -48,3 +48,19 @@ export function dateFormat(postDate) {
   temp[2] = temp[2].replace(",", " ");
   return temp.join(" ");
 }
+
+export function successModal(swal, text) {
+  swal({
+    icon: "success",
+    title: "Saved!",
+    text: text,
+  });
+}
+
+export function errorModal(swal, error) {
+  swal({
+    icon: "error",
+    title: "Something went wrong !",
+    text: `[Reason] :  ${error}`,
+  });
+}
