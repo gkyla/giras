@@ -13,7 +13,7 @@
         <div class="flex items-center gap-6 w-36"></div>
         <img
           class="max-w-[100px] max-h-[100px] rounded-md"
-          :src="currentHomeState.imgLink"
+          :src="currentHomeState?.imgLink"
           alt="Home display image"
         />
         <button
@@ -32,7 +32,7 @@
       <div class="flex">
         <img
           class="max-w-[100px] max-h-[100px] rounded-md"
-          :src="currentHomeState.imgLink"
+          :src="currentHomeState?.imgLink"
           alt="Home display image"
         />
         <button
@@ -152,6 +152,7 @@ async function editHome() {
     });
 
     homeState.edit({ ...currentHomeState.value, imgLink: url });
+    currentHomeState.value.imgLink = url;
     isRevertable.value = false;
     successModal(swal, "Section has been successfully edited !");
   } catch (error) {
