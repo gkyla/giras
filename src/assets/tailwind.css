@@ -14,6 +14,11 @@
       #fd1d1d
     );
   }
+
+  .prose-content-spacing {
+    /* has v-html and the parent has prose*/
+    @apply [&>p]:mt-[0.5px] [&>p]:mb-[0.5px] [&>p:has(br)]:mt-[0.5px] [&>p:has(br)]:mb-[0.5px] [&>ul]:mt-[0.5px] [&>ul]:mb-[0.5px];
+  }
 }
 
 @layer components {
