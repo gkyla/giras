@@ -310,15 +310,13 @@ const historyTabState = useHistoryTab();
 const homeState = useHome();
 const myWorksState = useMyWorks();
 const socialsState = useSocials();
+const particleConfig = new URL("../libs/particlesjs-bg.json", import.meta.url)
+  .href;
 
 onMounted(() => {
-  particlesJS.load(
-    socials.value.id,
-    "/src/libs/particlesjs-bg.json",
-    function () {
-      console.log("callback - particles.js config loaded");
-    }
-  );
+  particlesJS.load(socials.value.id, particleConfig, function () {
+    console.log("callback - particles.js config loaded");
+  });
 });
 </script>
 
