@@ -37,7 +37,6 @@ const props = defineProps({
 });
 
 const imgUrl = new URL(props.img, import.meta.url).href;
-console.log(imgUrl);
 </script>
 
 <style lang="scss" scoped></style>

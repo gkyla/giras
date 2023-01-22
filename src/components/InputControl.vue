@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex mb-5 gap-4"
+    class="flex flex-col sm:flex-row mb-5 gap-4"
     :class="[
       {
         'items-start': inputType !== 'input',
@@ -42,17 +42,7 @@
     />
 
     <!-- Textarea, use Quill  -->
-    <div
-      :class="[
-        {
-          'h-[400px]': !inputHeight,
-          'w-[600px]': !inputWidth,
-        },
-        inputHeight,
-        inputWidth,
-      ]"
-      v-if="inputType === 'textarea'"
-    >
+    <div class="h-[200px] w-full sm:w-[600px]" v-if="inputType === 'textarea'">
       <!-- Use @update:content instead @input for updating v-model -->
       <QuillEditor
         ref="quillEditor"

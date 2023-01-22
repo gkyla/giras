@@ -1,25 +1,4 @@
 <template>
-  <!-- <form class="mb-10" @submit.prevent="handleEditSectionTitle">
-    <InputControl identifier="Headline" v-model="currentMyWorks.sectionTitle"
-      >Section tittle</InputControl
-    >
-    <div class="flex gap-2">
-      <button
-        class="ml-auto"
-        :class="{
-          btn_close_clickable: isRevertable,
-          btn_close_unclickable: !isRevertable,
-        }"
-        @click.self="handleRevertSectionTitle"
-        type="button"
-      >
-        Revert
-      </button>
-      <button class="btn_save" type="submit">Save</button>
-    </div>
-  </form>
-  <div class="border border-slate-200 w-full"></div> -->
-
   <div class="flex items-center gap-3 my-5">
     <div>
       <h1 class="font-bold text-xl mb-2">
@@ -43,21 +22,21 @@
       <div
         v-for="(post, index) in currentMyWorks.posts"
         :key="post.title"
-        class="w-full p-4 rounded-lg border-2 mb-3 flex justify-between"
+        class="w-full p-4 rounded-lg border-2 mb-3 flex flex-col sm:flex-row justify-between"
       >
-        <div class="flex gap-5 items-center">
+        <div class="flex flex-col sm:flex-row gap-5 items-center">
           <img
             :src="post.imgLink"
             :alt="post.name"
-            class="inline-block w-10 h-10 rounded-md"
+            class="inline-block w-16 h-16 sm:w-10 sm:h-10 object-cover rounded-md"
           />
-          <div>
-            <h1 class="text-xl font-semibold">{{ post.title }}</h1>
+          <div class="text-center sm:text-left">
+            <h1 class="lg:text-xl font-semibold">{{ post.title }}</h1>
             <span class="text-sm">{{ dateFormat(post.date) }}</span>
           </div>
         </div>
 
-        <div>
+        <div class="mx-auto mt-4 sm:mt-[unset] sm:mx-[unset]">
           <button
             class="rounded-lg inline-flex gap-2 items-center border-2 px-3 py-1"
             @click="handleEditPost(index)"
@@ -76,8 +55,8 @@
   <div v-if="showModal">
     <VueFinalModal
       v-model="showModal"
-      classes="flex justify-center items-center p-10"
-      content-class="bg-white p-10 rounded-lg"
+      classes="flex justify-center items-center "
+      content-class="bg-white p-2 w-full h-full md:p-10 md:w-auto md:h-auto rounded-lg"
       :click-to-close="false"
     >
       <form @submit.prevent="handleSavePost">

@@ -1,14 +1,29 @@
 <template>
-  <div class="container mx-auto max-w-screen-xl">
-    <div class="mt-20 flex items-center">
-      <p class="text-xl font-bold">Welcome, Giras</p>
+  <div class="container mx-auto max-w-screen-xl p-4">
+    <div class="flex items-center mt-10 min-w-fit">
+      <div class="mt-auto flex justify-between w-full">
+        <button
+          class="font-semibold flex items-center hover:underline underline-offset-4 transition-all"
+          type="button"
+          @click="$router.push('/')"
+        >
+          <Icon icon="ic:round-arrow-back" />
+          Back to Homepage
+        </button>
+        <div class="flex items-center ml-auto">
+          <p class="text-xl font-bold">Welcome, Giras</p>
 
-      <button class="bg-white px-5 py-2 btn_addNew ml-5" @click="logoutUser">
-        logout
-      </button>
+          <button
+            class="bg-white px-5 py-2 btn_addNew ml-5"
+            @click="logoutUser"
+          >
+            logout
+          </button>
+        </div>
+      </div>
     </div>
     <div
-      class="container mx-auto max-w-screen-xl bg-white shadow-lg p-5 flex mt-5 mb-20 rounded-xl border border-t-4 border-t-[#85bc33]"
+      class="container mx-auto max-w-screen-xl min-w-fit bg-white shadow-lg p-5 flex flex-col lg:flex-row mt-5 mb-20 rounded-xl border border-t-4 border-t-[#85bc33] relative"
     >
       <div class="flex-none w-80 p-10">
         <div class="mb-5">
@@ -49,7 +64,9 @@
           </router-link>
         </aside>
       </div>
-      <div class="flex-1 p-10 border-l-[3px] border-slate-200 relative">
+      <div
+        class="flex-1 p-10 border-t-[3px] lg:border-t-0 lg:border-l-[3px] ] border-slate-200 relative"
+      >
         <div class="mb-5">
           <h1 class="font-semibold text-xl mb-2">Edit your content</h1>
           <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
@@ -65,6 +82,7 @@ import { RouterView, RouterLink } from "vue-router";
 import { logout } from "../libs/firebase";
 import { useRouter } from "vue-router";
 import { useUserState } from "../stores/userState";
+import { Icon } from "@iconify/vue";
 
 const router = useRouter();
 const userState = useUserState();
