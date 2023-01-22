@@ -155,7 +155,6 @@ export async function getEveryCollection() {
   const myWorksState = useMyWorks();
   const aboutMeState = useAboutMe();
 
-  console.log(filteredData);
   filteredData.forEach(({ pathId, data }) => {
     switch (pathId) {
       case "home":
