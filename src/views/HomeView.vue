@@ -51,8 +51,11 @@
             class="w-[15px] h-[15px] rounded-full bg-[#85bc33] pointer-events-none"
           ></div>
         </div>
-        <p class="mt-10 mx-auto text-center max-w-screen-lg">
-          {{ historyTabState.headlineDescription }}
+        <p
+          class="mt-10 mx-auto text-center max-w-screen-lg md:text-lg"
+          v-dompurify-html="historyTabState.headlineDescription"
+        >
+          <!-- <span ></span> -->
         </p>
 
         <div
