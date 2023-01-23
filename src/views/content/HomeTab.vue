@@ -9,7 +9,7 @@
           >Image</InputControl
         >
       </div>
-      <div class="flex gap-4 mb-5">
+      <div class="flex flex-col md:flex-row gap-4 mb-5">
         <div class="flex items-center gap-6 w-36"></div>
         <img
           class="max-w-[100px] max-h-[100px] rounded-md"
@@ -25,7 +25,7 @@
         </button>
       </div>
     </div>
-    <div class="flex gap-4 mb-5" v-show="!isChangeImg">
+    <div class="flex flex-col sm:flex-row gap-4 mb-5" v-show="!isChangeImg">
       <div class="flex items-center gap-6 w-36">
         <span class="font-bold">Image :</span>
       </div>

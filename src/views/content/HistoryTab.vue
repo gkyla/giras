@@ -8,7 +8,6 @@
       identifier="headlineDescription"
       v-model="currentHeadline.headlineDescription"
       input-height="h-[230px]"
-      input-width="w-[680px]"
       input-type="textarea"
       >Headline Description</InputControl
     >
