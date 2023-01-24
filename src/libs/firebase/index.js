@@ -64,20 +64,15 @@ export function createStorageRef(type) {
     case "works":
       return ref(storage, `images/${type}-${crypto.randomUUID()}`);
     default:
-      console.log("something wrong ", type);
+      console.error("something went wrong ", type);
   }
 }
 
 export async function signIn({ email, password }) {
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    console.log(userCredential);
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 

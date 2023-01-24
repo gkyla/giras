@@ -2,15 +2,13 @@
   <form @submit.prevent="editAboutme">
     <div v-if="isChangeImg" class="grid items-center gap-4 rounded">
       <div class="flex">
-        <InputControl
-          identifier="imageAboutMe"
-          input-type="file"
-          @inputedFile="getImage"
+        <InputControl identifier="imageAboutMe" input-type="file" @inputedFile="getImage"
           >Image</InputControl
         >
       </div>
       <div class="flex gap-4 mb-5">
-        <div class="flex items-center gap-6 w-36"></div>
+        <div class="md:flex items-center gap-6 w-36 hidden"></div>
+
         <img
           class="max-w-[100px] max-h-[100px] rounded-md"
           :src="currentAboutMe.imgLink"
@@ -25,7 +23,7 @@
         </button>
       </div>
     </div>
-    <div class="flex gap-4 mb-5" v-show="!isChangeImg">
+    <div class="flex flex-col sm:flex-row gap-4 mb-5" v-show="!isChangeImg">
       <div class="flex items-center gap-6 w-36">
         <span class="font-bold">Image :</span>
       </div>
@@ -48,9 +46,8 @@
       identifier="aboutMeEdit"
       input-type="textarea"
       input-height="h-[230px]"
-      input-width="w-[680px]"
       v-model="currentAboutMe.content"
-      >Content</InputControl
+      >Content management</InputControl
     >
     <div class="flex mt-16 gap-2 self-end">
       <button

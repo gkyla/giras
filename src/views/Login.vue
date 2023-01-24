@@ -12,7 +12,7 @@
       <InputControl identifier="password" input-type="password" v-model="user.password"
         >Password</InputControl
       >
-      <div class="flex justify-between mt-7">
+      <div class="flex flex-col sm:flex-row justify-between mt-7 gap-4">
         <button
           class="font-semibold flex items-center hover:underline underline-offset-4 transition-all"
           type="button"
@@ -21,7 +21,7 @@
           <Icon icon="ic:round-arrow-back" />
           Back to Homepage
         </button>
-        <div>
+        <div class="ml-auto sm:ml-[unset]">
           <button class="btn_close ml-auto" type="reset">Reset</button>
           <button class="btn_save ml-2" type="submit">Login</button>
         </div>

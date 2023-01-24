@@ -1,9 +1,7 @@
 <template>
   <div class="flex items-center gap-3 my-5">
     <div>
-      <h1 class="font-bold text-xl mb-2">
-        My works ({{ currentMyWorks.posts.length }})
-      </h1>
+      <h1 class="font-bold text-xl mb-2">My works ({{ currentMyWorks.posts.length }})</h1>
       <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
     </div>
 
@@ -55,8 +53,8 @@
   <div v-if="showModal">
     <VueFinalModal
       v-model="showModal"
-      classes="flex justify-center items-center "
-      content-class="bg-white p-2 w-full h-full md:p-10 md:w-auto md:h-auto rounded-lg"
+      classes="flex justify-center items-center md:m-5"
+      content-class="bg-white p-4 w-full h-full md:p-10 md:w-auto rounded-lg overflow-y-auto"
       :click-to-close="false"
     >
       <form @submit.prevent="handleSavePost">
@@ -84,7 +82,7 @@
               >
             </div>
             <div class="flex gap-4 mb-5">
-              <div class="flex items-center gap-6 w-36"></div>
+              <div class="md:flex items-center gap-6 w-36 hidden"></div>
               <img
                 class="max-w-[100px] max-h-[100px] rounded-md"
                 :src="currentEditedWorkPost?.imgLink"
@@ -99,7 +97,7 @@
               </button>
             </div>
           </div>
-          <div class="flex gap-4 mb-5" v-show="!isChangeImg">
+          <div class="flex flex-col sm:flex-row gap-4 mb-5" v-show="!isChangeImg">
             <div class="flex items-center gap-6 w-36">
               <span class="font-bold">Image :</span>
             </div>
@@ -118,9 +116,7 @@
               </button>
             </div>
           </div>
-          <InputControl
-            identifier="HeadlineEdit"
-            v-model="currentEditedWorkPost.title"
+          <InputControl identifier="HeadlineEdit" v-model="currentEditedWorkPost.title"
             >Tittle</InputControl
           >
           <InputControl
@@ -134,6 +130,7 @@
             v-model="currentEditedWorkPost.content"
             inputHeight="h-[200px]"
             input-type="textarea"
+            input-width="w-[600px]"
             >History</InputControl
           >
         </div>
@@ -150,16 +147,14 @@
           <InputControl identifier="addHeadling" v-model="newWorkPost.title"
             >Tittle</InputControl
           >
-          <InputControl
-            identifier="dateNew"
-            inputType="date"
-            v-model="newWorkPost.date"
+          <InputControl identifier="dateNew" inputType="date" v-model="newWorkPost.date"
             >Date</InputControl
           >
           <InputControl
             identifier="AddWorks"
             v-model="newWorkPost.content"
             inputHeight="h-[200px]"
+            input-width="w-[600px]"
             input-type="textarea"
             >History Content</InputControl
           >
@@ -173,19 +168,10 @@
             @click="handleDeletePost"
           >
             Delete Post
-            <Icon
-              icon="mdi:trash-can-outline"
-              width="25"
-              height="25"
-              class="ml-2"
-            />
+            <Icon icon="mdi:trash-can-outline" width="25" height="25" class="ml-2" />
           </button>
 
-          <button
-            class="btn_close ml-auto"
-            @click.stop="handleClose"
-            type="button"
-          >
+          <button class="btn_close ml-auto" @click.stop="handleClose" type="button">
             Cancel
           </button>
 
@@ -209,12 +195,7 @@ import {
   deleteDocument,
   deleteImageStorage,
 } from "../../libs/firebase";
-import {
-  uploadImage,
-  dateFormat,
-  successModal,
-  errorModal,
-} from "../../libs/utils";
+import { uploadImage, dateFormat, successModal, errorModal } from "../../libs/utils";
 
 const myWorksState = useMyWorks();
 const inputState = useInputState();

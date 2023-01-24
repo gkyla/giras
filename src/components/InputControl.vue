@@ -7,16 +7,19 @@
       },
     ]"
   >
-    <div
-      class="flex items-center gap-6"
-      :class="[
-        {
-          'w-36': !labelWidth,
-        },
-        labelWidth,
-      ]"
-    >
-      <label :for="identifier" class="font-semibold"><slot /> :</label>
+    <div class="flex items-center gap-6">
+      <label :for="identifier" class="font-semibold w-full"
+        ><p
+          :class="[
+            {
+              'w-36': !labelWidth,
+            },
+            labelWidth,
+          ]"
+        >
+          <slot /> :
+        </p></label
+      >
     </div>
 
     <!-- Default Input -->
@@ -42,7 +45,11 @@
     />
 
     <!-- Textarea, use Quill  -->
-    <div class="h-[200px] w-full sm:w-[600px]" v-if="inputType === 'textarea'">
+    <div
+      class="h-[200px] max-w-full"
+      :class="[inputWidth]"
+      v-if="inputType === 'textarea'"
+    >
       <!-- Use @update:content instead @input for updating v-model -->
       <QuillEditor
         ref="quillEditor"

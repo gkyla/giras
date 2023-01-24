@@ -10,7 +10,7 @@
         </div>
       </div>
       <nav
-        class="mx-auto absolute lg:-translate-x-1/2 left-1/2 top-[62px] lg:top-1/2 lg:-translate-y-1/2 right-0 h-[calc(100vh-62px)] lg:h-auto bg-white transition-all flex flex-col shadow-xl lg:shadow-none"
+        class="mx-auto absolute lg:-translate-x-1/2 left-1/2 top-[62px] lg:top-1/2 lg:-translate-y-1/2 right-0 h-[calc(100vh-62px)] lg:h-auto bg-white transition-all flex flex-col shadow-xl lg:shadow-none overflow-y-auto lg:overflow-y-hidden"
         :class="[{ 'translate-x-0': navIsOpened, 'translate-x-full': !navIsOpened }]"
       >
         <div class="px-3 lg:hidden">
@@ -96,7 +96,7 @@
             Others
           </p>
         </div>
-        <div class="lg:hidden flex flex-col md:flex-row px-4 gap-4">
+        <div class="lg:hidden flex flex-col md:flex-row px-4 gap-4 mb-3">
           <button
             class="items-center border-2 border-[#85bc33] rounded-lg px-[16px] py-[10px] gap-4 font-semibold shadow-md group flex"
           >
