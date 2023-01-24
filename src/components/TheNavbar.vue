@@ -1,6 +1,8 @@
 <template>
   <header class="bg-white shadow-2xl fixed top-0 left-0 right-0 z-50">
-    <div class="container mx-auto max-w-screen-xl flex items-center py-3 relative px-2">
+    <div
+      class="container mx-auto max-w-screen-xl flex items-center py-3 relative px-2"
+    >
       <div class="absolute mr-auto text-white font-bold text-center">
         <div
           class="inline-flex items-center flex-col border-2 border-[#85bc33] py-1 px-3 rounded"
@@ -11,10 +13,14 @@
       </div>
       <nav
         class="mx-auto absolute lg:-translate-x-1/2 left-1/2 top-[62px] lg:top-1/2 lg:-translate-y-1/2 right-0 h-[calc(100vh-62px)] lg:h-auto bg-white transition-all flex flex-col shadow-xl lg:shadow-none overflow-y-auto lg:overflow-y-hidden"
-        :class="[{ 'translate-x-0': navIsOpened, 'translate-x-full': !navIsOpened }]"
+        :class="[
+          { 'translate-x-0': navIsOpened, 'translate-x-full': !navIsOpened },
+        ]"
       >
         <div class="px-3 lg:hidden">
-          <p class="lg:hidden text-lg font-bold p-2 border-b-2 border-slate-400">
+          <p
+            class="lg:hidden text-lg font-bold p-2 border-b-2 border-slate-400"
+          >
             Navigation
           </p>
         </div>
@@ -92,31 +98,51 @@
           </li>
         </ul>
         <div class="px-3 mb-5 lg:hidden">
-          <p class="lg:hidden text-lg font-bold p-2 border-b-2 border-slate-400">
+          <p
+            class="lg:hidden text-lg font-bold p-2 border-b-2 border-slate-400"
+          >
             Others
           </p>
         </div>
         <div class="lg:hidden flex flex-col md:flex-row px-4 gap-4 mb-3">
-          <button
+          <a
+            href="mailto:giras.gendrasena@gmail.com"
+            target="_blank"
             class="items-center border-2 border-[#85bc33] rounded-lg px-[16px] py-[10px] gap-4 font-semibold shadow-md group flex"
           >
-            <Icon icon="mdi:email" class="text-[#85bc33]" width="25" height="25" />
-            <p class="text-sm text-slate-800 overflow-hidden transition-all">Contact</p>
-          </button>
+            <Icon
+              icon="mdi:email"
+              class="text-[#85bc33]"
+              width="25"
+              height="25"
+            />
+            <p class="text-sm text-slate-800 overflow-hidden transition-all">
+              Contact
+            </p>
+          </a>
           <button
             v-if="userState.isFirstTime"
             class="items-center border-2 border-[#85bc33] rounded-lg px-[16px] py-[10px] gap-4 font-semibold shadow-md flex"
           >
             <img :src="spinnerSVG" alt="" width="25" height="25" />
-            <p class="text-sm text-slate-800 overflow-hidden transition-all">Loading..</p>
+            <p class="text-sm text-slate-800 overflow-hidden transition-all">
+              Loading..
+            </p>
           </button>
           <button
             v-if="!userState.isAuthenticated && !userState.isFirstTime"
             class="items-center border-2 border-[#85bc33] rounded-lg px-[16px] py-[10px] gap-4 font-semibold shadow-md flex"
             @click="$router.push('/login')"
           >
-            <Icon icon="mdi:user" class="text-[#85bc33]" width="25" height="25" />
-            <p class="text-sm text-slate-800 overflow-hidden transition-all">Login</p>
+            <Icon
+              icon="mdi:user"
+              class="text-[#85bc33]"
+              width="25"
+              height="25"
+            />
+            <p class="text-sm text-slate-800 overflow-hidden transition-all">
+              Login
+            </p>
           </button>
           <button
             v-if="userState.isAuthenticated && !userState.isFirstTime"
@@ -129,7 +155,9 @@
               width="25"
               height="25"
             />
-            <p class="text-sm text-slate-800 overflow-hidden transition-all">Edit</p>
+            <p class="text-sm text-slate-800 overflow-hidden transition-all">
+              Edit
+            </p>
           </button>
         </div>
 
@@ -142,7 +170,9 @@
       <button class="ml-auto lg:hidden" @click="toggleNav">
         <Icon icon="icon-park:hamburger-button" width="40" height="40" />
       </button>
-      <button
+      <a
+        href="mailto:giras.gendrasena@gmail.com"
+        target="_blank"
         class="hidden lg:inline-flex items-center border-2 border-[#85bc33] text-white rounded-lg px-[16px] py-[5px] ml-auto shadow-md group"
       >
         <Icon icon="mdi:email" class="text-[#85bc33]" width="25" height="25" />
@@ -151,7 +181,7 @@
         >
           Contact
         </p>
-      </button>
+      </a>
       <!-- Desktop -->
       <button
         v-if="userState.isFirstTime"

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-screen-xl p-4">
+  <div class="container mx-auto max-w-screen-xl sm:p-4">
     <div class="flex items-center mt-10 min-w-fit">
       <div
         class="mt-auto flex flex-col items-center justify-center sm:flex-row sm:justify-between w-full"
@@ -15,16 +15,19 @@
         <div class="flex items-center sm:ml-auto">
           <p class="text-xl font-bold">Welcome, Giras</p>
 
-          <button class="bg-white px-5 py-2 btn_addNew ml-5" @click="logoutUser">
+          <button
+            class="bg-white px-5 py-2 btn_addNew ml-5"
+            @click="logoutUser"
+          >
             logout
           </button>
         </div>
       </div>
     </div>
     <div
-      class="container mx-auto max-w-screen-xl min-w-fit bg-white shadow-lg p-5 flex flex-col lg:flex-row mt-5 mb-20 rounded-xl border border-t-4 border-t-[#85bc33] relative"
+      class="container mx-auto max-w-screen-xl min-w-fit bg-white shadow-lg p-5 flex flex-col lg:flex-row mt-5 mb-20 rounded-3xl border border-t-4 border-t-[#85bc33] relative"
     >
-      <div class="flex-none w-full lg:w-80 p-10">
+      <div class="flex-none w-full lg:w-80 md:p-10 p-5">
         <div class="mb-5">
           <h1 class="font-semibold text-xl mb-2">Section Viewer</h1>
           <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
@@ -64,7 +67,7 @@
         </aside>
       </div>
       <div
-        class="flex-1 p-10 border-t-[3px] lg:border-t-0 lg:border-l-[3px] ] border-slate-200 relative"
+        class="flex-1 md:p-10 p-5 border-t-[3px] lg:border-t-0 lg:border-l-[3px] ] border-slate-200 relative"
       >
         <div class="mb-5">
           <h1 class="font-semibold text-xl mb-2">Edit your content</h1>

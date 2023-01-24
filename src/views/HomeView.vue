@@ -126,12 +126,12 @@
           </div>
 
           <div
-            class="grid lg:grid-cols-3 gap-4 place-items-center mt-20 max-w-[1120px]"
+            class="grid lg:grid-cols-3 gap-4 place-items-center mt-10 md:mt-20 max-w-[1120px]"
             data-aos="fade-up"
             data-aos-duration="1300"
           >
             <div
-              class="self-start text-xl col-span-2 prose prose-content-spacing"
+              class="self-start text-xl col-span-2 prose prose-content-spacing mb-10"
               v-dompurify-html="aboutMeState.content"
             ></div>
             <div class="col-span-2 lg:col-span-1">
@@ -263,7 +263,7 @@
             </p>
           </div>
           <a
-            href="mailto:giras.gg@gmail.com"
+            href="mailto:giras.gendrasena@gmail.com"
             class="shadow-md px-4 py-2 inline-flex items-center rounded-md gap-4 border bg-[#393E46] text-white font-semibold text-xl"
           >
             Say hello
