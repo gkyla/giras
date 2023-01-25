@@ -47,7 +47,7 @@
     <!-- Textarea, use Quill  -->
     <div
       class="h-[200px] max-w-full"
-      :class="[inputWidth]"
+      :class="[inputWidth, inputHeight]"
       v-if="inputType === 'textarea'"
     >
       <!-- Use @update:content instead @input for updating v-model -->

@@ -82,8 +82,8 @@
   <div v-show="showModal">
     <vue-final-modal
       v-model="showModal"
-      classes="flex justify-center items-center md:m-5"
-      content-class="bg-white p-4 w-full h-full md:p-10 md:w-auto rounded-lg overflow-y-auto"
+      classes="flex justify-center items-center md:m-5 "
+      content-class="bg-white p-4 w-full h-full max-h-[760px] md:p-10 md:w-auto rounded-lg overflow-y-auto"
       :click-to-close="false"
     >
       <form @submit.prevent="handleSavePost">
@@ -162,6 +162,7 @@
             identifier="historyContentEdit"
             v-model="currentEditedHistoryPost.historyContent"
             input-type="textarea"
+            input-height="h-[325px]"
             input-width="w-[680px]"
             >History</InputControl
           >
@@ -188,6 +189,7 @@
             identifier="AddHistoryContent"
             v-model="newHistoryPost.historyContent"
             input-type="textarea"
+            input-height="h-[325px]"
             input-width="w-[680px]"
             >History Content</InputControl
           >

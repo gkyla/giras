@@ -54,7 +54,7 @@
     <VueFinalModal
       v-model="showModal"
       classes="flex justify-center items-center md:m-5"
-      content-class="bg-white p-4 w-full h-full md:p-10 md:w-auto rounded-lg overflow-y-auto"
+      content-class="bg-white p-4 w-full h-full max-h-[760px] md:p-10 md:w-auto rounded-lg overflow-y-auto"
       :click-to-close="false"
     >
       <form @submit.prevent="handleSavePost">
@@ -128,7 +128,7 @@
           <InputControl
             identifier="WorkContentEdit"
             v-model="currentEditedWorkPost.content"
-            inputHeight="h-[200px]"
+            inputHeight="h-[325px]"
             input-type="textarea"
             input-width="w-[680px]"
             >History</InputControl
@@ -153,7 +153,7 @@
           <InputControl
             identifier="AddWorks"
             v-model="newWorkPost.content"
-            inputHeight="h-[200px]"
+            inputHeight="h-[325px]"
             input-width="w-[680px]"
             input-type="textarea"
             >History Content</InputControl
