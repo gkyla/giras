@@ -2,10 +2,7 @@
   <TheNavbar @nav-status="(val) => (navIsOpened = val)" />
 
   <!-- Wrapper -->
-  <div
-    class="transition-all lg:blur-none"
-    :class="[{ 'blur-sm': navIsOpened }]"
-  >
+  <div class="transition-all lg:blur-none" :class="[{ 'blur-sm': navIsOpened }]">
     <div
       id="home"
       class="w-full h-[600px] flex justify-center items-center relative z-[3] mt-14"
@@ -112,9 +109,7 @@
         id="aboutme"
         class="w-full min-h-[600px] bg-[#f4f7fb] flex justify-center p-10 mb-16"
       >
-        <div
-          class="container mx-auto max-w-screen-xl flex flex-col items-center px-2"
-        >
+        <div class="container mx-auto max-w-screen-xl flex flex-col items-center px-2">
           <div class="flex flex-col gap-4 items-center text-center">
             <h1
               class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
@@ -158,10 +153,7 @@
           </h1>
           <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
         </div>
-        <div
-          id="worksbox"
-          class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7"
-        >
+        <div id="worksbox" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7">
           <MiniCard
             v-for="work in myWorksState.posts"
             :title="work.title"
@@ -195,9 +187,9 @@
               <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
             </div>
             <p class="text-slate-700 max-w-screen-lg">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus,
-              similique animi et distinctio asperiores corrupti. Vitae deserunt
-              eveniet asperiores magnam.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, similique
+              animi et distinctio asperiores corrupti. Vitae deserunt eveniet asperiores
+              magnam.
             </p>
           </div>
           <div class="container mx-auto max-w-screen-lg mb-20 px-2 relative">
@@ -276,7 +268,7 @@
         <div class="container mx-auto max-w-screen-lg">
           <!-- Footer -->
           <div class="flex justify-between p-4 text-slate-100">
-            <p class="text-sm">Copyright &copy; Giras Gendrasena 2022</p>
+            <p class="text-sm">Copyright &copy; Giras Gendrasena 2023</p>
             <router-link to="#home" class="text-sm hover:underline"
               >Back to top</router-link
             >
@@ -302,9 +294,6 @@ import { useSocials } from "../stores/socialsTab";
 import { dateFormat } from "../libs/utils";
 
 /* eslint-disable */
-const userOptions = reactive({
-  heroImage: new URL("../assets/img/hero.jpg", import.meta.url).href,
-});
 const socials = ref(); /* Social section */
 const navIsOpened = ref(false);
 
@@ -313,8 +302,7 @@ const historyTabState = useHistoryTab();
 const homeState = useHome();
 const myWorksState = useMyWorks();
 const socialsState = useSocials();
-const particleConfig = new URL("../libs/particlesjs-bg.json", import.meta.url)
-  .href;
+const particleConfig = new URL("../libs/particlesjs-bg.json", import.meta.url).href;
 
 onMounted(() => {
   particlesJS.load(socials.value.id, particleConfig, function () {
