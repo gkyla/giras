@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/gkyla/giras/compare/v1.0.0...v1.0.1) (2023-01-25)
+
+
+### Bug Fixes
+
+* **text-area:** fix text-area go full screen height ([a3d0267](https://github.com/gkyla/giras/commit/a3d0267d932d214285790990b54eba51f7d2692b))
+
+
+
 # 1.0.0 (2023-01-25)
 
 
