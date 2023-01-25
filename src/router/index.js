@@ -6,7 +6,7 @@ import ContentEditor from "../views/ContentEditor.vue";
 import Login from "../views/Login.vue";
 
 /* ContentChildrenViewer */
-import HistoryTab from "../views/content/HistoryTab.vue";
+// import HistoryTab from "../views/content/HistoryTab.vue";
 import AboutmeTab from "../views/content/AboutmeTab.vue";
 import HomeTab from "../views/content/HomeTab.vue";
 import MyworksTab from "../views/content/MyworksTab.vue";
@@ -36,43 +36,43 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: () => import("../views/HomeView.vue"),
     },
     {
       path: "/login",
       name: "login",
-      component: Login,
+      component: () => import("../views/Login.vue"),
     },
     {
       path: "/content",
       name: "ContentEditor",
-      component: ContentEditor,
+      component: () => import("../views/ContentEditor.vue"),
       meta: { requiresAuth: true },
       children: [
         {
           path: "home",
           name: "HomeTab",
-          component: HomeTab,
+          component: () => import("../views/content/HomeTab.vue"),
         },
         {
           path: "history",
           name: "history",
-          component: HistoryTab,
+          component: () => import("../views/content/HistoryTab.vue"),
         },
         {
           path: "aboutme",
           name: "AboutmeTab",
-          component: AboutmeTab,
+          component: () => import("../views/content/AboutmeTab.vue"),
         },
         {
           path: "myworks",
           name: "MyworksTab",
-          component: MyworksTab,
+          component: () => import("../views/content/MyworksTab.vue"),
         },
         {
           path: "socials",
           name: "SocialsTab",
-          component: SocialsTab,
+          component: () => import("../views/content/SocialsTab.vue"),
         },
       ],
     },
