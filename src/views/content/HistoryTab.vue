@@ -3,7 +3,6 @@
     <InputControl identifier="Headline" v-model="currentHeadline.headline"
       >Headline</InputControl
     >
-    <!-- TODO: make this to be flex so we can implement responsiveness -->
     <InputControl
       identifier="headlineDescription"
       v-model="currentHeadline.headlineDescription"
@@ -30,7 +29,9 @@
   <div class="section_divider"></div>
   <div class="flex items-center gap-3 my-5">
     <div>
-      <h1 class="font-bold text-xl mb-2">History ({{ history.posts.length }})</h1>
+      <h1 class="font-bold text-xl mb-2">
+        History ({{ history.posts.length }})
+      </h1>
       <div class="heading_divider"></div>
     </div>
 
@@ -125,7 +126,10 @@
               </button>
             </div>
           </div>
-          <div class="flex flex-col sm:flex-row gap-4 mb-5" v-show="!isChangeImg">
+          <div
+            class="flex flex-col sm:flex-row gap-4 mb-5"
+            v-show="!isChangeImg"
+          >
             <div class="flex items-center gap-6 w-36">
               <span class="font-bold">Image :</span>
             </div>
@@ -144,7 +148,9 @@
               </button>
             </div>
           </div>
-          <InputControl identifier="HeadlineEdit" v-model="currentEditedHistoryPost.title"
+          <InputControl
+            identifier="HeadlineEdit"
+            v-model="currentEditedHistoryPost.title"
             >Tittle</InputControl
           >
           <InputControl
@@ -173,7 +179,9 @@
           <InputControl identifier="addHeadling" v-model="newHistoryPost.title"
             >Tittle</InputControl
           >
-          <InputControl identifier="AddHeadlineDescription" v-model="newHistoryPost.event"
+          <InputControl
+            identifier="AddHeadlineDescription"
+            v-model="newHistoryPost.event"
             >Event Post</InputControl
           >
           <InputControl
@@ -193,10 +201,19 @@
             @click="handleDeletePost"
           >
             Delete Post
-            <Icon icon="mdi:trash-can-outline" width="25" height="25" class="ml-2" />
+            <Icon
+              icon="mdi:trash-can-outline"
+              width="25"
+              height="25"
+              class="ml-2"
+            />
           </button>
 
-          <button class="btn_close ml-auto" @click.stop="handleClose" type="button">
+          <button
+            class="btn_close ml-auto"
+            @click.stop="handleClose"
+            type="button"
+          >
             Cancel
           </button>
 
@@ -272,7 +289,8 @@ const currentHeadline = reactive({
 
 watch(currentHeadline, (newVal, oldVal) => {
   const isHeadlineNotSame = newVal.headline !== history.headline;
-  const isDescriptionNotSame = newVal.headlineDescription !== history.headlineDescription;
+  const isDescriptionNotSame =
+    newVal.headlineDescription !== history.headlineDescription;
 
   if (isDescriptionNotSame || isHeadlineNotSame) {
     isRevertable.value = true;
@@ -343,7 +361,8 @@ async function uploadImage() {
 
 function handleRevertHeadline() {
   currentHeadline.headline = headlineOldValue.value?.headline;
-  currentHeadline.headlineDescription = headlineOldValue.value?.headlineDescription;
+  currentHeadline.headlineDescription =
+    headlineOldValue.value?.headlineDescription;
 
   inputState.quillEditor["headlineDescription"].el.innerHTML =
     currentHeadline.headlineDescription;
