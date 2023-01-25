@@ -47,7 +47,7 @@
       input-type="textarea"
       input-height="h-[230px]"
       v-model="currentAboutMe.content"
-      >Content management</InputControl
+      >Description</InputControl
     >
     <div class="flex mt-16 gap-2 self-end">
       <button

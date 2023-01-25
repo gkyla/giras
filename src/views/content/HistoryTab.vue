@@ -156,7 +156,7 @@
             identifier="historyContentEdit"
             v-model="currentEditedHistoryPost.historyContent"
             input-type="textarea"
-            input-width="w-[600px]"
+            input-width="w-[680px]"
             >History</InputControl
           >
         </div>
@@ -180,7 +180,7 @@
             identifier="AddHistoryContent"
             v-model="newHistoryPost.historyContent"
             input-type="textarea"
-            input-width="w-[600px]"
+            input-width="w-[680px]"
             >History Content</InputControl
           >
         </div>

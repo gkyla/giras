@@ -46,7 +46,7 @@ import { reactive, ref, watch, inject } from "vue";
 
 import InputControl from "../../components/InputControl.vue";
 import { useSocials } from "../../stores/socialsTab";
-import { addDocument, setDocument } from "../../libs/firebase";
+import { setDocument } from "../../libs/firebase";
 import { successModal, errorModal } from "../../libs/utils";
 
 const socialsState = useSocials();

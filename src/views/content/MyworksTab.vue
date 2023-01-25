@@ -130,7 +130,7 @@
             v-model="currentEditedWorkPost.content"
             inputHeight="h-[200px]"
             input-type="textarea"
-            input-width="w-[600px]"
+            input-width="w-[680px]"
             >History</InputControl
           >
         </div>
@@ -154,7 +154,7 @@
             identifier="AddWorks"
             v-model="newWorkPost.content"
             inputHeight="h-[200px]"
-            input-width="w-[600px]"
+            input-width="w-[680px]"
             input-type="textarea"
             >History Content</InputControl
           >
