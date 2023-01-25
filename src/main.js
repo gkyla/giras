@@ -4,7 +4,7 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import VueDOMPurifyHTML from "vue-dompurify-html";
-import "./libs/particles"; /* TODO: move bellow mount app */
+import "./libs/particles";
 
 import "./assets/tailwind.css"; /* Tailwind */
 import "./assets/main.css"; /* base */
