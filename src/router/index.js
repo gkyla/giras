@@ -1,17 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getCurrentUser } from "../libs/firebase";
 
-import HomeView from "../views/HomeView.vue";
-import ContentEditor from "../views/ContentEditor.vue";
-import Login from "../views/Login.vue";
-
-/* ContentChildrenViewer */
-// import HistoryTab from "../views/content/HistoryTab.vue";
-import AboutmeTab from "../views/content/AboutmeTab.vue";
-import HomeTab from "../views/content/HomeTab.vue";
-import MyworksTab from "../views/content/MyworksTab.vue";
-import SocialsTab from "../views/content/SocialsTab.vue";
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
