@@ -6,7 +6,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^3.6.3",
@@ -27,6 +27,7 @@
     "@vitejs/plugin-vue": "^3.1.2",
     "@vue/eslint-config-prettier": "^7.0.0",
     "autoprefixer": "^10.4.13",
+    "conventional-changelog": "^3.1.25",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "postcss": "^8.4.19",

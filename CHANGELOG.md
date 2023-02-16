@@ -119,6 +119,3 @@
 ### Reverts
 
 * **section title:** hold section title release ([bd8e805](https://github.com/gkyla/giras/commit/bd8e8054352d5e7f8164c89d483286173984cbfd))
-
-
-
