@@ -7,7 +7,7 @@
 
 
 
-# 1.0.0 (2023-01-25)
+# [1.0.0](https://github.com/gkyla/giras/compare/1779d031a5a7ef2e18fa990eb85f4b0a9ac86b3c...v1.0.0) (2023-01-25)
 
 
 ### Bug Fixes
@@ -119,3 +119,6 @@
 ### Reverts
 
 * **section title:** hold section title release ([bd8e805](https://github.com/gkyla/giras/commit/bd8e8054352d5e7f8164c89d483286173984cbfd))
+
+
+
