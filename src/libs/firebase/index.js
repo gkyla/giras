@@ -69,11 +69,8 @@ export function createStorageRef(type) {
 }
 
 export async function signIn({ email, password }) {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.error(error);
-  }
+  await signInWithEmailAndPassword(auth, email, password);
+  /* let submitForm catch the error so we can show the error easily */
 }
 
 export async function logout() {

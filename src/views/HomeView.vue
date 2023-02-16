@@ -2,7 +2,10 @@
   <TheNavbar @nav-status="(val) => (navIsOpened = val)" />
 
   <!-- Wrapper -->
-  <div class="transition-all lg:blur-none" :class="[{ 'blur-sm': navIsOpened }]">
+  <div
+    class="transition-all lg:blur-none"
+    :class="[{ 'blur-sm': navIsOpened }]"
+  >
     <div
       id="home"
       class="w-full h-[600px] flex justify-center items-center relative z-[3] mt-14"
@@ -109,7 +112,9 @@
         id="aboutme"
         class="w-full min-h-[600px] bg-[#f4f7fb] flex justify-center p-10 mb-16"
       >
-        <div class="container mx-auto max-w-screen-xl flex flex-col items-center px-2">
+        <div
+          class="container mx-auto max-w-screen-xl flex flex-col items-center px-2"
+        >
           <div class="flex flex-col gap-4 items-center text-center">
             <h1
               class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
@@ -153,7 +158,10 @@
           </h1>
           <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
         </div>
-        <div id="worksbox" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7">
+        <div
+          id="worksbox"
+          class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-7"
+        >
           <MiniCard
             v-for="work in myWorksState.posts"
             :title="work.title"
@@ -175,7 +183,7 @@
       >
         <div class="p-10 z-20">
           <div
-            class="flex container mx-auto max-w-screen-xl flex-col gap-4 items-center justify-center mb-10 text-center px-2"
+            class="flex container w-full mx-auto max-w-screen-xl flex-col gap-4 items-center justify-center mb-10 text-center px-2"
           >
             <div class="flex flex-col items-center gap-3">
               <h1
@@ -187,13 +195,15 @@
               <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
             </div>
             <p class="text-slate-700 max-w-screen-lg">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, similique
-              animi et distinctio asperiores corrupti. Vitae deserunt eveniet asperiores
-              magnam.
+              Got a question, proposal, project or want to work together on
+              something? Feel free to reach out to one of my socials!
             </p>
           </div>
           <div class="container mx-auto max-w-screen-lg mb-20 px-2 relative">
-            <div id="socialsbox" class="gap-5 grid lg:grid-cols-4 relative">
+            <div
+              id="socialsbox"
+              class="gap-5 grid md:grid-cols-2 lg:grid-cols-4 relative"
+            >
               <SocialCard
                 name="Facebook"
                 :iconify="{
@@ -225,7 +235,6 @@
                 :link="socialsState.linkedin"
                 background-on-hover="hover:bg-[#0077b5]"
               />
-
               <SocialCard
                 name="Twitter"
                 :iconify="{
@@ -284,7 +293,7 @@ import TheNavbar from "../components/TheNavbar.vue";
 import MiniCard from "../components/MiniCard.vue";
 import SocialCard from "../components/socials/SocialCard.vue";
 
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { useAboutMe } from "../stores/aboutMe";
 import { useHistoryTab } from "../stores/historyTab";
@@ -302,7 +311,8 @@ const historyTabState = useHistoryTab();
 const homeState = useHome();
 const myWorksState = useMyWorks();
 const socialsState = useSocials();
-const particleConfig = new URL("../libs/particlesjs-bg.json", import.meta.url).href;
+const particleConfig = new URL("../libs/particlesjs-bg.json", import.meta.url)
+  .href;
 
 onMounted(() => {
   particlesJS.load(socials.value.id, particleConfig, function () {
