@@ -9,7 +9,10 @@
         <div class="heading_divider"></div>
       </div>
       <InputControl identifier="id" v-model="user.email">Email</InputControl>
-      <InputControl identifier="password" input-type="password" v-model="user.password"
+      <InputControl
+        identifier="password"
+        input-type="password"
+        v-model="user.password"
         >Password</InputControl
       >
       <div class="flex flex-col sm:flex-row justify-between mt-7 gap-4">
@@ -31,13 +34,16 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, inject } from "vue";
 import InputControl from "../components/InputControl.vue";
 import { Icon } from "@iconify/vue";
 import { signIn } from "../libs/firebase";
 import { useRouter } from "vue-router";
+import { errorModal } from "../libs/utils";
 
 const router = useRouter();
+
+const swal = inject("$swal");
 
 const user = reactive({
   email: "",
@@ -48,7 +54,13 @@ async function submitForm() {
   try {
     await signIn(user);
     router.push("/content/home");
-  } catch (error) {}
+  } catch (error) {
+    if (error.message.includes("auth/invalid-email")) {
+      errorModal(swal, "Please enter valid email");
+    } else {
+      errorModal(swal, "User not found!");
+    }
+  }
 }
 </script>
 
