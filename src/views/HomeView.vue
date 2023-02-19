@@ -170,7 +170,10 @@
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >
-            <div v-dompurify-html="work.content"></div>
+            <div
+              v-dompurify-html="work.content"
+              class="prose prose-content-spacing"
+            ></div>
           </MiniCard>
         </div>
       </div>
