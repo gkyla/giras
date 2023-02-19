@@ -287,7 +287,7 @@
         <div class="container mx-auto max-w-screen-lg">
           <!-- Footer -->
           <div class="flex justify-between p-4 text-slate-100">
-            <p class="text-sm">Copyright &copy; Giras Gendrasena 2023</p>
+            <p class="text-sm">Copyright &copy; Giras Gendrasena 2022-2023</p>
             <router-link to="#home" class="text-sm hover:underline"
               >Back to top</router-link
             >
