@@ -1,12 +1,12 @@
 {
   "name": "girassheng",
-  "version": "1.2.0",
+  "version": "1.1.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "changelog": "conventional-changelog -p jshint -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p karma -i CHANGELOG.md -s -r 0"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^3.6.3",
@@ -28,7 +28,6 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "autoprefixer": "^10.4.13",
     "conventional-changelog": "^3.1.25",
-    "conventional-changelog-cli": "^2.2.2",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "postcss": "^8.4.19",
