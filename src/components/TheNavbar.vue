@@ -79,7 +79,7 @@
                     currentSection === '3-navHeader',
                 },
               ]"
-              >My Works</router-link
+              >Experience</router-link
             >
           </li>
           <span class="hidden lg:inline-block">|</span>

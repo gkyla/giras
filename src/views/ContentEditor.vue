@@ -56,7 +56,7 @@
             class="px-5 py-2 border-2 border-slate-500 rounded-md shadow-md font-semibold"
             to="/content/myworks"
           >
-            My Works
+            Experience
           </router-link>
           <router-link
             class="px-5 py-2 border-2 border-slate-500 rounded-md shadow-md font-semibold"

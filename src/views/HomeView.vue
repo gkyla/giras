@@ -144,7 +144,7 @@
         </div>
       </div>
 
-      <!-- My Works -->
+      <!-- My Works -> Experience -->
       <div
         id="myworks"
         class="container mx-auto max-w-screen-xl flex flex-col items-center justify-center mb-20 px-2"
@@ -154,7 +154,7 @@
             class="text-4xl font-semibold text-slate-700 px-5 py-2 self-start"
             id="3-navHeader"
           >
-            My Works
+            Experience
           </h1>
           <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
         </div>

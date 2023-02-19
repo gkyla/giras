@@ -1,7 +1,9 @@
 <template>
   <div class="flex items-center gap-3 my-5">
     <div>
-      <h1 class="font-bold text-xl mb-2">My works ({{ currentMyWorks.posts.length }})</h1>
+      <h1 class="font-bold text-xl mb-2">
+        Experience ({{ currentMyWorks.posts.length }})
+      </h1>
       <div class="w-7 bg-[#85bc33] h-1 rounded-full"></div>
     </div>
 
@@ -12,7 +14,7 @@
         height="20"
         class="group-hover:text-[#85bc33] transition-all"
       />
-      Add Works
+      Add Experience
     </button>
   </div>
   <div id="works-container" class="py-4">
@@ -61,7 +63,9 @@
         <div class="flex items-center justify-between">
           <div class="mb-10">
             <h1 class="text-2xl mb-2">
-              {{ isCreating ? "Create new History " : "Edit your History" }}
+              {{
+                isCreating ? "Create new Experience " : "Edit your Experience"
+              }}
             </h1>
             <div class="heading_divider"></div>
           </div>
@@ -97,7 +101,10 @@
               </button>
             </div>
           </div>
-          <div class="flex flex-col sm:flex-row gap-4 mb-5" v-show="!isChangeImg">
+          <div
+            class="flex flex-col sm:flex-row gap-4 mb-5"
+            v-show="!isChangeImg"
+          >
             <div class="flex items-center gap-6 w-36">
               <span class="font-bold">Image :</span>
             </div>
@@ -116,7 +123,9 @@
               </button>
             </div>
           </div>
-          <InputControl identifier="HeadlineEdit" v-model="currentEditedWorkPost.title"
+          <InputControl
+            identifier="HeadlineEdit"
+            v-model="currentEditedWorkPost.title"
             >Tittle</InputControl
           >
           <InputControl
@@ -131,7 +140,7 @@
             inputHeight="h-[325px]"
             input-type="textarea"
             input-width="w-[680px]"
-            >History</InputControl
+            >Content</InputControl
           >
         </div>
 
@@ -147,7 +156,10 @@
           <InputControl identifier="addHeadling" v-model="newWorkPost.title"
             >Tittle</InputControl
           >
-          <InputControl identifier="dateNew" inputType="date" v-model="newWorkPost.date"
+          <InputControl
+            identifier="dateNew"
+            inputType="date"
+            v-model="newWorkPost.date"
             >Date</InputControl
           >
           <InputControl
@@ -156,7 +168,7 @@
             inputHeight="h-[325px]"
             input-width="w-[680px]"
             input-type="textarea"
-            >History Content</InputControl
+            >Content</InputControl
           >
         </div>
 
@@ -168,10 +180,19 @@
             @click="handleDeletePost"
           >
             Delete Post
-            <Icon icon="mdi:trash-can-outline" width="25" height="25" class="ml-2" />
+            <Icon
+              icon="mdi:trash-can-outline"
+              width="25"
+              height="25"
+              class="ml-2"
+            />
           </button>
 
-          <button class="btn_close ml-auto" @click.stop="handleClose" type="button">
+          <button
+            class="btn_close ml-auto"
+            @click.stop="handleClose"
+            type="button"
+          >
             Cancel
           </button>
 
@@ -195,7 +216,12 @@ import {
   deleteDocument,
   deleteImageStorage,
 } from "../../libs/firebase";
-import { uploadImage, dateFormat, successModal, errorModal } from "../../libs/utils";
+import {
+  uploadImage,
+  dateFormat,
+  successModal,
+  errorModal,
+} from "../../libs/utils";
 
 const myWorksState = useMyWorks();
 const inputState = useInputState();
