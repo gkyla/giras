@@ -174,6 +174,7 @@
             :title="work.title"
             :date="dateFormat(work.date)"
             :img="work.imgLink"
+            :position="work.position"
             data-aos="zoom-in-up"
             data-aos-duration="800"
           >

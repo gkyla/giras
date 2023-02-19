@@ -5,12 +5,13 @@
         <img
           :src="imgUrl"
           alt="works-picture"
-          class="w-[55px] h-[55px] block rounded-lg object-cover"
+          class="w-[60px] h-[60px] block rounded-lg object-cover"
         />
       </div>
       <div class="self-start">
         <p class="font-semibold">{{ title }}</p>
-        <span class="">{{ date }}</span>
+        <p class="text-sm text-slate-700">{{ position }}</p>
+        <span class="block">{{ date }}</span>
       </div>
     </div>
     <div data-details="workbox-description" class="flex items-center">
@@ -28,6 +29,10 @@ const props = defineProps({
     required: true,
   },
   date: {
+    type: String,
+    required: true,
+  },
+  position: {
     type: String,
     required: true,
   },

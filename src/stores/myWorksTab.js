@@ -12,6 +12,7 @@ export const useMyWorks = defineStore("myWorksTab", () => {
   const _initialValuePost = ref({
     imgLink: null,
     title: "",
+    position: "",
     date: new Date(),
     content: "",
   });

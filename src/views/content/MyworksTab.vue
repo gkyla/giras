@@ -129,6 +129,11 @@
             >Tittle</InputControl
           >
           <InputControl
+            identifier="PositionEdit"
+            v-model="currentEditedWorkPost.position"
+            >Position</InputControl
+          >
+          <InputControl
             identifier="dateEdit"
             inputType="date"
             v-model="currentEditedWorkPost.date"
@@ -152,6 +157,9 @@
             input-type="file"
             @inputedFile="getImage"
             >Image</InputControl
+          >
+          <InputControl identifier="addHeadling" v-model="newWorkPost.position"
+            >Position</InputControl
           >
           <InputControl identifier="addHeadling" v-model="newWorkPost.title"
             >Tittle</InputControl
@@ -234,6 +242,7 @@ const currentMyWorks = reactive({
 let newWorkPost = reactive({
   imgLink: null,
   title: "",
+  position: "",
   date: new Date(),
   content: "",
 });
