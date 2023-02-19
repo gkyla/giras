@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div id="history" class="">
+    <div id="views-wrapper" class="">
       <!-- Aboutme -->
       <!-- bg-[#f4f7fb] -->
       <div
@@ -73,7 +73,7 @@
         </div>
       </div>
       <!-- History headers -> My education -->
-      <div id="history-wrapper" class="bg-slate-50 py-12">
+      <div id="history" class="bg-slate-50 py-12">
         <div
           class="container mx-auto max-w-screen-xl sm:mb-16 md:mb-20 flex justify-center flex-col px-2"
           id="1-navHeader"
