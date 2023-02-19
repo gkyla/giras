@@ -37,7 +37,6 @@ export async function uploadImage({ type, currentLocalValue, file }) {
 
 export function dateFormat(postDate) {
   let options = {
-    weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
