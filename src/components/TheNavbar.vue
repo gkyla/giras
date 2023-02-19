@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white shadow-2xl fixed top-0 left-0 right-0 z-50">
+  <header class="bg-white shadow-xl fixed top-0 left-0 right-0 z-50">
     <div
       class="container mx-auto max-w-screen-xl flex items-center py-3 relative px-2"
     >
@@ -43,20 +43,6 @@
           <span class="hidden lg:inline-block">|</span>
           <li>
             <router-link
-              to="#history"
-              class="p-5 lg:p-0 flex transition-all"
-              :class="[
-                {
-                  'lg:border-b-[3px] border-l-[6px] lg:border-l-0  bg-slate-100 lg:bg-white border-[#85bc33]':
-                    currentSection === '1-navHeader',
-                },
-              ]"
-              >History</router-link
-            >
-          </li>
-          <span class="hidden lg:inline-block">|</span>
-          <li>
-            <router-link
               to="#aboutme"
               class="p-5 lg:p-0 flex transition-all"
               :class="[
@@ -66,6 +52,20 @@
                 },
               ]"
               >About Me</router-link
+            >
+          </li>
+          <span class="hidden lg:inline-block">|</span>
+          <li>
+            <router-link
+              to="#history"
+              class="p-5 lg:p-0 flex transition-all"
+              :class="[
+                {
+                  'lg:border-b-[3px] border-l-[6px] lg:border-l-0  bg-slate-100 lg:bg-white border-[#85bc33]':
+                    currentSection === '1-navHeader',
+                },
+              ]"
+              >Education</router-link
             >
           </li>
           <span class="hidden lg:inline-block">|</span>
