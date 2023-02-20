@@ -1,20 +1,15 @@
-## <small>1.1.1 (2023-02-19)</small>
+# Changelog
 
-* docs: better description on socials section ([8ecf209](https://github.com/gkyla/giras/commit/8ecf209))
-* docs(myworks): change MyWorks to Experience ([c18afdf](https://github.com/gkyla/giras/commit/c18afdf))
-* release: v1.0.2 ([c1b6b68](https://github.com/gkyla/giras/commit/c1b6b68))
-* test ([e7d4b25](https://github.com/gkyla/giras/commit/e7d4b25))
-* chore: add convetional-commit to project ([5658f13](https://github.com/gkyla/giras/commit/5658f13))
-* fix: login page now showing correct error if the error occurs ([a6f6d46](https://github.com/gkyla/giras/commit/a6f6d46))
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.2.0](https://github.com/gkyla/giras/compare/v1.1.1...v1.2.0) (2023-02-20)
 
 
+### Features
 
-## <small>1.0.1 (2023-01-25)</small>
-
-* release: v1.0.1 ([fa9f4bd](https://github.com/gkyla/giras/commit/fa9f4bd))
-* fix(text-area): fix text-area go full screen height ([a3d0267](https://github.com/gkyla/giras/commit/a3d0267))
-
-
+* **experience:** add tailwind prose to the card ([87af825](https://github.com/gkyla/giras/commit/87af825ffdd1a11895b977d7536ccaee3338f2c1))
+* **homeview:** add history id to the wrapper ([b6170a1](https://github.com/gkyla/giras/commit/b6170a1cc145c9747d73f2c557c110781aa3ec31))
+* **minicard:** add position prop ([0232b16](https://github.com/gkyla/giras/commit/0232b1614a0bd767c247a4325fd50a05f2ee6c6b))
 
 ## 1.0.0 (2023-01-25)
 
@@ -170,6 +165,3 @@
 * remove: remove unusued log ([9926e7e](https://github.com/gkyla/giras/commit/9926e7e))
 * build: add netlify,toml ([9435e96](https://github.com/gkyla/giras/commit/9435e96))
 * docs: add sources ([6030515](https://github.com/gkyla/giras/commit/6030515))
-
-
-
