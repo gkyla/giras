@@ -2,10 +2,7 @@
   <form @submit.prevent="editHome">
     <div v-if="isChangeImg" class="grid items-center gap-4 rounded">
       <div class="flex">
-        <InputControl
-          identifier="homeimg"
-          input-type="file"
-          @inputedFile="getImage"
+        <InputControl identifier="homeimg" input-type="file" @inputedFile="getImage"
           >Image</InputControl
         >
       </div>
@@ -73,16 +70,8 @@ import { watch, ref, inject } from "vue";
 
 import InputControl from "../../components/InputControl.vue";
 import { useHome } from "../../stores/homeTab";
-import {
-  addDocument,
-  createStorageRef,
-  setDocument,
-} from "../../libs/firebase/index";
-import {
-  uploadImage as upload,
-  successModal,
-  errorModal,
-} from "../../libs/utils";
+import { addDocument, createStorageRef, setDocument } from "../../libs/firebase/index";
+import { uploadImage as upload, successModal, errorModal } from "../../libs/utils";
 
 const swal = inject("$swal");
 
