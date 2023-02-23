@@ -129,7 +129,7 @@
               <img
                 :src="post.imgLink"
                 :alt="post.title"
-                class="w-[430px] h-full relative z-10 shadow"
+                class="w-[430px] h-full relative z-10"
               />
             </div>
             <div
