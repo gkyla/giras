@@ -8,28 +8,41 @@
   >
     <div
       id="home"
-      class="w-full h-[600px] flex justify-center items-center relative z-[3] mt-14"
+      class="w-full h-[600px] flex justify-center items-center relative z-[3] mt-14 bg-[#f4f7fb]"
     >
-      <img
-        id="0-navHeader"
-        :src="homeState.imgLink"
-        class="w-full h-full brightness-[.75] bg-cover object-cover pointer-events-none"
-      />
-      <div
-        class="font-bold text-4xl text-white text-center absolute z-10"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
-        <p class="mb-4">Hello I'm</p>
-        <p>Giras Gendrasena</p>
-        <button
-          class="rounded-full mt-4 px-4 py-1 bg-[#393E46] text-lg text-white shadow-xl"
-          @click="$router.push('#history')"
+      <div class="grid grid-cols-2 gap-20 items-center">
+        <div class="w-[500px] h-[400px] rounded-xl">
+          <img
+            id="0-navHeader"
+            :src="homeState.imgLink"
+            class="w-full h-full brightness-[.75] bg-cover object-cover pointer-events-none rounded-xl"
+          />
+        </div>
+        <div
+          class="font-bold text-4xl text-slate-700 text-left z-10"
           data-aos="fade-up"
-          data-aos-duration="1500"
+          data-aos-duration="1000"
         >
-          Explore
-        </button>
+          <div class="flex flex-col gap-2">
+            <p>Hello</p>
+            <p class="text-lg">I am</p>
+            <p>Giras Gendrasena</p>
+            <button
+              class="rounded-full mt-4 px-4 py-1 bg-[#72a02c] transition-colors duration-500 hover:brightness-110 text-lg text-slate-50 self-start"
+              @click="$router.push('#history')"
+              data-aos="fade-up"
+              data-aos-duration="1500"
+            >
+              Explore
+            </button>
+          </div>
+          <div class="mt-10 flex gap-5">
+            <Icon icon="ph:facebook-logo" width="50" height="50"></Icon>
+            <Icon icon="basil:instagram-outline" width="50" height="50"></Icon>
+            <Icon icon="iconoir:linkedin" width="50" height="50"></Icon>
+            <Icon icon="basil:twitter-outline" width="50" height="50"></Icon>
+          </div>
+        </div>
       </div>
     </div>
 
