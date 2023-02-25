@@ -37,10 +37,41 @@
             </button>
           </div>
           <div class="mt-10 flex gap-5">
-            <Icon icon="ph:facebook-logo" width="50" height="50"></Icon>
-            <Icon icon="basil:instagram-outline" width="50" height="50"></Icon>
-            <Icon icon="iconoir:linkedin" width="50" height="50"></Icon>
-            <Icon icon="basil:twitter-outline" width="50" height="50"></Icon>
+            <a
+              :href="socialsState.facebook"
+              class="hover:text-[#72a02c] transition-all"
+              target="_blank"
+            >
+              <Icon icon="ph:facebook-logo" width="50" height="50"></Icon>
+            </a>
+
+            <a
+              :href="socialsState.instagram"
+              class="hover:text-[#72a02c] transition-all"
+              target="_blank"
+            >
+              <Icon
+                icon="basil:instagram-outline"
+                width="50"
+                height="50"
+              ></Icon>
+            </a>
+
+            <a
+              :href="socialsState.linkedin"
+              class="hover:text-[#72a02c] transition-all"
+              target="_blank"
+            >
+              <Icon icon="iconoir:linkedin" width="50" height="50"></Icon>
+            </a>
+
+            <a
+              :href="socialsState.twitter"
+              class="hover:text-[#72a02c] transition-all"
+              target="_blank"
+            >
+              <Icon icon="basil:twitter-outline" width="50" height="50"></Icon>
+            </a>
           </div>
         </div>
       </div>
