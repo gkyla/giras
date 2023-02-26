@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white shadow-xl fixed top-0 left-0 right-0 z-50">
+  <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
     <div
       class="container mx-auto max-w-screen-xl flex items-center py-3 relative px-2"
     >
